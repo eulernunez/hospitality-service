@@ -1,0 +1,48 @@
+<!-- =========== PAGE TITLE ========== -->
+<div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
+    <div class="container">
+        <div class="inner">
+            <h1>Login</h1>
+            <ol class="breadcrumb">
+                <li><a href="<?= $this->baseUrl( ) . '/'; ?>">Home</a></li>
+                <li>Login</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+<!-- =========== MAIN ========== -->
+<main id="contact_page_style_2">
+    <div class="container">
+        <div class="row">
+
+            <div>
+                <div class="main_title  a_left">
+                    <h2>Credenciales</h2>
+                <form id="user-form" action="<?= $this->url(array('controller'=>'login','action'=>'users')); ?>" method="post">
+                    <div class="row">
+                        
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label class="control-label">Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="Your Email">
+                        </div>
+                        
+                        <div class="clearfix"></div>
+                        
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label class="control-label">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Your password">
+                        </div>
+                        
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="button  btn_blue mt35 upper pull-left"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Login </button>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</main>

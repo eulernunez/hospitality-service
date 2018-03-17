@@ -1,0 +1,481 @@
+<script type="text/javascript">
+$(document).ready(function() {   //$(document).ready se ejecuta cuando carga la pagina
+    
+    $(':input[type="submit"]').prop('disabled', true);   //desactiva el input al cargar
+    
+    var name = false;
+    var doc = false;
+    var email = false;
+    var phone = false;
+    var adult = false;
+    var children = false;
+    var checkin = false;
+    var checkout = false;
+//    var comp = false;
+    
+    $('#bookingName').keyup(function() {  
+        if($(this).val() != '') {
+           name = true;
+        }
+     });
+     
+    $('#bookingDocument').keyup(function() {  
+        if($(this).val() != '') {
+           doc = true;
+        }
+     });
+     
+
+    $('#bookingEmail').keyup(function() { 
+        if($(this).val() != '') {
+            email = true;
+        }
+     });
+
+    $('#bookingPhone').keyup(function() {  
+        if($(this).val() != '') {
+            phone = true;
+        }
+     });
+
+    $( "#bookingAdults" ).change(function() {
+        adult = true;
+    });
+
+    $('#bookingChildren').change(function() {   
+        children = true;
+     });
+
+    $('#bookingCheckin').change(function() {   
+        checkin = true;
+//            comp = comparacion($(this).val(), $('#bookingCheckout').val());
+//            $(':input[type="submit"]').prop('disabled', !comp);
+     });
+     
+    $('#bookingCheckout').change(function() {   
+            checkout = true;
+//            comp = comparacion($('#bookingCheckin').val(), $(this).val());
+//            
+//            $(':input[type="submit"]').prop('disabled', !comp);
+     });
+     
+    $(document).change(function() {
+         
+        if(name && doc && email && phone && adult && children && checkin && checkout) {
+            $(':input[type="submit"]').prop('disabled', false);
+        }    
+         
+    });
+     
+ });
+ 
+ 
+ function comparacion(fecha1, fecha2) {
+     
+    var x = fecha1.split("/");
+    var y = fecha2.split("/");
+
+    fecha1 = x[1] + "/" + x[0] + "/" + x[2];
+    fecha2 = y[1] + "/" + y[0] + "/" + y[2];
+
+    if (Date.parse(fecha2) > Date.parse(fecha1)){
+        return true;
+    }else{
+        return false;
+    }
+     
+ }
+ 
+ 
+ 
+ 
+</script>
+
+ 
+<!-- =========== PAGE TITLE ========== -->
+<div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
+    <div class="container">
+        <div class="inner">
+            <div class="row">
+                <h1><?= $this->ad["featured"]["title_ad"] ?></h1>
+                <div class="price">
+                        <div class="inner" style="color:black; font-size: 14px; font-weight: bold;">
+                            <?= number_format($this->ad["featured"]["price_ad"],0,"",""); ?>€ <span>por noche</span>
+                        </div>
+                </div>
+                
+                <div class="clearfix"></div>
+                <div class="col-md-6 col-sm-6">
+                    
+                    <ol class="breadcrumb">
+                        <li><a href="<?php echo $this->baseUrl( ) . '/'; ?>">Home</a></li>
+                        <li>Anuncios</li>
+                        <li><?= $this->ad["featured"]["title_ad"] ?></li>
+                    </ol>
+                </div>
+<!--                <div class="col-md-6 col-sm-6" style="border:1px solid blue;">
+                    <div class="price">
+                        <div class="inner" style="font-size: 14px;">
+                            €<?php // number_format($this->ad["featured"]["price_ad"],0,"",""); ?> <span>por noche</span>
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =========== MAIN ========== -->
+<main id="room_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="slider">
+                    <div id="slider-larg" class="owl-carousel image-gallery">
+                        
+                        <?php foreach($this->ad["pics"] as $pic) : ?>
+                        <div class="item lightbox-image-icon">
+                            <a href="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->ad["featured"]["id"] . '/gallery/' . $pic ;?>" class="hover_effect h_lightbox h_blue">
+                                <img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->ad["featured"]["id"] . '/gallery/' . $pic ;?>" alt="Image">
+                                
+                            </a>
+                        </div>
+                        <?php endforeach; ?>
+                        
+                    </div>
+                    <div id="thumbs" class="owl-carousel">
+                        <?php foreach($this->ad["pics"] as $pic) : ?>
+                            <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->ad["featured"]["id"] .  '/thumbnail/' . $pic ;?>" alt="Image"></div>
+                        <?php endforeach; ?>
+
+<!--                    <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb2.jpg';?>" alt="Image"></div>
+                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb3.jpg';?>" alt="Image"></div>
+                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb4.jpg';?>" alt="Image"></div>
+                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb5.jpg';?>" alt="Image"></div>
+                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb6.jpg';?>" alt="Image"></div>
+                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb7.jpg';?>" alt="Image"></div>
+                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb8.jpg';?>" alt="Image"></div>
+                            -->
+                        
+                    </div>
+                </div>
+                <div class="main_title mt50">
+                    <h2><?= $this->ad["featured"]["title_ad"] ?></h2>
+                </div>
+                
+                <p><?= $this->ad["featured"]["comments_ad"] ?></p>
+
+                <div class="main_title t_style a_left s_title mt50">
+                    <div class="c_inner">
+                        <h2 class="c_title">SERVICIOS</h2>
+                    </div>
+                </div>
+                <?php
+                
+                $type = (int)$this->ad["featured"]["surface_type_id"];
+                switch ($type) {
+                    case 1:
+                        $m2 = "40";
+                        break;
+                    case 2:
+                        $m2 = "60";
+                        break;
+                    case 3:
+                        $m2 = "80";
+                        break;
+                    case 4:
+                        $m2 = "100";
+                        break;
+                    case 5:
+                        $m2 = "120";
+                        break;
+                    case 6:
+                        $m2 = "140";
+                        break;
+                    case 7:
+                        $m2 = "200";
+                        break;
+                }                
+                
+                
+                ?>
+                
+                
+                <div class="room_facilitys_list">
+                    <div class="all_facility_list">
+                        <div class="col-sm-4 nopadding">
+                            <ul class="list-unstyled"> 
+                                <li><i class="fa fa-check"></i>Cama <?= ('1'==$this->ad["featured"]["bed_type_id"])?'simple':'doble'; ?></li>
+                                <li><i class="fa fa-check"></i><?= $m2 ; ?> m2</li>
+                                <li><i class="fa fa-check"></i>Persona<?= ('1'==$this->ad["featured"]["persons_number_id"])?'':'s'; ?> <?= $this->ad["featured"]["persons_number_id"]; ?> </li>
+                                <?php
+                                if(isset($this->ad["featured"]["free_service_internet"])
+                                        && $this->ad["featured"]["free_service_internet"]==1): ?>
+                                <li><i class="fa fa-check"></i>Internet gratis</li>
+                                <?php else: ?>
+                                <li class="no"><i class="fa fa-times"></i>Internet gratis</li>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 nopadding">
+                            <ul class="list-unstyled">
+                                <?php
+                                    if(isset($this->ad["featured"]["free_service_wifi"])
+                                            && $this->ad["featured"]["free_service_wifi"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Wi-Fi gratis</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Wi-Fi gratis</li>
+                                <?php endif; ?>                                
+                                
+                                <?php
+                                    if(isset($this->ad["featured"]["free_service_breakfast_include"])
+                                            && $this->ad["featured"]["free_service_breakfast_include"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Desayuno incluido</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Desayuno incluido</li>
+                                <?php endif; ?>    
+                                
+                                <?php
+                                    if(isset($this->ad["featured"]["other_service_private_balcony"])
+                                            && $this->ad["featured"]["other_service_private_balcony"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Balcones privados</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Balcones privados</li>
+                                <?php endif; ?>    
+                                
+                                <?php
+                                    if(isset($this->ad["featured"]["free_service_newspaper"])
+                                            && $this->ad["featured"]["free_service_newspaper"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Periódicos gratis</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Periódicos gratis</li>
+                                <?php endif; ?>                                
+                                
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 nopadding_left">
+                            <ul class="list-unstyled">
+                                <?php
+                                    if(isset($this->ad["featured"]["other_service_flat_screen_tv"])
+                                            && $this->ad["featured"]["other_service_flat_screen_tv"]==1): ?>
+                                    <li><i class="fa fa-check"></i>TV pantalla plana</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>TV pantalla plana</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["other_service_full_ac"])
+                                            && $this->ad["featured"]["other_service_full_ac"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Aire acondicionado</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Aire acondicionado</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["other_service_beach_view"])
+                                            && $this->ad["featured"]["other_service_beach_view"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Vista al mar</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Vista al mar</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["other_service_room_service"])
+                                            && $this->ad["featured"]["other_service_room_service"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Servicios de habitación</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Servicios de habitación</li>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="similar_rooms">
+                    <div class="main_title t_style5 l_blue s_title a_left">
+                        <div class="c_inner">
+                            <h2 class="c_title">SIMILAR ROOMS</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <article>
+                                <figure>
+                                    <a href="room.html" class="hover_effect h_blue h_link"><img src="images/rooms/single-room.jpg" alt="Image" class="img-responsive"></a>
+                                    <div class="price">â‚¬99<span> night</span></div>
+                                    <figcaption>
+                                        <h4><a href="room.html">Double Room</a></h4>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        </div>
+                        <div class="col-md-4">
+                            <article>
+                                <figure>
+                                    <a href="room.html" class="hover_effect h_blue h_link"><img src="images/rooms/double-room.jpg" alt="Image" class="img-responsive"></a>
+                                    <div class="price">â‚¬129<span> night</span></div>
+                                    <figcaption>
+                                        <h4><a href="room.html">Single Room </a></h4>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        </div>
+                        <div class="col-md-4">
+                            <article>
+                                <figure>
+                                    <a href="room.html" class="hover_effect h_blue h_link"><img src="images/rooms/deluxe-room.jpg" alt="Image" class="img-responsive"></a>
+                                    <div class="price">â‚¬189<span> night</span></div>
+                                    <figcaption>
+                                        <h4><a href="room.html">Deluxe Room </a></h4>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sidebar">
+                    <aside class="widget">
+                        <div class="vbf">
+                            <h2 class="form_title"><i class="fa fa-calendar"></i> RESERVAR</h2>
+                            <form id="booking-form-other" class="inner" action="<?= $this->baseUrl() . '/booking-form/reserva'; ?>" method="post">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    <div class="input-group">
+                                        <div class="form_date">
+                                            <input type="text" class="datepicker form-control md_noborder_right" id="bookingCheckin" name="bookingCheckin" placeholder="Fecha de ingreso" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    <div class="input-group">
+                                        <div class="form_date">
+                                            <input type="text" class="datepicker form-control" id="bookingCheckout" name="bookingCheckout" placeholder="Fecha de salida" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="bookingName" name="bookingName" placeholder="Ingrese su nombre" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="bookingDocument" name="bookingDocument" placeholder="Ingrese NIE/NIF" type="text">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input class="form-control" id="bookingEmail" name="bookingEmail" placeholder="Ingrese tu correo electrónico" type="email">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="bookingPhone" name="bookingPhone" placeholder="Ingrese su teléfono" type="text">
+                                </div>
+                                
+                                
+                                <!--
+                                <div class="form-group">
+                                    <div class="form_select">
+                                        <select id="bookingRoomtype" name="bookingRoomtype" class="form-control" title="Select Room Type" data-header="Room Type">
+                                            <option value="Single Room" selected>Single Room</option>
+                                            <option value="Double Room">Double Room</option>
+                                            <option value="Deluxe Room">Deluxe Room</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                -->
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    <div class="form_select">
+                                        <select id="bookingAdults" name="bookingAdults" class="form-control md_noborder_right" title="Adultos" data-header="Adultos">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    <div class="form_select">
+                                        <select id="bookingChildren" name="bookingChildren" class="form-control" title="Niños" data-header="Niños">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="anuncioId" name="anuncioId" value="<?= $this->ad["featured"]["id"]; ?>" />
+                                <button class="button btn_lg btn_blue btn_full" type="submit">RESERVAR AHORA</button>
+                                <div class="a_center mt10">
+                                    <a href="<?php echo $this->baseUrl( ) . '/booking-form/?id=' . $this->ad["featured"]["id"]; ?>" class="a_b_f"> RESERVA DETALLADA </a>
+                                </div>
+                            </form>
+                        </div>
+                    </aside>
+                    <aside class="widget">
+                        <h4>¿NECESITA AYUDA?</h4>
+                        <div class="help">
+                            Si Ud. tiene alguna duda contáctanos.
+<!--                            <div class="phone"><i class="fa  fa-phone"></i><a href="tel:18475555555"> 1-888-123-4567 </a></div>-->
+                            <div class="email"><i class="fa  fa-envelope-o "></i><a href="mailto:tutorcen18@ono.com">tutorcen18@ono.com</a> o use <a href="<?php echo $this->baseUrl( ) . '/contact-us'; ?>"> el formulario de contacto</a></div>
+                        </div>
+                    </aside>
+                    <aside class="widget">
+                        <h4>Latest Posts</h4>
+                        <div class="latest_posts">
+                            <article class="latest_post">
+                                <figure>
+                                    <a href="blog-post.html" class="hover_effect h_link h_blue">
+                                        <img src="images/blog/thumb1.jpg" alt="Image">
+                                    </a>
+                                </figure>
+                                <div class="details">
+                                    <h6><a href="blog-post.html">Live your myth in Greece</a></h6>
+                                    <span><i class="fa fa-calendar"></i>23/11/2016</span>
+                                </div>
+                            </article>
+                            <article class="latest_post">
+                                <figure>
+                                    <a href="blog-post.html" class="hover_effect h_link h_blue">
+                                        <img src="images/blog/thumb2.jpg" alt="Image">
+                                    </a>
+                                </figure>
+                                <div class="details">
+                                    <h6><a href="blog-post.html">Zante Hotel in pictures</a></h6>
+                                    <span><i class="fa fa-calendar"></i>18/10/2016</span>
+                                </div>
+                            </article>
+                            <article class="latest_post">
+                                <figure>
+                                    <a href="blog-post.html" class="hover_effect h_link h_blue">
+                                        <img src="images/blog/thumb3.jpg" alt="Image">
+                                    </a>
+                                </figure>
+                                <div class="details">
+                                    <h6><a href="blog-post.html">Zante Hotel family party</a></h6>
+                                    <span><i class="fa fa-calendar"></i>13/08/2016</span>
+                                </div>
+                            </article>
+                            <article class="latest_post">
+                                <figure>
+                                    <a href="blog-post.html" class="hover_effect h_link h_blue">
+                                        <img src="images/blog/thumb4.jpg" alt="Image">
+                                    </a>
+                                </figure>
+                                <div class="details">
+                                    <h6><a href="blog-post.html">Zante Hotel weddings</a></h6>
+                                    <span><i class="fa fa-calendar"></i>13/08/2016</span>
+                                </div>
+                            </article>
+                            <article class="latest_post">
+                                <figure>
+                                    <a href="blog-post.html" class="hover_effect h_link h_blue">
+                                        <img src="images/blog/thumb5.jpg" alt="Image">
+                                    </a>
+                                </figure>
+                                <div class="details">
+                                    <h6><a href="blog-post.html">10 things you should know</a></h6>
+                                    <span><i class="fa fa-calendar"></i>13/08/2016</span>
+                                </div>
+                            </article>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,179 @@
+<script type="text/javascript">
+   
+    $(document).ready(function() { 
+
+    //    $(".notification").delay(15000).queue(function (next) {
+    //        $(this).addClass("scale-out");
+    //        next();
+    //    });
+    //                
+    //    $(".notification").on("click", function(){ 
+    //        $(this).addClass("scale-out");
+    //    });
+
+
+    });
+
+    function savePublication() {
+
+        $(window).scrollTop(0);
+        
+        var urlPath = baseUrl + '/alta-publicacion/save-publication/';
+        $.ajax({
+            type: "POST",
+            url: urlPath,
+            cache: false,
+            data: $("#booking_form_advanced").serialize(),
+            success: function(html) {
+                $("#ajax-box").html(html);
+            }
+        });
+
+        var output;
+        output = '<div class="notification success"><span class="notification-icon"><i class="fa fa-check" aria-hidden="true"></i></span><span class="notification-text">Se guardo fatisfactoriamente!</span></div>';
+
+        $("#notification").html(output);
+        $(".notification").delay(5000).queue(function (next) {
+            $(this).addClass("scale-out");
+            next();
+        });
+        $(".notification").on("click", function(){ 
+            $(this).addClass("scale-out");
+        });
+
+    }
+
+</script>
+             
+<!-- =========== PAGE TITLE ========== -->
+<div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
+    <div class="container">
+        <div class="inner">
+            <h1>Alta</h1>
+            <ol class="breadcrumb">
+                <li><a href="<?= $this->baseUrl( ) . '/'; ?>">Home</a></li>
+                <li>Alta Publicaciones</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- =========== MAIN ========== -->
+<main id="booking_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div id="booking_advanced">
+                    <div class="main_title a_left upper">
+                        <h2>Alta Publicaciones</h2>
+                    </div>
+                    <!-- ========== ANUNCIO FORM ========== -->
+                    <div id="ajax-box" class="row">
+                        <form id="booking_form_advanced" action="<?= $this->url(array('controller'=>'alta-anuncio','action'=>'guardar')); ?>" method="post">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Categoría</label>
+                                    <div class="form_select">
+                                        <select id="category-id" name="category-id" class="form-control" title="Seleccionar la categoría" data-header="Seleccionar la categoría">
+                                            <option value="1" data-subtext="<span class='label label-info'></span>">Turismo</option>
+                                            <option value="2" data-subtext="<span class='label label-info'></span>">Vacaciones</option>
+                                            <option value="3" data-subtext="<span class='label label-info'></span>">Barcelona</option>
+                                            <option value="4" data-subtext="<span class='label label-info'></span>">Playas Caribeñas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                                    
+                                    
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Título</label>
+                                    <input id="title-publication" name="title-publication" type="text" class="form-control" placeholder="Título de la publicación">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Contenido</label>
+                                    <textarea id="contenido-publication" class="form-control" name="contenido-publication" placeholder="Párrafo principal ..."></textarea>
+                                </div>
+                            </div>
+                                    
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Contenido secundario</label>
+                                    <textarea id="contenido-publication-2" class="form-control" name="contenido-publication-2" placeholder="Párrafo secundario ..."></textarea>
+                                </div>
+                            </div>                                    
+                                    
+                            <div class="clearfix"></div>
+                                    
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Etiquetas
+                                        <a href="#" title="Etiquetas" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Elige las etiquetas"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="tags-publication[]" class="form-control" title="Etiquetas" data-header="Etiquetas" multiple>
+                                            <option value="1">Vacaciones</option>
+                                            <option value="2">Playas</option>
+                                            <option value="3">Resort caribeños</option>
+                                            <option value="4">Hoteles</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                                    
+                                    
+                            <div class="col-md-12">
+                                <button type="button" class="button btn_blue pull-right" onclick="savePublication();"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> CONTINUAR </button>
+                            </div>
+                            
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="special_offers">
+                    <div class="main_title a_left upper">
+                        <h2>Special Offers</h2>
+                    </div>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special1.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Single Room</a></h4>
+                                <div class="price">â‚¬ 89<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special2.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Double Room</a></h4>
+                                <div class="price">â‚¬ 129<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special3.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Delux Room</a></h4>
+                                <div class="price">â‚¬ 189<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

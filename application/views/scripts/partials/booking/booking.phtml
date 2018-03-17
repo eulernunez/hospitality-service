@@ -1,0 +1,217 @@
+<div id="reserva" class="row">
+
+    <div class="main_title a_left upper room">
+        <figure>
+            <div class="price">
+                <h2>Reserva&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+            </div>
+        </figure>
+    </div>
+    <div>
+        &nbsp;
+    </div>
+    <div>
+        &nbsp;
+    </div>                    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="main_title a_left upper room">
+                <figure>
+                    <div class="price">
+                        <h2>Tus Datos</h2>
+                    </div>
+                </figure>
+                <div>
+                    &nbsp;
+                </div>
+                <div style="font-size: 20px; margin-top: 30px;">
+                    <div>
+                        <b>Nombre</b><br/>
+                        <?= $this->bookingName; ?>
+                    </div>
+                    <div>
+                        <b>NIE/NIF</b><br/>
+                        <?= $this->bookingDocument; ?>
+                    </div>
+                    <div>
+                        <b>E-mail</b><br/>
+                        <?= $this->bookingEmail; ?>
+                    </div>
+                    <div>
+                        <b>Teléfono</b><br/>
+                        <?= $this->bookingPhone; ?>
+                    </div>
+                    <?php if(!empty($this->bookingComments)) : ?>
+                    <div>
+                        <b>Especial requerimientos</b><br/>
+                        <?= $this->bookingComments; ?>
+                    </div>
+                    <?php endif; ?>
+                </div>
+        </div> 
+        <div class="main_title a_left upper room" style="margin-top: 50px;">
+            <figure>
+                <div class="price">
+                    <h2>Alojamiento</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <div>
+                    <b>Anuncio</b><br/>
+                    <?= $this->anuncio['0']['title_ad']; ?>
+                </div>
+                <div>
+                    <b>Dirección</b><br/>
+                    <?= $this->anuncio['0']['address_ad']; ?>
+                </div>
+                <div>
+                    <b>Código Postal</b><br/>
+                    <?= $this->anuncio['0']['zip']; ?>
+                </div>
+                <div>
+                    <b>Provincia</b><br/>
+                    <?= $this->anuncio['0']['city']; ?>
+                </div>
+                <div>
+                    <b>Pais</b><br/>
+                    España
+                </div>
+
+            </div>
+        </div> 
+
+        
+        
+        
+        
+        
+    </div>
+    
+    <div class="col-md-6">
+        <div class="main_title a_left upper room">
+<!--            <h2>Facturación</h2>-->
+            <figure>
+                <div class="price">
+                    <h2>Facturación</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <div>
+                    <b>Llegada</b><br/>
+                    <?= $this->bookingCheckin; ?>
+                </div>
+                <div>
+                    <b>Salida</b><br/>
+                    <?= $this->bookingCheckout; ?>
+                </div>
+                <div>
+                    <b>Noches</b><br/>
+                    <?php $nights = (int)$this->interval ; ?>
+                    <?= $nights; ?>
+                </div>
+                <div>
+                    <b>Precio x noche</b><br/>
+                    <?php
+                    $price = (int)number_format($this->anuncio['0']['price_ad'],0);
+                    ?>
+                    <?= number_format($price,2,",","."); ?>
+                </div>
+            </div>
+            
+            
+            
+        </div>
+        
+
+        <div class="main_title a_left upper room" style="margin-top: 50px;">
+
+            <figure>
+                <div class="price">
+                    <h2>Sub-Total</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            
+            <div style="font-size: 20px; margin-top: 30px;">
+                <div>
+                    <b>Alojamiento</b><br/>
+                    <?= number_format($nights*$price,2,",","."); ?>
+                </div>
+                <div>
+                    <b>Gastos de tramites</b><br/>
+                    <?php
+                    $porcentajeGasto = (int)number_format($this->anuncio['0']['gasto_tramite'],0);
+                    $gastosTramite = $nights*$price*$porcentajeGasto/100;
+                    ?>
+                    <?= number_format($gastosTramite,2,",","."); ?>
+                </div>
+                <div>
+                    <b>Fianza</b><br/>
+                    <?php
+                    $fianza = (int)number_format($this->anuncio['0']['fianza'],0);
+                    ?>
+                    <?= number_format($fianza,2,",","."); ?>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main_title a_left upper room" style="margin-top: 50px;">
+<!--            <h2>IVA</h2>-->
+            <figure>
+                <div class="price">
+                    <h2>IVA</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <b>
+                    <?php
+                    $subTotal = $nights*$price+$gastosTramite+$fianza;;
+                    ?>
+
+                    <?= number_format($subTotal*0.21,2,",","."); ?>
+                </b>    
+            </div>
+
+
+
+        </div>
+
+        <div class="main_title a_left upper room" style="margin-top: 50px;">
+
+            <figure>
+                <div class="price">
+                    <h2>Total</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <b>
+                    <?= number_format($subTotal+$subTotal*0.21,2,",","."); ?>
+                </b>    
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+                        
+                        
+</div>
+
+
+

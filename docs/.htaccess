@@ -1,0 +1,39 @@
+
+# Excepciones modsecurity
+<IfModule mod_security2.c>
+#    SecRuleRemoveById 555016
+</IfModule>
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^www.
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+#RewriteCond %{HTTP_HOST} ^barcelonapordias.com
+#RewriteRule (.*) http://www.barcelonapordias.com/$1 [R=301,L]
+#RewriteCond %{HTTP_HOST} ^turisdays\.com[NC]
+#RewriteRule ^(.*)$ http://www.turisdays.com/$1 [R=301,L]
+
+
+# Inicio: Test mobile
+RewriteCond %{HTTP_USER_AGENT} android|blackBerry|iphone|ipod|iPad|Mobile [NC]
+RewriteRule ^$ http://www.turisdays.com/mobile/ [R,L]
+# Fin: Test mobile
+
+
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+#RewriteRule ^.*$ index.php [NC,L]
+# /htdocs/public/www/
+#RewriteRule ^ /home/alquilertop/www/index.php
+#RewriteRule ^ /www/index.php
+
+RewriteRule ^ /home/turisdays/www/index.php
+
+
+
+
+#RewriteEngine On
+#RewriteRule test\.html http://www.google.com [R]
+

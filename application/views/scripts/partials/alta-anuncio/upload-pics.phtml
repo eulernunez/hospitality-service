@@ -1,0 +1,77 @@
+<div>
+    
+    <form>
+        <div id="queue"></div>
+        <input id="file_upload_ibi" name="file_upload_ibi" type="file" multiple="true">
+    </form>
+    
+    <form>
+<!--         <div id="queue"></div>-->
+        <input id="file_upload" name="file_upload" type="file" multiple="true">
+    </form>
+    
+    
+    <form>
+        
+         <input id="file_upload_gallery" name="file_upload_gallery" type="file" multiple="true">
+    </form>
+
+    <script type="text/javascript">
+     <?php $timestamp = time();?>
+     <?php $timestamp2 = time();?>
+     <?php $timestamp3 = time();?>    
+     $(function() {
+
+            $('#file_upload_ibi').uploadify({
+             'formData'     : {
+                             'timestamp' : '<?php echo $timestamp3;?>',
+                             'token'     : '<?php echo md5('unique_salt' . $timestamp3);?>'
+                     },
+              'swf'      : '<?php echo $this->baseUrl( ) . "/swf/uploadify.swf";?>',
+              'uploader' : '<?php echo $this->baseUrl( ) . "/alta-anuncio/execute-upload-ibi";?>',
+              'buttonText' : 'Recibo del IBI',
+              'width' : '200'
+             });
+
+             $('#file_upload').uploadify({
+             'formData'     : {
+                             'timestamp' : '<?php echo $timestamp;?>',
+                             'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
+                     },
+              'swf'      : '<?php echo $this->baseUrl( ) . "/swf/uploadify.swf";?>',
+              'uploader' : '<?php echo $this->baseUrl( ) . "/alta-anuncio/execute-upload-pic";?>',
+              'buttonText' : 'Home (1 imagen: 715x450)',
+              'width' : '200'
+             });
+             
+
+             
+             $('#file_upload_gallery').uploadify({
+             'formData'     : {
+                             'timestamp' : '<?php echo $timestamp2;?>',
+                             'token'     : '<?php echo md5('unique_salt' . $timestamp2);?>'
+                     },
+              'swf'      : '<?php echo $this->baseUrl( ) . "/swf/uploadify.swf";?>',
+              'uploader' : '<?php echo $this->baseUrl( ) . "/alta-anuncio/execute-upload-gallery-pics";?>',
+              'buttonText' : 'Galeria (8 imagenes: 750x400)',
+              'width' : '200'
+             });             
+             
+             
+     });
+             
+             
+             
+             
+    </script>
+    
+    
+    
+    
+</div>
+
+       
+       
+   
+ 
+   

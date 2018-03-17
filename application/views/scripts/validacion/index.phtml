@@ -1,0 +1,678 @@
+<script type="text/javascript">
+   
+$(document).ready(function() { 
+  
+//    $(".notification").delay(15000).queue(function (next) {
+//        $(this).addClass("scale-out");
+//        next();
+//    });
+//                
+//    $(".notification").on("click", function(){ 
+//        $(this).addClass("scale-out");
+//    });
+
+
+});
+                
+function validationAd() {
+
+    $(window).scrollTop(0);
+    //var front = 1;   $("#description").val();
+
+    var urlPath = baseUrl + '/validacion/validation-ad/';
+    $.ajax({
+        type: "POST",
+        url: urlPath,
+        cache: false,
+        data: $("#booking_form_advanced").serialize(),
+        success: function(html) {
+            $("#ajax-box").html(html);
+        }});
+
+    var output;
+    output = '<div class="notification success"><span class="notification-icon"><i class="fa fa-check" aria-hidden="true"></i></span><span class="notification-text">Se guardo fatisfactoriamente!</span></div>';
+    
+    $("#notification").html(output);
+    $(".notification").delay(5000).queue(function (next) {
+        $(this).addClass("scale-out");
+        next();
+    });
+    $(".notification").on("click", function(){ 
+        $(this).addClass("scale-out");
+    });
+
+}
+
+</script>
+
+
+
+
+
+<!-- =========== PAGE TITLE ========== -->
+<div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
+    <div class="container">
+        <div class="inner">
+            <h1>Validación</h1>
+            <ol class="breadcrumb">
+                <li><a href="<?= $this->baseUrl() . '/'; ?>">Home</a></li>
+                <li>Validación de anuncios</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+   <!-- =========== MAIN ========== -->
+        <main id="booking_page">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div id="booking_advanced">
+
+                            <div class="main_title a_left upper">
+                                <h2>Validación</h2>
+                            </div>
+                            <!-- ========== ANUNCIO FORM ========== -->
+                            <div id="ajax-box" class="row">
+                                <form id="booking_form_advanced" action="<?= $this->url(array('controller'=>'alta-anuncio','action'=>'guardar')); ?>" method="post">
+
+                                    <input id="id" name="id" type="hidden" value="<?= $this->dataForm["id"]; ?>">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Propietario</label>
+                                            <div class="form_select">
+                                                <?= $this->selected; ?>
+                                                <!--
+                                                <select id="owner-id" name="owner-id" class="form-control" title="Seleccione al propietario" data-header="Propietarios">
+                                                    <option value="1" data-subtext="">José </option>
+                                                    <option value="2" data-subtext="">Carlos </option>
+                                                    <option value="3" data-subtext="">Pedro </option>
+                                                </select>
+                                                -->
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Teléfono</label>
+                                            <label><b><?= $this->dataForm["telephone"]; ?></b></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Correo electrónico</label>
+                                            <label><b><?= $this->dataForm["email"]; ?></b></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="clearfix"></div>
+                                    
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Tipo de alojamiento</label>
+                                            <div class="form_select">
+                                                <select id="room-type-id" name="room-type-id" class="form-control" title="Seleccionar tipo de alojamiento" data-header="Tipo de alojamiento">
+                                                    <option value="1" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='1')?'selected':'' ?>>Alojamiento en hotel</option>
+                                                    <option value="2" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='2')?'selected':'' ?>>Alojamiento privado</option>
+                                                    <option value="3" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='3')?'selected':'' ?>>Alojamiento vacacional</option>
+                                                    <option value="4" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='4')?'selected':'' ?>>Apartamentos</option>
+                                                    <option value="5" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='5')?'selected':'' ?>>Turismo rural</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Título</label>
+                                            <input id="title-ad" name="title-ad" type="text" class="form-control" value="<?= $this->dataForm["title_ad"]; ?>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Descripción del anuncio</label>
+                                            <textarea id="comments-ad" class="form-control" name="comments-ad"><?= $this->dataForm["comments_ad"]; ?></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Dirección del anuncio</label>
+                                            <textarea id="address-ad" class="form-control" name="address-ad"><?= $this->dataForm["address_ad"]; ?></textarea>
+                                        </div>
+                                    </div>                                    
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Código Postal</label>
+                                            <input id="zip" name="zip" type="text" class="form-control" value="<?= $this->dataForm["zip"]; ?>"/>
+                                        </div>
+                                    </div>   
+                            
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Población</label>
+                                            <input id="city" name="city" type="text" class="form-control" value="<?= $this->dataForm["city"]; ?>"/>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Pais</label>
+                                    <div class="form_select">
+                                        <select id="country" name="country" class="form-control" title="Seleccione tu pais" data-header="Seleccione tu pais" data-live-search="true" data-size="5">
+                                            <option value="82" <?= ($this->dataForm["country"]=='82')?'selected':'' ?>>Alemania</option>
+                                            <option value="206" <?= ($this->dataForm["country"]=='206')?'selected':'' ?>>España</option>
+                                            <option value="232" <?= ($this->dataForm["country"]=='232')?'selected':'' ?>>Estados Unidos</option>
+                                            <option value="75" <?= ($this->dataForm["country"]=='75')?'selected':'' ?>>Francia</option>
+                                            <option value="231" <?= ($this->dataForm["country"]=='231')?'selected':'' ?>>Reino Unido</option>
+                                            <option value="107" <?= ($this->dataForm["country"]=='107')?'selected':'' ?>>Italia</option>
+                                            <option value="1" <?= ($this->dataForm["country"]=='1')?'selected':'' ?>>Afghanistan</option>
+                                            <option value="2" <?= ($this->dataForm["country"]=='2')?'selected':'' ?>>Albania</option>
+                                            <option value="3" <?= ($this->dataForm["country"]=='3')?'selected':'' ?>>Algeria</option>
+                                            <option value="4" <?= ($this->dataForm["country"]=='4')?'selected':'' ?>>American Samoa</option>
+                                            <option value="5" <?= ($this->dataForm["country"]=='5')?'selected':'' ?>>Andorra</option>
+                                            <option value="6" <?= ($this->dataForm["country"]=='6')?'selected':'' ?>>Angola</option>
+                                            <option value="7" <?= ($this->dataForm["country"]=='7')?'selected':'' ?>>Anguilla</option>
+                                            <option value="8" <?= ($this->dataForm["country"]=='8')?'selected':'' ?>>Antigua &amp; Barbuda</option>
+                                            <option value="9" <?= ($this->dataForm["country"]=='9')?'selected':'' ?>>Argentina</option>
+                                            <option value="10" <?= ($this->dataForm["country"]=='10')?'selected':'' ?>>Armenia</option>
+                                            <option value="11" <?= ($this->dataForm["country"]=='11')?'selected':'' ?>>Aruba</option>
+                                            <option value="12" <?= ($this->dataForm["country"]=='12')?'selected':'' ?>>Australia</option>
+                                            <option value="13" <?= ($this->dataForm["country"]=='13')?'selected':'' ?>>Austria</option>
+                                            <option value="14" <?= ($this->dataForm["country"]=='14')?'selected':'' ?>>Azerbaijan</option>
+                                            <option value="15" <?= ($this->dataForm["country"]=='15')?'selected':'' ?>>Bahamas</option>
+                                            <option value="16" <?= ($this->dataForm["country"]=='16')?'selected':'' ?>>Bahrain</option>
+                                            <option value="17" <?= ($this->dataForm["country"]=='17')?'selected':'' ?>>Bangladesh</option>
+                                            <option value="18" <?= ($this->dataForm["country"]=='18')?'selected':'' ?>>Barbados</option>
+                                            <option value="19" <?= ($this->dataForm["country"]=='19')?'selected':'' ?>>Belarus</option>
+                                            <option value="20" <?= ($this->dataForm["country"]=='20')?'selected':'' ?>>Belgium</option>
+                                            <option value="21" <?= ($this->dataForm["country"]=='21')?'selected':'' ?>>Belize</option>
+                                            <option value="22" <?= ($this->dataForm["country"]=='22')?'selected':'' ?>>Benin</option>
+                                            <option value="23" <?= ($this->dataForm["country"]=='23')?'selected':'' ?>>Bermuda</option>
+                                            <option value="24" <?= ($this->dataForm["country"]=='24')?'selected':'' ?>>Bhutan</option>
+                                            <option value="25" <?= ($this->dataForm["country"]=='25')?'selected':'' ?>>Bolivia</option>
+                                            <option value="26" <?= ($this->dataForm["country"]=='26')?'selected':'' ?>>Bonaire</option>
+                                            <option value="27" <?= ($this->dataForm["country"]=='27')?'selected':'' ?>>Bosnia &amp; Herzegovina</option>
+                                            <option value="28" <?= ($this->dataForm["country"]=='28')?'selected':'' ?>>Botswana</option>
+                                            <option value="29" <?= ($this->dataForm["country"]=='29')?'selected':'' ?>>Brazil</option>
+                                            <option value="30" <?= ($this->dataForm["country"]=='30')?'selected':'' ?>>British Indian Ocean Ter</option>
+                                            <option value="31" <?= ($this->dataForm["country"]=='31')?'selected':'' ?>>Brunei</option>
+                                            <option value="32" <?= ($this->dataForm["country"]=='32')?'selected':'' ?>>Bulgaria</option>
+                                            <option value="33" <?= ($this->dataForm["country"]=='33')?'selected':'' ?>>Burkina Faso</option>
+                                            <option value="34" <?= ($this->dataForm["country"]=='34')?'selected':'' ?>>Burundi</option>
+                                            <option value="35" <?= ($this->dataForm["country"]=='35')?'selected':'' ?>>Cambodia</option>
+                                            <option value="36" <?= ($this->dataForm["country"]=='36')?'selected':'' ?>>Cameroon</option>
+                                            <option value="37" <?= ($this->dataForm["country"]=='37')?'selected':'' ?>>Canada</option>
+                                            <option value="38" <?= ($this->dataForm["country"]=='38')?'selected':'' ?>>Canary Islands</option>
+                                            <option value="39" <?= ($this->dataForm["country"]=='39')?'selected':'' ?>>Cape Verde</option>
+                                            <option value="40" <?= ($this->dataForm["country"]=='40')?'selected':'' ?>>Cayman Islands</option>
+                                            <option value="41" <?= ($this->dataForm["country"]=='41')?'selected':'' ?>>Central African Republic</option>
+                                            <option value="42" <?= ($this->dataForm["country"]=='42')?'selected':'' ?>>Chad</option>
+                                            <option value="43" <?= ($this->dataForm["country"]=='43')?'selected':'' ?>>Channel Islands</option>
+                                            <option value="44" <?= ($this->dataForm["country"]=='44')?'selected':'' ?>>Chile</option>
+                                            <option value="45" <?= ($this->dataForm["country"]=='45')?'selected':'' ?>>China</option>
+                                            <option value="46" <?= ($this->dataForm["country"]=='46')?'selected':'' ?>>Christmas Island</option>
+                                            <option value="47" <?= ($this->dataForm["country"]=='47')?'selected':'' ?>>Cocos Island</option>
+                                            <option value="48" <?= ($this->dataForm["country"]=='48')?'selected':'' ?>>Colombia</option>
+                                            <option value="49" <?= ($this->dataForm["country"]=='49')?'selected':'' ?>>Comoros</option>
+                                            <option value="50" <?= ($this->dataForm["country"]=='50')?'selected':'' ?>>Congo</option>
+                                            <option value="51" <?= ($this->dataForm["country"]=='51')?'selected':'' ?>>Cook Islands</option>
+                                            <option value="52" <?= ($this->dataForm["country"]=='52')?'selected':'' ?>>Costa Rica</option>
+                                            <option value="53" <?= ($this->dataForm["country"]=='53')?'selected':'' ?>>Cote D'Ivoire</option>
+                                            <option value="54" <?= ($this->dataForm["country"]=='54')?'selected':'' ?>>Croatia</option>
+                                            <option value="55" <?= ($this->dataForm["country"]=='55')?'selected':'' ?>>Cuba</option>
+                                            <option value="56" <?= ($this->dataForm["country"]=='56')?'selected':'' ?>>Curacao</option>
+                                            <option value="57" <?= ($this->dataForm["country"]=='57')?'selected':'' ?>>Cyprus</option>
+                                            <option value="58" <?= ($this->dataForm["country"]=='58')?'selected':'' ?>>Czech Republic</option>
+                                            <option value="59" <?= ($this->dataForm["country"]=='59')?'selected':'' ?>>Denmark</option>
+                                            <option value="60" <?= ($this->dataForm["country"]=='60')?'selected':'' ?>>Djibouti</option>
+                                            <option value="61" <?= ($this->dataForm["country"]=='61')?'selected':'' ?>>Dominica</option>
+                                            <option value="62" <?= ($this->dataForm["country"]=='62')?'selected':'' ?>>Dominican Republic</option>
+                                            <option value="63" <?= ($this->dataForm["country"]=='63')?'selected':'' ?>>East Timor</option>
+                                            <option value="64" <?= ($this->dataForm["country"]=='64')?'selected':'' ?>>Ecuador</option>
+                                            <option value="65" <?= ($this->dataForm["country"]=='65')?'selected':'' ?>>Egypt</option>
+                                            <option value="66" <?= ($this->dataForm["country"]=='66')?'selected':'' ?>>El Salvador</option>
+                                            <option value="67" <?= ($this->dataForm["country"]=='67')?'selected':'' ?>>Equatorial Guinea</option>
+                                            <option value="68" <?= ($this->dataForm["country"]=='68')?'selected':'' ?>>Eritrea</option>
+                                            <option value="69" <?= ($this->dataForm["country"]=='69')?'selected':'' ?>>Estonia</option>
+                                            <option value="70" <?= ($this->dataForm["country"]=='70')?'selected':'' ?>>Ethiopia</option>
+                                            <option value="71" <?= ($this->dataForm["country"]=='71')?'selected':'' ?>>Falkland Islands</option>
+                                            <option value="72" <?= ($this->dataForm["country"]=='72')?'selected':'' ?>>Faroe Islands</option>
+                                            <option value="73" <?= ($this->dataForm["country"]=='73')?'selected':'' ?>>Fiji</option>
+                                            <option value="74" <?= ($this->dataForm["country"]=='74')?'selected':'' ?>>Finland</option>
+                                            <option value="76" <?= ($this->dataForm["country"]=='76')?'selected':'' ?>>French Guiana</option>
+                                            <option value="77" <?= ($this->dataForm["country"]=='77')?'selected':'' ?>>French Polynesia</option>
+                                            <option value="78" <?= ($this->dataForm["country"]=='78')?'selected':'' ?>>French Southern Ter</option>
+                                            <option value="79" <?= ($this->dataForm["country"]=='79')?'selected':'' ?>>Gabon</option>
+                                            <option value="80" <?= ($this->dataForm["country"]=='80')?'selected':'' ?>>Gambia</option>
+                                            <option value="81" <?= ($this->dataForm["country"]=='81')?'selected':'' ?>>Georgia</option>
+                                            <option value="83" <?= ($this->dataForm["country"]=='83')?'selected':'' ?>>Ghana</option>
+                                            <option value="84" <?= ($this->dataForm["country"]=='84')?'selected':'' ?>>Gibraltar</option>
+                                            <option value="85" <?= ($this->dataForm["country"]=='85')?'selected':'' ?>>Great Britain</option>
+                                            <option value="86" <?= ($this->dataForm["country"]=='86')?'selected':'' ?>>Greece</option>
+                                            <option value="87" <?= ($this->dataForm["country"]=='87')?'selected':'' ?>>Greenland</option>
+                                            <option value="88" <?= ($this->dataForm["country"]=='88')?'selected':'' ?>>Grenada</option>
+                                            <option value="89" <?= ($this->dataForm["country"]=='89')?'selected':'' ?>>Guadeloupe</option>
+                                            <option value="90" <?= ($this->dataForm["country"]=='90')?'selected':'' ?>>Guam</option>
+                                            <option value="91" <?= ($this->dataForm["country"]=='91')?'selected':'' ?>>Guatemala</option>
+                                            <option value="92" <?= ($this->dataForm["country"]=='92')?'selected':'' ?>>Guinea</option>
+                                            <option value="93" <?= ($this->dataForm["country"]=='93')?'selected':'' ?>>Guyana</option>
+                                            <option value="94" <?= ($this->dataForm["country"]=='94')?'selected':'' ?>>Haiti</option>
+                                            <option value="95" <?= ($this->dataForm["country"]=='95')?'selected':'' ?>>Hawaii</option>
+                                            <option value="96" <?= ($this->dataForm["country"]=='96')?'selected':'' ?>>Honduras</option>
+                                            <option value="97" <?= ($this->dataForm["country"]=='97')?'selected':'' ?>>Hong Kong</option>
+                                            <option value="98" <?= ($this->dataForm["country"]=='98')?'selected':'' ?>>Hungary</option>
+                                            <option value="99" <?= ($this->dataForm["country"]=='99')?'selected':'' ?>>Iceland</option>
+                                            <option value="100" <?= ($this->dataForm["country"]=='100')?'selected':'' ?>>India</option>
+                                            <option value="101" <?= ($this->dataForm["country"]=='101')?'selected':'' ?>>Indonesia</option>
+                                            <option value="102" <?= ($this->dataForm["country"]=='102')?'selected':'' ?>>Iran</option>
+                                            <option value="103" <?= ($this->dataForm["country"]=='103')?'selected':'' ?>>Iraq</option>
+                                            <option value="104" <?= ($this->dataForm["country"]=='104')?'selected':'' ?>>Ireland</option>
+                                            <option value="105" <?= ($this->dataForm["country"]=='105')?'selected':'' ?>>Isle of Man</option>
+                                            <option value="106" <?= ($this->dataForm["country"]=='106')?'selected':'' ?>>Israel</option>
+                                            <option value="108" <?= ($this->dataForm["country"]=='108')?'selected':'' ?>>Jamaica</option>
+                                            <option value="109" <?= ($this->dataForm["country"]=='109')?'selected':'' ?>>Japan</option>
+                                            <option value="110" <?= ($this->dataForm["country"]=='110')?'selected':'' ?>>Jordan</option>
+                                            <option value="111" <?= ($this->dataForm["country"]=='111')?'selected':'' ?>>Kazakhstan</option>
+                                            <option value="112" <?= ($this->dataForm["country"]=='112')?'selected':'' ?>>Kenya</option>
+                                            <option value="113" <?= ($this->dataForm["country"]=='113')?'selected':'' ?>>Kiribati</option>
+                                            <option value="114" <?= ($this->dataForm["country"]=='114')?'selected':'' ?>>Korea North</option>
+                                            <option value="115" <?= ($this->dataForm["country"]=='115')?'selected':'' ?>>Korea South</option>
+                                            <option value="116" <?= ($this->dataForm["country"]=='116')?'selected':'' ?>>Kuwait</option>
+                                            <option value="117" <?= ($this->dataForm["country"]=='117')?'selected':'' ?>>Kyrgyzstan</option>
+                                            <option value="118" <?= ($this->dataForm["country"]=='118')?'selected':'' ?>>Laos</option>
+                                            <option value="119" <?= ($this->dataForm["country"]=='119')?'selected':'' ?>>Latvia</option>
+                                            <option value="120" <?= ($this->dataForm["country"]=='120')?'selected':'' ?>>Lebanon</option>
+                                            <option value="121" <?= ($this->dataForm["country"]=='121')?'selected':'' ?>>Lesotho</option>
+                                            <option value="122" <?= ($this->dataForm["country"]=='122')?'selected':'' ?>>Liberia</option>
+                                            <option value="123" <?= ($this->dataForm["country"]=='123')?'selected':'' ?>>Libya</option>
+                                            <option value="124" <?= ($this->dataForm["country"]=='124')?'selected':'' ?>>Liechtenstein</option>
+                                            <option value="125" <?= ($this->dataForm["country"]=='125')?'selected':'' ?>>Lithuania</option>
+                                            <option value="126" <?= ($this->dataForm["country"]=='126')?'selected':'' ?>>Luxembourg</option>
+                                            <option value="127" <?= ($this->dataForm["country"]=='127')?'selected':'' ?>>Macau</option>
+                                            <option value="128" <?= ($this->dataForm["country"]=='128')?'selected':'' ?>>Macedonia</option>
+                                            <option value="129" <?= ($this->dataForm["country"]=='129')?'selected':'' ?>>Madagascar</option>
+                                            <option value="130" <?= ($this->dataForm["country"]=='130')?'selected':'' ?>>Malaysia</option>
+                                            <option value="131" <?= ($this->dataForm["country"]=='131')?'selected':'' ?>>Malawi</option>
+                                            <option value="132" <?= ($this->dataForm["country"]=='132')?'selected':'' ?>>Maldives</option>
+                                            <option value="133" <?= ($this->dataForm["country"]=='133')?'selected':'' ?>>Mali</option>
+                                            <option value="134" <?= ($this->dataForm["country"]=='134')?'selected':'' ?>>Malta</option>
+                                            <option value="135" <?= ($this->dataForm["country"]=='135')?'selected':'' ?>>Marshall Islands</option>
+                                            <option value="136" <?= ($this->dataForm["country"]=='136')?'selected':'' ?>>Martinique</option>
+                                            <option value="137" <?= ($this->dataForm["country"]=='137')?'selected':'' ?>>Mauritania</option>
+                                            <option value="138" <?= ($this->dataForm["country"]=='138')?'selected':'' ?>>Mauritius</option>
+                                            <option value="139" <?= ($this->dataForm["country"]=='139')?'selected':'' ?>>Mayotte</option>
+                                            <option value="140" <?= ($this->dataForm["country"]=='140')?'selected':'' ?>>Mexico</option>
+                                            <option value="141" <?= ($this->dataForm["country"]=='141')?'selected':'' ?>>Midway Islands</option>
+                                            <option value="142" <?= ($this->dataForm["country"]=='142')?'selected':'' ?>>Moldova</option>
+                                            <option value="143" <?= ($this->dataForm["country"]=='143')?'selected':'' ?>>Monaco</option>
+                                            <option value="144" <?= ($this->dataForm["country"]=='144')?'selected':'' ?>>Mongolia</option>
+                                            <option value="145" <?= ($this->dataForm["country"]=='145')?'selected':'' ?>>Montserrat</option>
+                                            <option value="146" <?= ($this->dataForm["country"]=='146')?'selected':'' ?>>Morocco</option>
+                                            <option value="147" <?= ($this->dataForm["country"]=='147')?'selected':'' ?>>Mozambique</option>
+                                            <option value="148" <?= ($this->dataForm["country"]=='148')?'selected':'' ?>>Myanmar</option>
+                                            <option value="149" <?= ($this->dataForm["country"]=='149')?'selected':'' ?>>Nambia</option>
+                                            <option value="150" <?= ($this->dataForm["country"]=='150')?'selected':'' ?>>Nauru</option>
+                                            <option value="151" <?= ($this->dataForm["country"]=='151')?'selected':'' ?>>Nepal</option>
+                                            <option value="152" <?= ($this->dataForm["country"]=='152')?'selected':'' ?>>Netherland Antilles</option>
+                                            <option value="153" <?= ($this->dataForm["country"]=='153')?'selected':'' ?>>Netherlands (Holland, Europe)</option>
+                                            <option value="154" <?= ($this->dataForm["country"]=='154')?'selected':'' ?>>Nevis</option>
+                                            <option value="155" <?= ($this->dataForm["country"]=='155')?'selected':'' ?>>New Caledonia</option>
+                                            <option value="156" <?= ($this->dataForm["country"]=='156')?'selected':'' ?>>New Zealand</option>
+                                            <option value="157" <?= ($this->dataForm["country"]=='157')?'selected':'' ?>>Nicaragua</option>
+                                            <option value="158" <?= ($this->dataForm["country"]=='158')?'selected':'' ?>>Niger</option>
+                                            <option value="159" <?= ($this->dataForm["country"]=='159')?'selected':'' ?>>Nigeria</option>
+                                            <option value="160" <?= ($this->dataForm["country"]=='160')?'selected':'' ?>>Niue</option>
+                                            <option value="161" <?= ($this->dataForm["country"]=='161')?'selected':'' ?>>Norfolk Island</option>
+                                            <option value="162" <?= ($this->dataForm["country"]=='162')?'selected':'' ?>>Norway</option>
+                                            <option value="163" <?= ($this->dataForm["country"]=='163')?'selected':'' ?>>Oman</option>
+                                            <option value="164" <?= ($this->dataForm["country"]=='164')?'selected':'' ?>>Pakistan</option>
+                                            <option value="165" <?= ($this->dataForm["country"]=='165')?'selected':'' ?>>Palau Island</option>
+                                            <option value="166" <?= ($this->dataForm["country"]=='166')?'selected':'' ?>>Palestine</option>
+                                            <option value="167" <?= ($this->dataForm["country"]=='167')?'selected':'' ?>>Panama</option>
+                                            <option value="168" <?= ($this->dataForm["country"]=='168')?'selected':'' ?>>Papua New Guinea</option>
+                                            <option value="169" <?= ($this->dataForm["country"]=='169')?'selected':'' ?>>Paraguay</option>
+                                            <option value="170" <?= ($this->dataForm["country"]=='170')?'selected':'' ?>>Peru</option>
+                                            <option value="171" <?= ($this->dataForm["country"]=='171')?'selected':'' ?>>Philippines</option>
+                                            <option value="172" <?= ($this->dataForm["country"]=='172')?'selected':'' ?>>Pitcairn Island</option>
+                                            <option value="173" <?= ($this->dataForm["country"]=='173')?'selected':'' ?>>Poland</option>
+                                            <option value="174" <?= ($this->dataForm["country"]=='174')?'selected':'' ?>>Portugal</option>
+                                            <option value="175" <?= ($this->dataForm["country"]=='175')?'selected':'' ?>>Puerto Rico</option>
+                                            <option value="176" <?= ($this->dataForm["country"]=='176')?'selected':'' ?>>Qatar</option>
+                                            <option value="177" <?= ($this->dataForm["country"]=='177')?'selected':'' ?>>Republic of Montenegro</option>
+                                            <option value="178" <?= ($this->dataForm["country"]=='178')?'selected':'' ?>>Republic of Serbia</option>
+                                            <option value="179" <?= ($this->dataForm["country"]=='179')?'selected':'' ?>>Reunion</option>
+                                            <option value="180" <?= ($this->dataForm["country"]=='180')?'selected':'' ?>>Romania</option>
+                                            <option value="181" <?= ($this->dataForm["country"]=='181')?'selected':'' ?>>Russia</option>
+                                            <option value="182" <?= ($this->dataForm["country"]=='182')?'selected':'' ?>>Rwanda</option>
+                                            <option value="182" <?= ($this->dataForm["country"]=='182')?'selected':'' ?>>St Barthelemy</option>
+                                            <option value="183" <?= ($this->dataForm["country"]=='183')?'selected':'' ?>>St Eustatius</option>
+                                            <option value="184" <?= ($this->dataForm["country"]=='184')?'selected':'' ?>>St Helena</option>
+                                            <option value="185" <?= ($this->dataForm["country"]=='185')?'selected':'' ?>>St Kitts-Nevis</option>
+                                            <option value="186" <?= ($this->dataForm["country"]=='186')?'selected':'' ?>>St Lucia</option>
+                                            <option value="187" <?= ($this->dataForm["country"]=='187')?'selected':'' ?>>St Maarten</option>
+                                            <option value="188" <?= ($this->dataForm["country"]=='188')?'selected':'' ?>>St Pierre &amp; Miquelon</option>
+                                            <option value="189" <?= ($this->dataForm["country"]=='189')?'selected':'' ?>>St Vincent &amp; Grenadines</option>
+                                            <option value="190" <?= ($this->dataForm["country"]=='190')?'selected':'' ?>>Saipan</option>
+                                            <option value="191" <?= ($this->dataForm["country"]=='191')?'selected':'' ?>>Samoa</option>
+                                            <option value="192" <?= ($this->dataForm["country"]=='192')?'selected':'' ?>>Samoa American</option>
+                                            <option value="193" <?= ($this->dataForm["country"]=='193')?'selected':'' ?>>San Marino</option>
+                                            <option value="194" <?= ($this->dataForm["country"]=='194')?'selected':'' ?>>Sao Tome &amp; Principe</option>
+                                            <option value="195" <?= ($this->dataForm["country"]=='195')?'selected':'' ?>>Saudi Arabia</option>
+                                            <option value="196" <?= ($this->dataForm["country"]=='196')?'selected':'' ?>>Senegal</option>
+                                            <option value="197" <?= ($this->dataForm["country"]=='197')?'selected':'' ?>>Serbia</option>
+                                            <option value="198" <?= ($this->dataForm["country"]=='198')?'selected':'' ?>>Seychelles</option>
+                                            <option value="199" <?= ($this->dataForm["country"]=='199')?'selected':'' ?>>Sierra Leone</option>
+                                            <option value="200" <?= ($this->dataForm["country"]=='200')?'selected':'' ?>>Singapore</option>
+                                            <option value="201" <?= ($this->dataForm["country"]=='201')?'selected':'' ?>>Slovakia</option>
+                                            <option value="202" <?= ($this->dataForm["country"]=='202')?'selected':'' ?>>Slovenia</option>
+                                            <option value="203" <?= ($this->dataForm["country"]=='203')?'selected':'' ?>>Solomon Islands</option>
+                                            <option value="204" <?= ($this->dataForm["country"]=='204')?'selected':'' ?>>Somalia</option>
+                                            <option value="205" <?= ($this->dataForm["country"]=='205')?'selected':'' ?>>South Africa</option>
+                                            <option value="207" <?= ($this->dataForm["country"]=='207')?'selected':'' ?>>Sri Lanka</option>
+                                            <option value="208" <?= ($this->dataForm["country"]=='208')?'selected':'' ?>>Sudan</option>
+                                            <option value="209" <?= ($this->dataForm["country"]=='209')?'selected':'' ?>>Suriname</option>
+                                            <option value="210" <?= ($this->dataForm["country"]=='210')?'selected':'' ?>>Swaziland</option>
+                                            <option value="211" <?= ($this->dataForm["country"]=='211')?'selected':'' ?>>Sweden</option>
+                                            <option value="212" <?= ($this->dataForm["country"]=='212')?'selected':'' ?>>Switzerland</option>
+                                            <option value="213" <?= ($this->dataForm["country"]=='213')?'selected':'' ?>>Syria</option>
+                                            <option value="214" <?= ($this->dataForm["country"]=='214')?'selected':'' ?>>Tahiti</option>
+                                            <option value="215" <?= ($this->dataForm["country"]=='215')?'selected':'' ?>>Taiwan</option>
+                                            <option value="216" <?= ($this->dataForm["country"]=='216')?'selected':'' ?>>Tajikistan</option>
+                                            <option value="217" <?= ($this->dataForm["country"]=='217')?'selected':'' ?>>Tanzania</option>
+                                            <option value="218" <?= ($this->dataForm["country"]=='218')?'selected':'' ?>>Thailand</option>
+                                            <option value="219" <?= ($this->dataForm["country"]=='219')?'selected':'' ?>>Togo</option>
+                                            <option value="220" <?= ($this->dataForm["country"]=='220')?'selected':'' ?>>Tokelau</option>
+                                            <option value="221" <?= ($this->dataForm["country"]=='221')?'selected':'' ?>>Tonga</option>
+                                            <option value="222" <?= ($this->dataForm["country"]=='222')?'selected':'' ?>>Trinidad &amp; Tobago</option>
+                                            <option value="223" <?= ($this->dataForm["country"]=='223')?'selected':'' ?>>Tunisia</option>
+                                            <option value="224" <?= ($this->dataForm["country"]=='224')?'selected':'' ?>>Turkey</option>
+                                            <option value="225" <?= ($this->dataForm["country"]=='225')?'selected':'' ?>>Turkmenistan</option>
+                                            <option value="226" <?= ($this->dataForm["country"]=='226')?'selected':'' ?>>Turks &amp; Caicos Is</option>
+                                            <option value="227" <?= ($this->dataForm["country"]=='227')?'selected':'' ?>>Tuvalu</option>
+                                            <option value="228" <?= ($this->dataForm["country"]=='228')?'selected':'' ?>>Uganda</option>
+                                            <option value="229" <?= ($this->dataForm["country"]=='229')?'selected':'' ?>>Ukraine</option>
+                                            <option value="230" <?= ($this->dataForm["country"]=='230')?'selected':'' ?>>United Arab Emirates</option>
+                                            <option value="233" <?= ($this->dataForm["country"]=='233')?'selected':'' ?>>Uruguay</option>
+                                            <option value="234" <?= ($this->dataForm["country"]=='234')?'selected':'' ?>>Uzbekistan</option>
+                                            <option value="235" <?= ($this->dataForm["country"]=='235')?'selected':'' ?>>Vanuatu</option>
+                                            <option value="236" <?= ($this->dataForm["country"]=='236')?'selected':'' ?>>Vatican City State</option>
+                                            <option value="237" <?= ($this->dataForm["country"]=='237')?'selected':'' ?>>Venezuela</option>
+                                            <option value="238" <?= ($this->dataForm["country"]=='238')?'selected':'' ?>>Vietnam</option>
+                                            <option value="239" <?= ($this->dataForm["country"]=='239')?'selected':'' ?>>Virgin Islands (Brit)</option>
+                                            <option value="240" <?= ($this->dataForm["country"]=='240')?'selected':'' ?>>Virgin Islands (USA)</option>
+                                            <option value="241" <?= ($this->dataForm["country"]=='241')?'selected':'' ?>>Wake Island</option>
+                                            <option value="242" <?= ($this->dataForm["country"]=='242')?'selected':'' ?>>Wallis &amp; Futana Is</option>
+                                            <option value="243" <?= ($this->dataForm["country"]=='243')?'selected':'' ?>>Yemen</option>
+                                            <option value="244" <?= ($this->dataForm["country"]=='244')?'selected':'' ?>>Zaire</option>
+                                            <option value="245" <?= ($this->dataForm["country"]=='245')?'selected':'' ?>>Zambia</option>
+                                            <option value="246" <?= ($this->dataForm["country"]=='246')?'selected':'' ?>>Zimbabwe</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Precio</label>
+                                            <input id="price-ad" name="price-ad" type="text" class="form-control" value="<?= number_format($this->dataForm['price_ad'],0); ?>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="clearfix"></div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Tipo de cama
+                                                <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Cama"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                            </label>
+                                            <div class="form_select">
+                                                <select id="bed-type-id" name="bed-type-id" class="form-control" title="Cama" data-header="Cama">
+                                                    <option value="1" <?= ($this->dataForm["bed_type_id"]=='1')?'selected':'' ?>>Simple</option>
+                                                    <option value="2" <?= ($this->dataForm["bed_type_id"]=='2')?'selected':'' ?>>Doble</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Superficie
+                                                <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Superficie"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                            </label>
+                                            <div class="form_select">
+                                                <select id="surface-type-id" name="surface-type-id" class="form-control" title="Superficie" data-header="Superficie">
+                                                    <option value="1" <?= ($this->dataForm["surface_type_id"]=='1')?'selected':'' ?>>40 m2</option>
+                                                    <option value="2" <?= ($this->dataForm["surface_type_id"]=='2')?'selected':'' ?>>60 m2</option>
+                                                    <option value="3" <?= ($this->dataForm["surface_type_id"]=='3')?'selected':'' ?>>80 m2</option>
+                                                    <option value="4" <?= ($this->dataForm["surface_type_id"]=='4')?'selected':'' ?>>100 m2</option>
+                                                    <option value="5" <?= ($this->dataForm["surface_type_id"]=='5')?'selected':'' ?>>120 m2</option>
+                                                    <option value="6" <?= ($this->dataForm["surface_type_id"]=='6')?'selected':'' ?>>160 m2</option>
+                                                    <option value="7" <?= ($this->dataForm["surface_type_id"]=='7')?'selected':'' ?>>200 m2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Personas
+                                                <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Personas"><i class="label_icon_info fa fa-info-circle"></i></a>
+                                            </label>
+                                            <div class="form_select">
+                                                <select id="persons-number-id" name="persons-number-id" class="form-control" title="Personas" data-header="Personas">
+                                                    <option value="1" <?= ($this->dataForm["persons_number_id"]=='1')?'selected':'' ?>>1</option>
+                                                    <option value="2" <?= ($this->dataForm["persons_number_id"]=='2')?'selected':'' ?>>2</option>
+                                                    <option value="3" <?= ($this->dataForm["persons_number_id"]=='3')?'selected':'' ?>>3</option>
+                                                    <option value="4" <?= ($this->dataForm["persons_number_id"]=='4')?'selected':'' ?>>4</option>
+                                                    <option value="5" <?= ($this->dataForm["persons_number_id"]=='5')?'selected':'' ?>>5</option>
+                                                    <option value="6" <?= ($this->dataForm["persons_number_id"]=='6')?'selected':'' ?>>6</option>
+                                                    <option value="7" <?= ($this->dataForm["persons_number_id"]=='7')?'selected':'' ?>>7</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="clearfix"></div>
+                                    
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Servicios free
+                                                <a href="#" title="Servicios" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Free"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                            </label>
+                                            <div class="form_select">
+                                                <select name="free-ads[]" class="form-control" title="Free" data-header="Free" multiple>
+                                                    <option value="1" <?= ($this->dataForm["free_service_internet"]=='1')?'selected':'' ?>>Internet</option>
+                                                    <option value="2" <?= ($this->dataForm["free_service_wifi"]=='1')?'selected':'' ?>>WI-FI</option>
+                                                    <option value="3" <?= ($this->dataForm["free_service_newspaper"]=='1')?'selected':'' ?>>Periódicos</option>
+                                                    <option value="4" <?= ($this->dataForm["free_service_breakfast_include"]=='1')?'selected':'' ?>>Desayuno incluido</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    
+                                    <div class="clearfix"></div>
+                                    
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Otros servicios
+                                        <a href="#" title="Otros servicios" data-toggle="popover" data-placement="top" data-trigger="hover" data-content=""> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="other-services-ads[]" class="form-control" title="Otros servicios" data-header="Otros servicios" multiple>
+                                            <option value="1" <?= ($this->dataForm["other_service_full_ac"]=='1')?'selected':'' ?>>Aire acondicionado</option>
+                                            <option value="2" <?= ($this->dataForm["other_service_private_balcony"]=='1')?'selected':'' ?>>Balcón privado</option>
+                                            <option value="3" <?= ($this->dataForm["other_service_flat_screen_tv"]=='1')?'selected':'' ?>>Flat Screen Tv</option>
+                                            <option value="4" <?= ($this->dataForm["other_service_room_service"]=='1')?'selected':'' ?>>Servicios de habitación</option>
+                                            <option value="5" <?= ($this->dataForm["other_service_beach_view"]=='1')?'selected':'' ?>>Vista a la playa</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                                             
+                                    
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-8">
+                                <?php foreach($this->dataForm["pics"] as $pic) : ?>
+                                <div style="padding: 4px;">
+                                    <?php if('1'==$pic["section_id"]) : ?>
+                                    <img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->dataForm["id"] . '/home/' . $pic["file_name"] ;?>" alt="Image">
+                                    <?php endif; ?>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>                            
+                            
+                            <div class="col-md-12">
+                                <?php foreach($this->dataForm["pics"] as $pic) : ?>
+                                <div style="padding: 4px;">
+                                    <?php if('2'==$pic["section_id"]) : ?>
+                                    <img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->dataForm["id"] . '/gallery/' . $pic["file_name"] ;?>" alt="Image">
+                                    <?php endif; ?>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>                            
+                            
+                            <div class="clearfix"></div>
+                            
+<!--                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>OTROS GASTOS</label>
+                                </div>
+                            </div>-->
+                            
+                             <div class="main_title a_left upper" style="margin-top: 20px; margin-left: 20px;">
+                                <h2>OTROS GASTOS</h2>
+                            </div>
+                            
+                            
+<!--                            <div class="clearfix"></div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Traslados
+                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Traslados  del aeropuerto-alojamiento y viceversa"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <input id="gastoServicio" name="gastoServicio" type="text" class="form-control" placeholder="Ingrese la cantidad por servicio">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Servicio de guía turístico
+                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Servicio de guía turístico"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <input id="otroGastos" name="otroGastos" type="text" class="form-control" placeholder="Ingrese el precio del servicio">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Cargo adicional
+                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Cargo adicional ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <input id="cargoAdicional" name="cargoAdicional" type="text" class="form-control" placeholder="Ingrese el cargo adicional">
+                                </div>
+                            </div>
+                            -->
+
+                            <div class="clearfix"></div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Gasto de tramites
+                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Gastos de tramites"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    
+                                    <input id="gastoTramite" name="gastoTramite" type="text" class="form-control" placeholder="Ingrese el porcentaje" value="10">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Fianza
+                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Fianza ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <input id="fianza" name="fianza" type="text" class="form-control" placeholder="Ingrese la fianza">
+                                </div>
+                            </div>                        
+                                                                                                    
+                            <div class="col-md-12">                                                   
+                                <a type="button" target="_blank" class="button btn_yellow pull-left" href="<?= $this->baseUrl() . '/ads/images/57/' . $this->dataForm["id"] . '/ibi/' . $this->dataForm["ibi"]["file_name"]; ?>"> <i class="fa fa-id-card-o" aria-hidden="true"></i> DESCARGAR IBI </a>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button type="button" class="button btn_blue pull-right" onclick="validationAd();"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> VALIDAR </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                            
+
+                            
+                        </div>
+                    </div>
+
+                    
+                    
+                    <div class="col-md-4">
+                        <div class="special_offers">
+                            <div class="main_title a_left upper">
+                                <h2>Special Offers</h2>
+                            </div>
+                            <article class="room mb40">
+                                <figure>
+                                    <a href="room.html" class="hover_effect h_blue h_link">
+                                        <img src="images/rooms/special1.jpg" class="img-responsive" alt="Image">
+                                    </a>
+                                    <figcaption>
+                                        <h4><a href="room.html">Single Room</a></h4>
+                                        <div class="price">â‚¬ 89<span> / night</span></div>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                            <article class="room mb40">
+                                <figure>
+                                    <a href="room.html" class="hover_effect h_blue h_link">
+                                        <img src="images/rooms/special2.jpg" class="img-responsive" alt="Image">
+                                    </a>
+                                    <figcaption>
+                                        <h4><a href="room.html">Double Room</a></h4>
+                                        <div class="price">â‚¬ 129<span> / night</span></div>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                            <article class="room mb40">
+                                <figure>
+                                    <a href="room.html" class="hover_effect h_blue h_link">
+                                        <img src="images/rooms/special3.jpg" class="img-responsive" alt="Image">
+                                    </a>
+                                    <figcaption>
+                                        <h4><a href="room.html">Delux Room</a></h4>
+                                        <div class="price">â‚¬ 189<span> / night</span></div>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+   

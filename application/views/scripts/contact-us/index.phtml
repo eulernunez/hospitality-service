@@ -1,0 +1,88 @@
+<!-- =========== PAGE TITLE ========== -->
+<div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
+    <div class="container">
+        <div class="inner">
+            <h1> Contáctanos </h1>
+            <ol class="breadcrumb">
+                <li><a href="<?= $this->baseUrl( ) . '/'; ?>">Home</a></li>
+                <li> Contáctanos </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+<!-- =========== MAIN ========== -->
+<main id="contact_page_style_2">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="main_title  a_left">
+                    <h2> CONTÁCTANOS </h2>
+                </div>
+                <form id="contact-form-page" method="post" action="<?= $this->url(array('controller'=>'contact-us','action'=>'send-message')); ?>">
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label class="control-label">Nombre</label>
+                            <input type="text" class="form-control" name="name" placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label class="control-label">Teléfono</label>
+                            <input type="text" class="form-control" name="phone" placeholder="Tu teléfono">
+                        </div>
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label class="control-label">Correo electrónico</label>
+                            <input type="email" class="form-control" name="email" placeholder="Tu correo electrónico">
+                        </div>
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label class="control-label">Asunto</label>
+                            <input type="text" class="form-control" name="subject" placeholder="Asunto">
+                        </div>
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label">Mensaje</label>
+                            <textarea class="form-control" name="message" placeholder="Tu mensaje ..."></textarea>
+                        </div>
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="button  btn_blue mt35 upper pull-right"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Enviar tu mensaje </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-4">
+                <div id="contact-page22">
+                    
+                <ul class="contact-info upper mt40">
+                  
+                    <li>
+                        <span class="ci_item">EMAIL:</span>
+                        example@site.com, contact@site.com
+                    </li>
+                    <li>
+                        <span class="ci_item">WEB:</span>
+                        wwww.site.com
+                    </li>
+                    <li>
+                        <span class="ci_item">PHONE:</span>
+                        +1 (330) <strong>993-443</strong> , +1 (330) <strong>995-445</strong>
+                    </li>
+                  
+                </ul>
+
+                    <div class="social_media">
+                        <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                        <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                        <a class="googleplus" href="#"><i class="fa fa-google-plus"></i></a>
+                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a>
+                        <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                        <a class="youtube" href="#"><i class="fa fa-youtube"></i></a>
+                        <a class="instagram" href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

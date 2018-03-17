@@ -1,0 +1,347 @@
+<script type="text/javascript">   
+   
+
+$(document).ready(function() { 
+  
+//    $(".notification").delay(15000).queue(function (next) {
+//        $(this).addClass("scale-out");
+//        next();
+//    });
+//                
+//    $(".notification").on("click", function(){ 
+//        $(this).addClass("scale-out");
+//    });
+
+
+});
+                
+function saveBook() {
+
+    $(window).scrollTop(0);
+    //var front = 1; //  $("#description").val( );
+    var urlPath = baseUrl + '/booking-form/save-book/';
+    $.ajax({
+        type: "POST",
+        url: urlPath,
+        cache: false,
+        data: $("#booking_form_advanced").serialize(),
+        success: function(html) {
+            $("#ajax-box").html(html);
+        }
+    });
+    
+    var output;
+    output = '<div class="notification success"><span class="notification-icon"><i class="fa fa-check" aria-hidden="true"></i></span><span class="notification-text">Se guardo fatisfactoriamente!</span></div>';
+    
+    $("#notification").html(output);
+    $(".notification").delay(5000).queue(function (next) {
+        $(this).addClass("scale-out");
+        next();
+    });
+    $(".notification").on("click", function(){ 
+        $(this).addClass("scale-out");
+    });
+
+}
+       
+                
+</script>
+
+
+<!-- =========== PAGE TITLE ========== -->
+<div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
+    <div class="container">
+        <div class="inner">
+            <h1>Resumen de reserva</h1>
+            <ol class="breadcrumb">
+                <li><a href="<?= $this->baseUrl() . '/'; ?>">Home</a></li>
+                <li>Reserva</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+   <!-- =========== MAIN ========== -->
+<main id="booking_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div id="ajax-box">
+                    
+                    
+                    
+                    
+                    
+                    
+                    <!-- ========== EX - BOOKING FORM ========== -->
+<div id="reserva" class="row">
+
+                        <div class="main_title a_left upper room">
+                        <figure>
+                            <div class="price">
+                                <h2>Reserva&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+                            </div>
+                        </figure>
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>                    
+
+    
+    
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="main_title a_left upper room">
+    <!--            <h2>Tu datos</h2>-->
+                <figure>
+                    <div class="price">
+                        <h2>Tus Datos</h2>
+                    </div>
+                </figure>
+                <div>
+                    &nbsp;
+                </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <div>
+                    <b>Nombre</b><br/>
+                    <?= $this->post['bookingName']; ?>
+                </div>
+                <div>
+                    <b>NIE/NIF</b><br/>
+                    <?= $this->post['bookingDocument']; ?>
+                </div>
+                <div>
+                    <b>E-mail</b><br/>
+                    <?= $this->post['bookingEmail']; ?>
+                </div>
+                <div>
+                    <b>Teléfono</b><br/>
+                    <?= $this->post['bookingPhone']; ?>
+                </div>
+                <?php if(!empty($this->post['bookingComments'])) : ?>
+                <div>
+                    <b>Especial requerimientos</b><br/>
+                    <?= $this->post['bookingComments']; ?>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div> 
+
+            
+            
+        <div class="main_title a_left upper room" style="margin-top: 50px;">
+            <figure>
+                <div class="price">
+                    <h2>Alojamiento</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <div>
+                    <b>Anuncio</b><br/>
+                    <?= $this->post['anuncio']['0']['title_ad']; ?>
+                </div>
+                <div>
+                    <b>Dirección</b><br/>
+                    <?= $this->post['anuncio']['0']['address_ad']; ?>
+                </div>
+                <div>
+                    <b>Código Postal</b><br/>
+                    <?= $this->post['anuncio']['0']['zip']; ?>
+                </div>
+                <div>
+                    <b>Provincia</b><br/>
+                    <?= $this->post['anuncio']['0']['city']; ?>
+                </div>
+                <div>
+                    <b>Pais</b><br/>
+                    España
+                </div>
+
+            </div>
+        </div> 
+
+        
+        
+        
+        
+        
+    </div>
+    
+    <div class="col-md-6">
+        <div class="main_title a_left upper room">
+<!--            <h2>Facturación</h2>-->
+            <figure>
+                <div class="price">
+                    <h2>Facturación</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <div>
+                    <b>Llegada</b><br/>
+                    <?= $this->post['bookingCheckin']; ?>
+                </div>
+                <div>
+                    <b>Salida</b><br/>
+                    <?= $this->post['bookingCheckout']; ?>
+                </div>
+                <div>
+                    <b>Noches</b><br/>
+                    <?php $nights = (int)$this->post['interval']     ; ?>
+                    <?= $nights; ?>
+                </div>
+                <div>
+                    <b>Precio x noche</b><br/>
+                    <?php
+                    $price = (int)number_format($this->post['anuncio']['0']['price_ad'],0);
+                    ?>
+                    <?= number_format($price,2,",","."); ?>
+                </div>
+            </div>
+            
+            
+            
+        </div>
+        
+
+        <div class="main_title a_left upper room" style="margin-top: 50px;">
+
+            <figure>
+                <div class="price">
+                    <h2>Sub-Total</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            
+            <div style="font-size: 20px; margin-top: 30px;">
+                <div>
+                    <b>Alojamiento</b><br/>
+                    <?= number_format($nights*$price,2,",","."); ?>
+                </div>
+                <div>
+                    <b>Gastos de tramites</b><br/>
+                    <?php
+                    $porcentajeGasto = (int)number_format($this->post['anuncio']['0']['gasto_tramite'],0);
+                    $gastosTramite = $nights*$price*$porcentajeGasto/100;
+                    ?>
+                    <?= number_format($gastosTramite,2,",","."); ?>
+                </div>
+                <div>
+                    <b>Fianza</b><br/>
+                    <?php
+                    $fianza = (int)number_format($this->post['anuncio']['0']['fianza'],0);
+                    ?>
+                    <?= number_format($fianza,2,",","."); ?>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main_title a_left upper room" style="margin-top: 50px;">
+<!--            <h2>IVA</h2>-->
+            <figure>
+                <div class="price">
+                    <h2>IVA</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <b>
+                    <?php
+                    $subTotal = $nights*$price+$gastosTramite+$fianza;;
+                    ?>
+
+                    <?= number_format($subTotal*0.21,2,",","."); ?>
+                </b>    
+            </div>
+
+
+
+        </div>
+
+        <div class="main_title a_left upper room" style="margin-top: 50px;">
+
+            <figure>
+                <div class="price">
+                    <h2>Total</h2>
+                </div>
+            </figure>
+            <div>
+                &nbsp;
+            </div>
+            <div style="font-size: 20px; margin-top: 30px;">
+                <b>
+                    <?= number_format($subTotal+$subTotal*0.21,2,",","."); ?>
+                </b>    
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+                        
+                        
+</div>
+                    
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="special_offers">
+                    <div class="main_title a_left upper">
+                        <h2>Special Offers</h2>
+                    </div>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special1.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Single Room</a></h4>
+                                <div class="price">â‚¬ 89<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special2.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Double Room</a></h4>
+                                <div class="price">â‚¬ 129<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special3.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Delux Room</a></h4>
+                                <div class="price">â‚¬ 189<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
