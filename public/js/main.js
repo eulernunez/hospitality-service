@@ -174,15 +174,15 @@
         };
         
         /* ----- Home Page 2 ----- */
-        if ($("#classic_slider").length > 0) {
+        if ($("#classic_slider_euler").length > 0) {
             var tpj = jQuery;
             tpj.noConflict();
             var revapi6;
             tpj(document).ready(function () {
-                if (tpj("#classic_slider").revolution == undefined) {
-                    revslider_showDoubleJqueryError("#classic_slider");
+                if (tpj("#classic_slider_euler").revolution == undefined) {
+                    revslider_showDoubleJqueryError("#classic_slider_euler");
                 } else {
-                    revapi6 = tpj("#classic_slider").show().revolution({
+                    revapi6 = tpj("#classic_slider_euler").show().revolution({
                         sliderType: "standard",
                         jsFileLocation: "js/",
                         sliderLayout: "auto",

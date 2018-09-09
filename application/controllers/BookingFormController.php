@@ -24,7 +24,6 @@ class BookingFormController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         $post = $this->getRequest()->getPost();
-        //die('POST: <pre>' . print_r($post, true) . '</pre>');
         $post['active'] = '1';
         $post['createdDate'] = date("Y-m-d H:i:s");
         $post['bookingRoomtype'] = 0;
@@ -44,8 +43,6 @@ class BookingFormController extends Zend_Controller_Action
         $handler = new Application_Model_Repository_Statement();
         $anuncio = $handler->getAdForBooking($anuncioId);
 
-        //die('ANUNCIO: <pre>' . print_r($anuncio,true) . '</pre>');
-        
         $post['anuncio'] = $anuncio;
 
         # SESSION
@@ -60,12 +57,30 @@ class BookingFormController extends Zend_Controller_Action
 
     }
 
-    
-    /*
-     * CONTINUAR CON EL POST EN EL NUEVO FORMULARIO
-     * 
-     */
 
+    public function datosFacturacionAction() 
+    {
+    
+        $post = $this->getRequest()->getPost();
+        $post['active'] = '1';
+        $post['createdDate'] = date("Y-m-d H:i:s");
+        $post['bookingCountry'] = 0;
+        $post['bookingRoomtype'] = 0;
+        $post['bookingComments'] = '';
+        $post['bookingDocument'] = '';
+
+        
+        $book = new Application_Model_DbTable_Booking();
+        $lastInsertId = $book->agregar($post);
+        $post['id'] = $lastInsertId;
+        
+        $this->view->anuncioId = (int)$post['anuncioId'];
+        $this->view->bookingId = (int)$lastInsertId;
+
+    }
+
+    
+    
     public function reservaAction()
     {
 
@@ -73,25 +88,35 @@ class BookingFormController extends Zend_Controller_Action
 
         $post['active'] = '1';
         $post['createdDate'] = date("Y-m-d H:i:s");
-        $post['bookingCountry'] = 0;
-        $post['bookingRoomtype'] = 0;
-        $post['bookingComments'] = '';
-
-        $book = new Application_Model_DbTable_Booking();
-        $lastInsertId = $book->agregar($post);
-
+        
+        $bill = new Application_Model_DbTable_Billing();
+        $lastInsertId = $bill->agregar($post);
+        
+        $post['billingId'] = $lastInsertId;        
+        
         $anuncioId = (int)$post['anuncioId'];
-
+        $bookingId = (int)$post['bookingId'];
+        $handler = new Application_Model_Repository_Statement();
+        
+        $book = $handler->getBooking($bookingId);
+        $post['id'] = $book['0']['id'];
+        $post['bookingName'] = $book['0']['booking_name'];
+        $post['bookingDocument'] = $book['0']['booking_document'];
+        $post['bookingEmail'] = $book['0']['booking_email'];
+        $post['bookingPhone'] = $book['0']['booking_phone'];
+        $post['bookingCheckin'] = $book['0']['booking_checkin'];
+        $post['bookingCheckout'] = $book['0']['booking_checkout'];
+        
         $bookingCheckin  = $post['bookingCheckin'];
         $bookingCheckout = $post['bookingCheckout'];
 
-        $interval = $this->diferenciaDias($bookingCheckin, $bookingCheckout);
+        $interval = $this->diferenciaDiasFromDataBase($bookingCheckin, $bookingCheckout);
 
         $post['interval'] = $interval;
 
-        $handler = new Application_Model_Repository_Statement();
+        
         $anuncio = $handler->getAdForBooking($anuncioId);
-        //die('fast book: <pre>' . print_r($anuncio,true) . '</pre>');
+        
         $post['anuncio'] = $anuncio;
 
         $this->view->post = $post;
@@ -112,15 +137,77 @@ class BookingFormController extends Zend_Controller_Action
         return $interval->format('%a');
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
 
+    public function diferenciaDiasFromDataBase($checkIn, $checkOut)
+    {
+
+        $datetime1 = new DateTime($checkIn);
+        $datetime2 = new DateTime($checkOut);  
+        $interval = $datetime1->diff($datetime2);
+
+        //echo $interval->format('%R%a días');
+        return $interval->format('%a');
+
+    }
+
+    
+    
+    public function reservaAceptadaAction()
+    {
+        
+        $handler = new Application_Model_Repository_Statement();
+       
+        $postParams = $this->getRequest()->getPost();
+        $bill = array();
+        $book = array();
+        $pic = array();
+        $anuncio = array(); 
+        $interval = 0;
+        
+        if(isset ($postParams['anuncioId'])){
+            $anuncioId = (int)$postParams['anuncioId'];
+            $anuncio = $handler->getAdForBooking($anuncioId);
+            $pic = $handler->getPicByAdId($anuncioId);    
+        }
+        if(isset ($postParams['bookingId'])){
+            $bookingId = (int)$postParams['bookingId'];
+            $book = $handler->getBooking($bookingId);
+            $interval = $this->diferenciaDiasFromDataBase($book['0']['booking_checkin'], $book['0']['booking_checkout']);
+        }
+        if(isset ($postParams['billingId'])){
+            $billingId = (int)$postParams['billingId'];
+            $bill = $handler->getBilling($billingId);
+        }
+
+        
+        
+        
+        
+
+        
+
+        $post['bill'] = $bill;
+        $post['book'] = $book;
+        $post['pic'] = $pic;
+        $post['book']['0']['interval'] = $interval;
+        $post['anuncio'] = $anuncio;
+
+        $body = $this->view->partial('booking-form/booking-email.phtml', $post);
+        
+        $params = array();
+        $params['mensaje'] = $body;
+        $params['para']   = $postParams['email'];
+        $params['asunto'] = 'Reserva';
+
+        $sender = new Application_Model_System_System();
+        try {
+            $sender->sendEmail($params);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+            echo $exc->getMessage();
+        }
+
+    }
+    
+
+}

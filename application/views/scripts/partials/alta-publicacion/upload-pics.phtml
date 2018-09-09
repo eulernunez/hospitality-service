@@ -3,36 +3,23 @@
          <div id="queue"></div>
         <input id="file_upload" name="file_upload" type="file" multiple="true">
     </form>
-    <form>
-        <input id="file_upload_2" name="file_upload_2" type="file" multiple="true">
-    </form>
+    
     <script type="text/javascript">
         <?php $timestamp = time();?>
-        <?php $timestamp2 = time();?>    
+       
         $(function() {
             $('#file_upload').uploadify({
                 'formData' : {
                              'timestamp' : '<?php echo $timestamp;?>',
                              'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
                      },
-                'swf'      : '<?php echo $this->baseUrl( ) . "/swf/uploadify.swf";?>',
-                'uploader' : '<?php echo $this->baseUrl( ) . "/alta-publicacion/execute-upload-pic";?>',
-                'buttonText' : 'Panorámico',
+                'swf'      : '<?php echo $this->baseUrl() . "/swf/uploadify.swf";?>',
+                'uploader' : '<?php echo $this->baseUrl() . "/alta-publicacion/execute-upload-pic";?>',
+                'buttonText' : 'Panorámico 1170 X 600',
                 'width' : '200'
             });
         });
-        $(function() {
-            $('#file_upload_2').uploadify({
-                'formData' : {
-                             'timestamp' : '<?php echo $timestamp2;?>',
-                             'token'     : '<?php echo md5('unique_salt' . $timestamp2);?>'
-                     },
-                'swf'      : '<?php echo $this->baseUrl( ) . "/swf/uploadify.swf";?>',
-                'uploader' : '<?php echo $this->baseUrl( ) . "/alta-publicacion/execute-upload-pic";?>',
-                'buttonText' : 'Imagen del listado',
-                'width' : '200'
-            });
-        });
+        
     </script>
 </div>
 

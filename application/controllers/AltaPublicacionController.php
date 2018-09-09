@@ -2,6 +2,7 @@
 require_once 'BaseSiteController.php';
 class AltaPublicacionController extends BaseSiteController
 {
+	
 
     public function init()
     {
@@ -51,7 +52,8 @@ class AltaPublicacionController extends BaseSiteController
 
         $this->setFolder($userId, $publicationId);
         $targetFolderOriginal = $basicPathPic . '/' . $userId . '/' . $publicationId . '/panoramico';
-
+        $targetFolderThumbnail = $basicPathPic . '/' . $userId . '/' . $publicationId . '/thumbnail';
+        
         $verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
         if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
@@ -65,13 +67,17 @@ class AltaPublicacionController extends BaseSiteController
             if (in_array(strtolower($fileParts['extension']),$fileTypes)) {
                 move_uploaded_file($tempFile,$targetFileOriginal);
                 
+                $targetFileThumbnail = rtrim($targetFolderThumbnail,'/') . $nameArchivo;
+                $resizeThumbnail = new Application_Model_System_ImagenResize($targetFileOriginal);
+                $resizeThumbnail->resizeImage(120, 62, 'crop');
+                $resizeThumbnail->saveImage($targetFileThumbnail, 100);
+                
                 $formData['fileName'] = $_FILES['Filedata']['name'];
                 $formData['fileExt'] = $fileParts['extension'];
-                $formData['sectionId'] = '1';
-                $formData['adId'] = $adId;
+                $formData['publicationId'] = $publicationId;
                 //$formData['anuncioId'] = $_SESSION['anuncioId'];
-//                $modelo = new Application_Model_DbTable_Pic();
-//                $modelo->agregar($formData);
+                $modelo = new Application_Model_DbTable_PublicationPic();
+                $modelo->agregar($formData);
                 
                 echo '1';
                 
@@ -85,7 +91,6 @@ class AltaPublicacionController extends BaseSiteController
 
     }
     
-    
     public function setFolder($userId, $publicationId)
     {
 
@@ -93,9 +98,7 @@ class AltaPublicacionController extends BaseSiteController
         $folderDestino = $basicPathPic . '/' . $userId ;
         $folderPublicacion = $folderDestino . '/' . $publicationId ;
         $folderDestinoPanoramico = $folderPublicacion . '/' . 'panoramico';
-//        $folderDestinoPdfIbi = $folderPublicacion . '/' . 'ibi' ;
-//        $folderDestinoGallery = $folderPublicacion . '/' . 'gallery' ;
-//        $folderDestinoThumbnail = $folderPublicacion . '/' . 'thumbnail' ;
+        $folderDestinoThumbnail = $folderPublicacion . '/' . 'thumbnail' ;
 
         if (file_exists($folderDestino)) {
         } else {
@@ -115,23 +118,11 @@ class AltaPublicacionController extends BaseSiteController
                 chmod($folderDestinoPanoramico, 0777);
         }
 
-//        if(file_exists($folderDestinoPdfIbi)){
-//        } else { 
-//                mkdir($folderDestinoPdfIbi, 0777 );
-//                chmod($folderDestinoPdfIbi, 0777);
-//        }
-//
-//        if(file_exists($folderDestinoGallery)){
-//        } else { 
-//                mkdir($folderDestinoGallery, 0777 );
-//                chmod($folderDestinoGallery, 0777);
-//        }
-//
-//        if( file_exists($folderDestinoThumbnail)){
-//        } else { 
-//                mkdir($folderDestinoThumbnail, 0777);
-//                chmod($folderDestinoThumbnail, 0777);
-//        }
+        if(file_exists($folderDestinoThumbnail)){
+        } else { 
+                mkdir($folderDestinoThumbnail, 0777 );
+                chmod($folderDestinoThumbnail, 0777);
+        }
 
         return true;
 

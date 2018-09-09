@@ -4,7 +4,7 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
     $(':input[type="submit"]').prop('disabled', true);   //desactiva el input al cargar
     
     var name = false;
-    var doc = false;
+    var doc = true;
     var email = false;
     var phone = false;
     var adult = false;
@@ -19,11 +19,11 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
         }
      });
      
-    $('#bookingDocument').keyup(function() {  
-        if($(this).val() != '') {
-           doc = true;
-        }
-     });
+//    $('#bookingDocument').keyup(function() {  
+//        if($(this).val() != '') {
+//           doc = true;
+//        }
+//     });
      
 
     $('#bookingEmail').keyup(function() { 
@@ -91,7 +91,23 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
  
 </script>
 
+<style type="text/css">
+    .room_list .room_price .button {
+        margin-top: 10px;
+    }
+    .room_list .room_price .room_price_inner {
+        padding-top: 0px; 
+        padding-bottom: 10px;
+    }
+    
+    
+</style>
  
+
+
+
+
+
 <!-- =========== PAGE TITLE ========== -->
 <div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
     <div class="container">
@@ -99,9 +115,9 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
             <div class="row">
                 <h1><?= $this->ad["featured"]["title_ad"] ?></h1>
                 <div class="price">
-                        <div class="inner" style="color:black; font-size: 14px; font-weight: bold;">
-                            <?= number_format($this->ad["featured"]["price_ad"],0,"",""); ?>€ <span>por noche</span>
-                        </div>
+                    <div class="inner" style="color:black; font-size: 14px; font-weight: bold;">
+                        <?= number_format($this->ad["featured"]["price_ad"],0,"",""); ?>€ <span>por noche</span>
+                    </div>
                 </div>
                 
                 <div class="clearfix"></div>
@@ -133,31 +149,24 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
             <div class="col-md-8">
                 <div class="slider">
                     <div id="slider-larg" class="owl-carousel image-gallery">
-                        
-                        <?php foreach($this->ad["pics"] as $pic) : ?>
+                        <?php $contador = 1;
+                        foreach($this->ad["pics"] as $pic) : ?>
                         <div class="item lightbox-image-icon">
-                            <a href="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->ad["featured"]["id"] . '/gallery/' . $pic ;?>" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->ad["featured"]["id"] . '/gallery/' . $pic ;?>" alt="Image">
-                                
+                            <a title="<?= $this->ad["featured"]["titulo_enlace".$contador]; ?>" href="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->ad["featured"]["id"] . '/gallery/' . $pic ;?>" class="hover_effect h_lightbox h_blue">
+                                <img title="<?= $this->ad["featured"]["titulo_imagen".$contador]; ?>" class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->ad["featured"]["id"] . '/gallery/' . $pic ;?>" alt="<?= $this->ad["featured"]["titulo_alt".$contador]; ?>">
                             </a>
                         </div>
-                        <?php endforeach; ?>
-                        
+                        <?php $contador++;
+                        endforeach; ?>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <?= $this->ad["featured"]["comments_slider"] ?>
                     </div>
                     <div id="thumbs" class="owl-carousel">
                         <?php foreach($this->ad["pics"] as $pic) : ?>
                             <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->ad["featured"]["id"] .  '/thumbnail/' . $pic ;?>" alt="Image"></div>
                         <?php endforeach; ?>
 
-<!--                    <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb2.jpg';?>" alt="Image"></div>
-                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb3.jpg';?>" alt="Image"></div>
-                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb4.jpg';?>" alt="Image"></div>
-                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb5.jpg';?>" alt="Image"></div>
-                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb6.jpg';?>" alt="Image"></div>
-                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb7.jpg';?>" alt="Image"></div>
-                        <div class="item"><img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/images/rooms/single-room/single-room-thumb8.jpg';?>" alt="Image"></div>
-                            -->
-                        
                     </div>
                 </div>
                 <div class="main_title mt50">
@@ -168,7 +177,7 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
 
                 <div class="main_title t_style a_left s_title mt50">
                     <div class="c_inner">
-                        <h2 class="c_title">SERVICIOS</h2>
+                        <h2 class="c_title">CARACTERÍSTICAS</h2>
                     </div>
                 </div>
                 <?php
@@ -176,159 +185,367 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
                 $type = (int)$this->ad["featured"]["surface_type_id"];
                 switch ($type) {
                     case 1:
-                        $m2 = "40";
+                        $m2 = "Hasta 15";
                         break;
                     case 2:
-                        $m2 = "60";
+                        $m2 = "Hasta 30";
                         break;
                     case 3:
-                        $m2 = "80";
+                        $m2 = "Hasta 50";
                         break;
                     case 4:
-                        $m2 = "100";
+                        $m2 = "Hasta 100";
                         break;
                     case 5:
-                        $m2 = "120";
+                        $m2 = "Hasta 120";
                         break;
                     case 6:
-                        $m2 = "140";
+                        $m2 = "Hasta 160";
                         break;
                     case 7:
-                        $m2 = "200";
+                        $m2 = "Hasta 200";
                         break;
-                }                
+                }
+                
+                $tipoAlojamiento = (int)$this->ad["featured"]["alojamiento_id"];
+                switch ($tipoAlojamiento) {
+                    case 1:
+                        $alojamiento = "Privado";
+                        break;
+                    case 2:
+                        $alojamiento = "Familiar";
+                        break;
+                    case 3:
+                        $alojamiento = "Hotel";
+                        break;
+                }
                 
                 
                 ?>
                 
-                
                 <div class="room_facilitys_list">
                     <div class="all_facility_list">
                         <div class="col-sm-4 nopadding">
+                            <p style="font-size: 14px; font-weight: bold;">Área/Número de personas</p>
                             <ul class="list-unstyled"> 
-                                <li><i class="fa fa-check"></i>Cama <?= ('1'==$this->ad["featured"]["bed_type_id"])?'simple':'doble'; ?></li>
                                 <li><i class="fa fa-check"></i><?= $m2 ; ?> m2</li>
                                 <li><i class="fa fa-check"></i>Persona<?= ('1'==$this->ad["featured"]["persons_number_id"])?'':'s'; ?> <?= $this->ad["featured"]["persons_number_id"]; ?> </li>
-                                <?php
-                                if(isset($this->ad["featured"]["free_service_internet"])
-                                        && $this->ad["featured"]["free_service_internet"]==1): ?>
-                                <li><i class="fa fa-check"></i>Internet gratis</li>
+                                
+                                <?php if((int)$this->ad["featured"]["childrens-number-id"]>0) : ?>
+                                <li><i class="fa fa-check"></i>Niño/a<?= ('1'==$this->ad["featured"]["childrens-number-id"])?'':'s'; ?> <?= '['.$this->ad["featured"]["childrens-number-id"] . ']'; ?> </li>
                                 <?php else: ?>
-                                <li class="no"><i class="fa fa-times"></i>Internet gratis</li>
-                                <?php endif; ?>
+                                    <li class="no"><i class="fa fa-times"></i>Niño/a</li>
+                                <?php endif; ?>                                
                             </ul>
                         </div>
                         <div class="col-sm-4 nopadding">
+                            <p style="font-size: 14px; font-weight: bold;">Alojamiento</p>
                             <ul class="list-unstyled">
+                                 <li><i class="fa fa-check"></i><?= $alojamiento ; ?></li>
                                 <?php
-                                    if(isset($this->ad["featured"]["free_service_wifi"])
-                                            && $this->ad["featured"]["free_service_wifi"]==1): ?>
-                                    <li><i class="fa fa-check"></i>Wi-Fi gratis</li>
-                                    <?php else: ?>
-                                    <li class="no"><i class="fa fa-times"></i>Wi-Fi gratis</li>
-                                <?php endif; ?>                                
+//                                    if(isset($this->ad["featured"]["tipo_huesped_familiar"])
+//                                            && $this->ad["featured"]["tipo_huesped_familiar"]==1): ?>
+<!--                                    <li><i class="fa fa-check"></i>Privado</li>-->
+                                    <?php //else: ?>
+<!--                                    <li class="no"><i class="fa fa-times"></i>Privado</li>-->
+                                <?php //endif; ?>                                
                                 
                                 <?php
-                                    if(isset($this->ad["featured"]["free_service_breakfast_include"])
-                                            && $this->ad["featured"]["free_service_breakfast_include"]==1): ?>
-                                    <li><i class="fa fa-check"></i>Desayuno incluido</li>
-                                    <?php else: ?>
-                                    <li class="no"><i class="fa fa-times"></i>Desayuno incluido</li>
-                                <?php endif; ?>    
+//                                    if(isset($this->ad["featured"]["tipo_huesped_persona_mayores"])
+//                                            && $this->ad["featured"]["tipo_huesped_persona_mayores"]==1): ?>
+<!--                                    <li><i class="fa fa-check"></i>Familiar</li>-->
+                                    <?php //else: ?>
+<!--                                    <li class="no"><i class="fa fa-times"></i>Familiar</li>-->
+                                <?php //endif; ?>    
                                 
                                 <?php
-                                    if(isset($this->ad["featured"]["other_service_private_balcony"])
-                                            && $this->ad["featured"]["other_service_private_balcony"]==1): ?>
-                                    <li><i class="fa fa-check"></i>Balcones privados</li>
-                                    <?php else: ?>
-                                    <li class="no"><i class="fa fa-times"></i>Balcones privados</li>
-                                <?php endif; ?>    
-                                
-                                <?php
-                                    if(isset($this->ad["featured"]["free_service_newspaper"])
-                                            && $this->ad["featured"]["free_service_newspaper"]==1): ?>
-                                    <li><i class="fa fa-check"></i>Periódicos gratis</li>
-                                    <?php else: ?>
-                                    <li class="no"><i class="fa fa-times"></i>Periódicos gratis</li>
-                                <?php endif; ?>                                
+//                                    if(isset($this->ad["featured"]["tipo_huesped_ninos"])
+//                                            && $this->ad["featured"]["tipo_huesped_ninos"]==1): ?>
+<!--                                    <li><i class="fa fa-check"></i>Hotel</li>-->
+                                    <?php //else: ?>
+<!--                                    <li class="no"><i class="fa fa-times"></i>Hotel</li>-->
+                                <?php //endif; ?>    
                                 
                             </ul>
                         </div>
                         <div class="col-sm-4 nopadding_left">
+                            <p style="font-size: 14px; font-weight: bold;">Habitaciones</p>
+                            <ul class="list-unstyled">
+                                <?php if((int)$this->ad["featured"]["big_room_id"]>0) : ?>
+                                <li><i class="fa fa-check"></i>Doble/matrimonial<?= ('1'==$this->ad["featured"]["big_room_id"])?'':'es'; ?> <?= '['.$this->ad["featured"]["big_room_id"] . ']'; ?> </li>
+                                <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Doble/matrimonial</li>
+                                <?php endif; ?>
+
+                                <?php if((int)$this->ad["featured"]["middle_room_id"]>0) : ?>    
+                                <li><i class="fa fa-check"></i>Mediana<?= ('1'==$this->ad["featured"]["middle_room_id"])?'':'s'; ?> <?= '['.$this->ad["featured"]["middle_room_id"] . ']'; ?> </li>
+                                <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Mediana</li>
+                                <?php endif; ?>
+
+                                <?php if((int)$this->ad["featured"]["individually_room_id"]>0) : ?>
+                                <li><i class="fa fa-check"></i>individual<?= ('1'==$this->ad["featured"]["individually_room_id"])?'':'es'; ?> <?= '['.$this->ad["featured"]["individually_room_id"] . ']'; ?> </li>    
+                                <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>individual</li>
+                                <?php endif; ?> 
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="all_facility_list">
+                        <div class="col-sm-4 nopadding">
+                            <p style="font-size: 14px; font-weight: bold;">Camas</p>
+                            <ul class="list-unstyled">
+                                <?php if((int)$this->ad["featured"]["big_bed_id"]>0) : ?>
+                                <li><i class="fa fa-check"></i>Doble/matrimonial<?= ('1'==$this->ad["featured"]["big_bed_id"])?'':'es'; ?> <?= '['.$this->ad["featured"]["big_bed_id"] . ']'; ?> </li>
+                                <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Doble/matrimonial</li>
+                                <?php endif; ?>
+                                    
+                                <?php if((int)$this->ad["featured"]["middle_bed_id"]>0) : ?>
+                                <li><i class="fa fa-check"></i>Mediana<?= ('1'==$this->ad["featured"]["middle_bed_id"])?'':'s'; ?> <?= '['.$this->ad["featured"]["middle_bed_id"] . ']'; ?> </li>
+                                <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Mediana</li>
+                                <?php endif; ?>
+                                    
+                                <?php if((int)$this->ad["featured"]["sofabed_id"]>0) : ?>
+                                <li><i class="fa fa-check"></i>sofá cama<?= ('1'==$this->ad["featured"]["sofabed_id"])?'':'s'; ?> <?= '['.$this->ad["featured"]["sofabed_id"] . ']'; ?> </li>
+                                <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>sofá cama</li>
+                                <?php endif; ?> 
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 nopadding">
+                            <p style="font-size: 14px; font-weight: bold;">Aseo y baños</p>
                             <ul class="list-unstyled">
                                 <?php
-                                    if(isset($this->ad["featured"]["other_service_flat_screen_tv"])
-                                            && $this->ad["featured"]["other_service_flat_screen_tv"]==1): ?>
+                                    if(isset($this->ad["featured"]["tipo_aseo_bano_privado"])
+                                            && $this->ad["featured"]["tipo_aseo_bano_privado"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Baño privado</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Baño privado</li>
+                                <?php endif; ?>                                
+                                
+                                <?php
+                                    if(isset($this->ad["featured"]["tipo_aseo_bano_compartido"])
+                                            && $this->ad["featured"]["tipo_aseo_bano_compartido"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Baño compartido</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Baño compartido</li>
+                                <?php endif; ?>    
+
+                                <?php
+                                    if(isset($this->ad["featured"]["tipo_aseo_aseo"])
+                                            && $this->ad["featured"]["tipo_aseo_aseo"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Aseo</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Aseo</li>
+                                <?php endif; ?>    
+                                    
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 nopadding_left">
+                            <p style="font-size: 14px; font-weight: bold;">Otros ambientes</p>
+                            <ul class="list-unstyled">
+                                <?php
+                                    if(isset($this->ad["featured"]["otro_ambiente_balcon"])
+                                            && $this->ad["featured"]["otro_ambiente_balcon"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Balcón</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Balcón</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["otro_ambiente_terraza"])
+                                            && $this->ad["featured"]["otro_ambiente_terraza"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Terraza</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Terraza</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["otro_ambiente_zonas_comunes"])
+                                            && $this->ad["featured"]["otro_ambiente_zonas_comunes"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Zonas comunes</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Zonas comunes</li>
+                                <?php endif; ?>
+                               
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="all_facility_list">
+                        
+                        
+                        <div class="col-sm-4 nopadding">
+                            
+                            <p style="font-size: 14px; font-weight: bold;">Ocio y confort</p>
+                            <ul class="list-unstyled">
+                                <?php
+                                    if(isset($this->ad["featured"]["tipo_ocio_confort_tv_pantalla_plana"])
+                                            && $this->ad["featured"]["tipo_ocio_confort_tv_pantalla_plana"]==1): ?>
                                     <li><i class="fa fa-check"></i>TV pantalla plana</li>
                                     <?php else: ?>
                                     <li class="no"><i class="fa fa-times"></i>TV pantalla plana</li>
                                 <?php endif; ?>
                                 <?php
-                                    if(isset($this->ad["featured"]["other_service_full_ac"])
-                                            && $this->ad["featured"]["other_service_full_ac"]==1): ?>
+                                    if(isset($this->ad["featured"]["tipo_ocio_confort_aire_acondicionado"])
+                                            && $this->ad["featured"]["tipo_ocio_confort_aire_acondicionado"]==1): ?>
                                     <li><i class="fa fa-check"></i>Aire acondicionado</li>
                                     <?php else: ?>
                                     <li class="no"><i class="fa fa-times"></i>Aire acondicionado</li>
-                                <?php endif; ?>
+                                <?php endif; ?>                               
                                 <?php
-                                    if(isset($this->ad["featured"]["other_service_beach_view"])
-                                            && $this->ad["featured"]["other_service_beach_view"]==1): ?>
-                                    <li><i class="fa fa-check"></i>Vista al mar</li>
+                                    if(isset($this->ad["featured"]["tipo_ocio_confort_calefaccion"])
+                                            && $this->ad["featured"]["tipo_ocio_confort_calefaccion"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Calefacción</li>
                                     <?php else: ?>
-                                    <li class="no"><i class="fa fa-times"></i>Vista al mar</li>
-                                <?php endif; ?>
+                                    <li class="no"><i class="fa fa-times"></i>Calefacción</li>
+                                <?php endif; ?>                               
                                 <?php
-                                    if(isset($this->ad["featured"]["other_service_room_service"])
-                                            && $this->ad["featured"]["other_service_room_service"]==1): ?>
-                                    <li><i class="fa fa-check"></i>Servicios de habitación</li>
+                                    if(isset($this->ad["featured"]["tipo_ocio_confort_wifi"])
+                                            && $this->ad["featured"]["tipo_ocio_confort_wifi"]==1): ?>
+                                    <li><i class="fa fa-check"></i>WIFI</li>
                                     <?php else: ?>
-                                    <li class="no"><i class="fa fa-times"></i>Servicios de habitación</li>
-                                <?php endif; ?>
+                                    <li class="no"><i class="fa fa-times"></i>WIFI</li>
+                                <?php endif; ?>                               
+                                <?php
+                                    if(isset($this->ad["featured"]["tipo_ocio_confort_salon_compartido"])
+                                            && $this->ad["featured"]["tipo_ocio_confort_salon_compartido"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Salón compartido</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Salón compartido</li>
+                                <?php endif; ?>                               
                             </ul>
+
+                        </div>                        
+
+                        <div class="col-sm-4 nopadding">
+                            <p style="font-size: 14px; font-weight: bold;">Servicios de cocina</p>
+                            <ul class="list-unstyled">
+                                <?php
+                                    if(isset($this->ad["featured"]["servicios_cocina_compartida"])
+                                            && $this->ad["featured"]["servicios_cocina_compartida"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Cocina compartida</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Cocina compartida</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["servicios_cocina_privada"])
+                                            && $this->ad["featured"]["servicios_cocina_privada"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Cocina privada</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Cocina privada</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["servicios_cocina_sin_servicio"])
+                                            && $this->ad["featured"]["servicios_cocina_sin_servicio"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Sin servicio</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Sin servicio</li>
+                                <?php endif; ?>                                
+                                <?php
+                                    if(isset($this->ad["featured"]["servicios_cocina_mascota"])
+                                            && $this->ad["featured"]["servicios_cocina_mascota"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Mascota</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Mascota</li>
+                                <?php endif; ?>                                
+                                
+                            </ul>
+
                         </div>
-                    </div>
+                        
+                        <div class="col-sm-4 nopadding">
+                            <p style="font-size: 14px; font-weight: bold;">Electrodomésticos</p>
+                            <ul class="list-unstyled">
+                                <?php
+                                    if(isset($this->ad["featured"]["tipo_electrodomestico_lavadora"])
+                                            && $this->ad["featured"]["tipo_electrodomestico_lavadora"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Lavadora</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Lavadora</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["tipo_electrodomestico_frigorifico"])
+                                            && $this->ad["featured"]["tipo_electrodomestico_frigorifico"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Frigorífico</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Frigorífico</li>
+                                <?php endif; ?>
+                                <?php
+                                    if(isset($this->ad["featured"]["tipo_electrodomestico_encimera"])
+                                            && $this->ad["featured"]["tipo_electrodomestico_encimera"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Encimera</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Encimera</li>
+                                <?php endif; ?>                                
+                                <?php
+                                    if(isset($this->ad["featured"]["tipo_electrodomestico_horno"])
+                                            && $this->ad["featured"]["tipo_electrodomestico_horno"]==1): ?>
+                                    <li><i class="fa fa-check"></i>Horno</li>
+                                    <?php else: ?>
+                                    <li class="no"><i class="fa fa-times"></i>Horno</li>
+                                <?php endif; ?>                                
+                                
+                            </ul>
+
+                        </div>						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+                    </div>                    
+                    
                 </div>
-                <div class="similar_rooms">
+                
+                <a href="<?= $this->baseUrl() . '/condiciones-legales'; ?>">
+                    <span style="font-weight: bold;">Condiciones generales de información</span>
+                </a>
+                
+                <div class="similar_rooms_">
                     <div class="main_title t_style5 l_blue s_title a_left">
                         <div class="c_inner">
-                            <h2 class="c_title">SIMILAR ROOMS</h2>
+                            <h2 class="c_title">SIMILAR OFERTAS</h2>
                         </div>
                     </div>
+<!--                    <div class="container">-->
                     <div class="row">
-                        <div class="col-md-4">
+<!--                        <div class="col-md-4">
                             <article>
                                 <figure>
-                                    <a href="room.html" class="hover_effect h_blue h_link"><img src="images/rooms/single-room.jpg" alt="Image" class="img-responsive"></a>
-                                    <div class="price">â‚¬99<span> night</span></div>
+                                    <a href="#" class="hover_effect h_blue h_link">
+                                        <img src="<?= $this->baseUrl( ) . '/ads/images/57/26/home/hotel-barato-barcelona-condal-2-estrellas-outdoor-terrace.jpg'; ?>" alt="Image" class="img-responsive">
+                                    </a>
+                                    <div class="price">99 &euro;<span> Noche</span></div>
                                     <figcaption>
-                                        <h4><a href="room.html">Double Room</a></h4>
+                                        <h4><a href="#">Ver</a></h4>
                                     </figcaption>
                                 </figure>
                             </article>
-                        </div>
-                        <div class="col-md-4">
-                            <article>
-                                <figure>
-                                    <a href="room.html" class="hover_effect h_blue h_link"><img src="images/rooms/double-room.jpg" alt="Image" class="img-responsive"></a>
-                                    <div class="price">â‚¬129<span> night</span></div>
-                                    <figcaption>
-                                        <h4><a href="room.html">Single Room </a></h4>
-                                    </figcaption>
-                                </figure>
-                            </article>
-                        </div>
-                        <div class="col-md-4">
-                            <article>
-                                <figure>
-                                    <a href="room.html" class="hover_effect h_blue h_link"><img src="images/rooms/deluxe-room.jpg" alt="Image" class="img-responsive"></a>
-                                    <div class="price">â‚¬189<span> night</span></div>
-                                    <figcaption>
-                                        <h4><a href="room.html">Deluxe Room </a></h4>
-                                    </figcaption>
-                                </figure>
-                            </article>
-                        </div>
+                        </div>-->
+                    <?php foreach($this->allAdsWithoutOne as $ad) : ?>
+                    <div class="col-md-6">
+                        <?php $file = (empty($ad["file_home"]))?$ad["file_name"]:$ad["file_home"]; ?>
+                        <article class="room" style="margin-bottom: 20px;">
+                            <figure>
+                                <div class="price">Alojamiento para <?= $ad["persons_number_id"]; ?> personas   <?= number_format($ad["price_ad"],0); ?>€<span>/noche</span></div>
+                                <a title="<?= $ad['titulo_enlace']; ?>" class="hover_effect h_blue h_link" href="<?php echo $this->baseUrl( ) . '/habitacion/?id=' . $ad["id"]; ?>">
+                                    <img title="<?= $ad['titulo_imagen']; ?>" src="<?= $this->baseUrl() . '/ads/images/57/' .  $ad["id"] . '/home/' . $file; ?>" class="img-responsive" style="height: 240px;" alt="<?= $ad['titulo_alt']; ?>"/>
+                                </a>
+                            </figure>
+                        </article>
                     </div>
+                    <?php endforeach; ?>
+                    </div>
+<!--                    </div>    -->
                 </div>
             </div>
             <div class="col-md-4">
@@ -336,7 +553,7 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
                     <aside class="widget">
                         <div class="vbf">
                             <h2 class="form_title"><i class="fa fa-calendar"></i> RESERVAR</h2>
-                            <form id="booking-form-other" class="inner" action="<?= $this->baseUrl() . '/booking-form/reserva'; ?>" method="post">
+                            <form id="booking-form-other" class="inner" action="<?= $this->baseUrl() . '/booking-form/datos-facturacion'; ?>" method="post">
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="input-group">
                                         <div class="form_date">
@@ -354,9 +571,9 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
                                 <div class="form-group">
                                     <input class="form-control" id="bookingName" name="bookingName" placeholder="Ingrese su nombre" type="text">
                                 </div>
-                                <div class="form-group">
+<!--                                <div class="form-group">
                                     <input class="form-control" id="bookingDocument" name="bookingDocument" placeholder="Ingrese NIE/NIF" type="text">
-                                </div>
+                                </div>-->
                                 
                                 <div class="form-group">
                                     <input class="form-control" id="bookingEmail" name="bookingEmail" placeholder="Ingrese tu correo electrónico" type="email">
@@ -364,8 +581,7 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
                                 <div class="form-group">
                                     <input class="form-control" id="bookingPhone" name="bookingPhone" placeholder="Ingrese su teléfono" type="text">
                                 </div>
-                                
-                                
+
                                 <!--
                                 <div class="form-group">
                                     <div class="form_select">
@@ -377,6 +593,7 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
                                     </div>
                                 </div>
                                 -->
+
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="form_select">
                                         <select id="bookingAdults" name="bookingAdults" class="form-control md_noborder_right" title="Adultos" data-header="Adultos">
@@ -400,9 +617,9 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
                                 </div>
                                 <input type="hidden" id="anuncioId" name="anuncioId" value="<?= $this->ad["featured"]["id"]; ?>" />
                                 <button class="button btn_lg btn_blue btn_full" type="submit">RESERVAR AHORA</button>
-                                <div class="a_center mt10">
-                                    <a href="<?php echo $this->baseUrl( ) . '/booking-form/?id=' . $this->ad["featured"]["id"]; ?>" class="a_b_f"> RESERVA DETALLADA </a>
-                                </div>
+<!--                                <div class="a_center mt10">
+                                    <a href="<?php //echo $this->baseUrl( ) . '/booking-form/?id=' . $this->ad["featured"]["id"]; ?>" class="a_b_f"> RESERVA DETALLADA </a>
+                                </div>-->
                             </form>
                         </div>
                     </aside>
@@ -415,20 +632,25 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
                         </div>
                     </aside>
                     <aside class="widget">
-                        <h4>Latest Posts</h4>
+                        <h4> Últimas Publicaciones </h4>
                         <div class="latest_posts">
+                            
+                            <?php foreach($this->publications as $item) : ?>
                             <article class="latest_post">
                                 <figure>
-                                    <a href="blog-post.html" class="hover_effect h_link h_blue">
-                                        <img src="images/blog/thumb1.jpg" alt="Image">
+                                    <a href="<?php echo $this->baseUrl() . '/blog/?id=' . $item["publicationId"]; ?>" class="hover_effect h_link h_blue">
+                                        <img src="<?php echo $this->baseUrl() . '/publicaciones/images/57/' . $item["publicationId"] . '/thumbnail/' . $item["file_name"] ;?>" alt="Image">
                                     </a>
                                 </figure>
                                 <div class="details">
-                                    <h6><a href="blog-post.html">Live your myth in Greece</a></h6>
-                                    <span><i class="fa fa-calendar"></i>23/11/2016</span>
+                                    <h6><a href="<?php echo $this->baseUrl() . '/blog/?id=' . $item["publicationId"]; ?>"><?= $item["title_publication"]; ?></a></h6>
+                                    <span><i class="fa fa-calendar"></i><?= $item["created_date"]; ?></span>
                                 </div>
                             </article>
-                            <article class="latest_post">
+                            <?php  endforeach; ?>
+                            
+                            
+<!--                            <article class="latest_post">
                                 <figure>
                                     <a href="blog-post.html" class="hover_effect h_link h_blue">
                                         <img src="images/blog/thumb2.jpg" alt="Image">
@@ -471,11 +693,144 @@ $(document).ready(function() {   //$(document).ready se ejecuta cuando carga la 
                                     <h6><a href="blog-post.html">10 things you should know</a></h6>
                                     <span><i class="fa fa-calendar"></i>13/08/2016</span>
                                 </div>
-                            </article>
+                            </article>-->
                         </div>
                     </aside>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- -->
+
+    <a name="comments" id="comments"></a>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <?php if(count($this->comments)>0) : ?>
+    <section id="testimonials_style_2" class="grey_bg">
+        <div class="container">
+            <div class="main_title mt_wave a_center">
+                <h2> COMENTARIOS </h2>
+            </div> 
+                <p class="main_description a_center">Ver comentarios que han dejado otros visitantes del alojamiento.</p> 
+            <div class="row">
+                <!-- ITEM -->
+                
+                <?php foreach($this->comments as $item) : ?>
+                <div class="col-md-4">
+                    <div class="review_item">
+                        <div class="review_content">
+                            <h3>
+                            <?php if($item["puntaje"]==5) : ?>
+                                Excelente! 
+                            <?php elseif($item["puntaje"]==4) : ?>
+                                Muy bueno!
+                            <?php elseif($item["puntaje"]==3) : ?>
+                                Bueno!
+                            <?php elseif($item["puntaje"]==2) : ?>
+                                Regular!
+                            <?php elseif($item["puntaje"]==1) : ?>
+                                Malo!
+                            <?php elseif($item["puntaje"]==0) : ?>    
+                                Pesimo!
+                            <?php endif; ?>    
+                            </h3>
+                            <div class="review_rating">
+                                <?php if($item["puntaje"]==5) : ?>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                <?php elseif($item["puntaje"]==4) : ?>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <?php elseif($item["puntaje"]==3) : ?>   
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <?php elseif($item["puntaje"]==2) : ?>    
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <?php elseif($item["puntaje"]==1) : ?>    
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                 <?php elseif($item["puntaje"]==0) : ?>   
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                 <?php endif; ?>    
+                            </div>
+                            <p>
+                                <?= $item["comentario"]; ?>
+                                <?php if(strlen($item["comentario"])<110) : ?>
+                                    <br/><br/>
+                                    <br/><br/>
+                                    <br/><br/>
+                                <?php elseif(strlen($item["comentario"])<201) : ?>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                <?php endif; ?>
+                                    
+                            </p>
+                            
+                        </div>
+                        <div class="review_author">
+<!--                                    <img src="images/users/user1.jpg" alt="Image">-->
+                            <div style="text-align: center;">
+                                <h5><?= $item["booking_name"]; ?></h5>
+                                <span class="place"><?= $item["city"]; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+                        
+                        <!-- ITEM of comment -->
+<!--                        <div class="col-md-4">
+                            <div class="review_item">
+                                <div class="review_content">
+                                    <h3>Excellent! </h3>
+                                    <div class="review_rating">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+                                </div>
+                                <div class="review_author">
+                                    <img src="images/users/user3.jpg" alt="Image">
+                                    <div style="text-align: center;">
+                                        <h5>William W.</h5>
+                                        <span class="place">Athens, Greece</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                
+                
+                </div>
+            </section>
+            <?php endif; ?>
+
+
+    <!-- -->
+    
 </main>

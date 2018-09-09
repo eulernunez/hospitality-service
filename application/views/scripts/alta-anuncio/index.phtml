@@ -1,3 +1,12 @@
+<style>
+    .form-control .btn-select, .form-control .btn-select:hover, .form-control .btn-select:focus {
+        font-size: 0.85em;
+        
+    }    
+</style>
+
+
+
 <script type="text/javascript">   
    
 
@@ -65,84 +74,91 @@ function saveAd() {
 
 
    <!-- =========== MAIN ========== -->
-        <main id="booking_page">
-            <div class="container">
-                <div class="row">
+<main id="booking_page">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-8">
+                <div id="booking_advanced">
 
-                    <div class="col-md-8">
-                        <div id="booking_advanced">
-
-                            <div class="main_title a_left upper">
-                                <h2>Alta Anuncios</h2>
+                    <div class="main_title a_left upper">
+                        <h2>Alta Anuncios</h2>
+                    </div>
+                    <!-- ========== ANUNCIO FORM ========== -->
+                    <div id="ajax-box" class="row">
+                        <form id="booking_form_advanced" action="<?= $this->url(array('controller'=>'alta-anuncio','action'=>'guardar')); ?>" method="post">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Propietario</label>
+                                    <div class="form_select">
+                                        <?= $this->selected; ?>
+                                        <!--
+                                        <select id="owner-id" name="owner-id" class="form-control" title="Seleccione al propietario" data-header="Propietarios">
+                                            <option value="1" data-subtext="">José </option>
+                                            <option value="2" data-subtext="">Carlos </option>
+                                            <option value="3" data-subtext="">Pedro </option>
+                                        </select>
+                                        -->
+                                    </div>
+                                </div>
                             </div>
-                            <!-- ========== ANUNCIO FORM ========== -->
-                            <div id="ajax-box" class="row">
-                                <form id="booking_form_advanced" action="<?= $this->url(array('controller'=>'alta-anuncio','action'=>'guardar')); ?>" method="post">
-                                    
-                                    
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Propietario</label>
-                                            <div class="form_select">
-                                                <?= $this->selected; ?>
-                                                <!--
-                                                <select id="owner-id" name="owner-id" class="form-control" title="Seleccione al propietario" data-header="Propietarios">
-                                                    <option value="1" data-subtext="">José </option>
-                                                    <option value="2" data-subtext="">Carlos </option>
-                                                    <option value="3" data-subtext="">Pedro </option>
-                                                </select>
-                                                -->
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Tipo de alojamiento</label>
-                                            <div class="form_select">
-                                                <select id="room-type-id" name="room-type-id" class="form-control" title="Seleccionar tipo de alojamiento" data-header="Tipo de alojamiento">
-                                                    <option value="1" data-subtext="<span class='label label-info'></span>">Alojamiento en hotel</option>
-                                                    <option value="2" data-subtext="<span class='label label-info'></span>">Alojamiento privado</option>
-                                                    <option value="3" data-subtext="<span class='label label-info'></span>">Alojamiento vacacional</option>
-                                                    <option value="4" data-subtext="<span class='label label-info'></span>">Apartamentos</option>
-                                                    <option value="5" data-subtext="<span class='label label-info'></span>">Turismo rural</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                    
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Título</label>
-                                            <input id="title-ad" name="title-ad" type="text" class="form-control" placeholder="Título del anuncio">
-                                        </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Tipo de alojamiento</label>
+                                    <div class="form_select">
+                                        <select id="room-type-id" name="room-type-id" class="form-control" title="Seleccionar tipo de alojamiento" data-header="Tipo de alojamiento">
+                                            <option value="1" data-subtext="<span class='label label-info'></span>">Alojamiento en hotel</option>
+                                            <option value="2" data-subtext="<span class='label label-info'></span>">Alojamiento privado</option>
+                                            <option value="3" data-subtext="<span class='label label-info'></span>">Alojamiento residencial</option>
+                                            <option value="4" data-subtext="<span class='label label-info'></span>">Apartamentos</option>
+                                            <option value="5" data-subtext="<span class='label label-info'></span>">Turismo rural</option>
+                                        </select>
                                     </div>
+                                </div>
+                            </div>                                    
                                     
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Descripción del anuncio</label>
-                                            <textarea id="comments-ad" class="form-control" name="comments-ad" placeholder="Ingrese la descripción ..."></textarea>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Dirección del anuncio</label>
-                                            <textarea id="address-ad" class="form-control" name="address-ad" placeholder="Ingrese la dirección ..."></textarea>
-                                        </div>
-                                    </div>                                    
-                                    
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Título</label>
+                                    <input id="title-ad" name="title-ad" type="text" maxlength="50" class="form-control" placeholder="Título del anuncio"/>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Descripción del anuncio</label>
+                                    <textarea id="comments-ad" class="form-control" name="comments-ad" placeholder="Ingrese la descripción ..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Dirección del anuncio</label>
+                                    <textarea id="address-ad" class="form-control" name="address-ad" placeholder="Ingrese la dirección ..."></textarea>
+                                </div>
+                            </div>
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Código Postal</label>
                                     <input id="zip" name="zip" type="text" class="form-control" placeholder="Código postal"/>
                                 </div>
                             </div>   
-                            
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Población</label>
                                     <input id="city" name="city" type="text" class="form-control" placeholder="Población"/>
+                                </div>
+                            </div>
+                            
+                            <div class="clearfix"></div>        
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Provincia</label>
+                                    <input id="provincia" name="provincia" type="text" class="form-control" placeholder="Provincia"/>
                                 </div>
                             </div>
                                     
@@ -231,14 +247,12 @@ function saveAd() {
                                             <option value="72">Faroe Islands</option>
                                             <option value="73">Fiji</option>
                                             <option value="74">Finland</option>
-                                            
                                             <option value="76">French Guiana</option>
                                             <option value="77">French Polynesia</option>
                                             <option value="78">French Southern Ter</option>
                                             <option value="79">Gabon</option>
                                             <option value="80">Gambia</option>
                                             <option value="81">Georgia</option>
-                                            
                                             <option value="83">Ghana</option>
                                             <option value="84">Gibraltar</option>
                                             <option value="85">Great Britain</option>
@@ -363,7 +377,6 @@ function saveAd() {
                                             <option value="203">Solomon Islands</option>
                                             <option value="204">Somalia</option>
                                             <option value="205">South Africa</option>
-                                            
                                             <option value="207">Sri Lanka</option>
                                             <option value="208">Sudan</option>
                                             <option value="209">Suriname</option>
@@ -388,8 +401,6 @@ function saveAd() {
                                             <option value="228">Uganda</option>
                                             <option value="229">Ukraine</option>
                                             <option value="230">United Arab Emirates</option>
-                                            
-                                            
                                             <option value="233">Uruguay</option>
                                             <option value="234">Uzbekistan</option>
                                             <option value="235">Vanuatu</option>
@@ -408,212 +419,401 @@ function saveAd() {
                                     </div>
                                 </div>
                             </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Precio</label>
-                                            <input id="price-ad" name="price-ad" type="text" class="form-control" placeholder="Precio">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="clearfix"></div>
-                                    
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Tipo de cama
-                                                <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Cama"> <i class="label_icon_info fa fa-info-circle"></i></a>
-                                            </label>
-                                            <div class="form_select">
-                                                <select id="bed-type-id" name="bed-type-id" class="form-control" title="Cama" data-header="Cama">
-                                                    <option value="1">Simple</option>
-                                                    <option value="2">Doble</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Superficie
-                                                <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Superficie"> <i class="label_icon_info fa fa-info-circle"></i></a>
-                                            </label>
-                                            <div class="form_select">
-                                                <select id="surface-type-id" name="surface-type-id" class="form-control" title="Superficie" data-header="Superficie">
-                                                    <option value="1">40 m2</option>
-                                                    <option value="2">60 m2</option>
-                                                    <option value="3">80 m2</option>
-                                                    <option value="4">100 m2</option>
-                                                    <option value="5">120 m2</option>
-                                                    <option value="6">160 m2</option>
-                                                    <option value="7">200 m2</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                    
-                                    
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Personas
-                                                <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Personas"><i class="label_icon_info fa fa-info-circle"></i></a>
-                                            </label>
-                                            <div class="form_select">
-                                                <select id="persons-number-id" name="persons-number-id" class="form-control" title="Personas" data-header="Personas">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                    
-                                    
-                                    <div class="clearfix"></div>
-                                    
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label>Servicios free
-                                                <a href="#" title="Servicios" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Free"> <i class="label_icon_info fa fa-info-circle"></i></a>
-                                            </label>
-                                            <div class="form_select">
-                                                <select name="free-ads[]" class="form-control" title="Free" data-header="Free" multiple>
-                                                    <option value="1">Internet</option>
-                                                    <option value="2">WI-FI</option>
-                                                    <option value="3">Periódicos</option>
-                                                    <option value="4">Desayuno incluido</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                    
-                                    <div class="clearfix"></div>
-                                    
-                            <div class="col-md-8">
+                            
+                            <div class="clearfix"></div>
+                            
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Otros servicios
-                                        <a href="#" title="Otros servicios" data-toggle="popover" data-placement="top" data-trigger="hover" data-content=""> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    <label> Precio del alojamiento día/noche </label>
+                                    <input id="price-ad" name="price-ad" type="text" class="form-control" placeholder="Precio">
+                                </div>
+                            </div>
+                                    
+                            <div class="clearfix"></div>
+                                    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Superficie
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Superficie"> <i class="label_icon_info fa fa-info-circle"></i></a>
                                     </label>
                                     <div class="form_select">
-                                        <select name="other-services-ads[]" class="form-control" title="Otros servicios" data-header="Otros servicios" multiple>
-                                            <option value="1">Aire acondicionado</option>
-                                            <option value="2">Balcón privado</option>
-                                            <option value="3">Flat Screen Tv</option>
-                                            <option value="4">Servicios de habitación</option>
-                                            <option value="5">Vista a la playa</option>
+                                        <select id="surface-type-id" name="surface-type-id" class="form-control" title="Superficie" data-header="Superficie">
+                                            <option value="1">Hasta 15 m2</option>
+                                            <option value="2">Hasta 30 m2</option>
+                                            <option value="3">Hasta 50 m2</option>
+                                            <option value="4">Hasta 100 m2</option>
+                                            <option value="5">Hasta 120 m2</option>
+                                            <option value="6">Hasta 160 m2</option>
+                                            <option value="7">Hasta 200 m2</option>
                                         </select>
                                     </div>
                                 </div>
-                            </div>                                             
+                            </div>                                    
                                     
-<!--                            <div class="clearfix"></div>-->
-                                    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Personas
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Personas"><i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="persons-number-id" name="persons-number-id" class="form-control" title="Personas" data-header="Personas">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Niños
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Niños"><i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="childrens-number-id" name="childrens-number-id" class="form-control" title="Niños" data-header="Niños">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
+                            <!-- Working -->
+                            <div class="col-md-6">
+<!--                                <div class="form-group">
+                                    <label>Alojamiento
+                                        <a href="#" title="Alojamiento" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alojamiento"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="tipo-huespedes[]" class="form-control" title="Alojamiento" data-header="Alojamiento" multiple>
+                                            <option value="1">Privado</option>
+                                            <option value="2">Familiar</option>
+                                            <option value="3">Hotel</option>
+                                        </select>
+                                    </div>
+                                </div>-->
+                                
+                                <div class="form-group">
+                                    <label>Tipo de alojamiento</label>
+                                    <div class="form_select">
+                                        <select id="alojamiento-id" name="alojamiento-id" class="form-control" title="Tipo de alojamiento" data-header="Tipo de alojamiento">
+                                            <option value="1" data-subtext="<span class='label label-info'></span>">Privado</option>
+                                            <option value="2" data-subtext="<span class='label label-info'></span>">Familiar</option>
+                                            <option value="3" data-subtext="<span class='label label-info'></span>">Hotel</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>                                    
+                                        
+                            <div class="clearfix"></div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de habitaciones de doble/matrimoniales
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Habitaciones dobles"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="big-room-id" name="big-room-id" class="form-control" title="Habitaciones dobles" data-header="Habitaciones dobles">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de Habitaciones medianas
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Habitaciones medianas"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="middle-room-id" name="middle-room-id" class="form-control" title="Habitaciones medianas" data-header="Habitaciones medianas">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de Habitaciones individuales
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Habitaciones individuales"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="individually-room-id" name="individually-room-id" class="form-control" title="Habitaciones individuales" data-header="Habitaciones individuales">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de camas dobles
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Camas dobles"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="big-bed-id" name="big-bed-id" class="form-control" title="Camas dobles" data-header="Camas dobles">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de camas medianas
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Camas medianas"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="middle-bed-id" name="middle-bed-id" class="form-control" title="Camas medianas" data-header="Camas medianas">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de sofá camas
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Sofá camas"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="sofabed-id" name="sofabed-id" class="form-control" title="Sofá camas" data-header="Sofá camas">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
 <!--                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Gasto de tramites
-                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Gastos para ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    <label>Tipo de habitaciones
+                                        <a href="#" title="Habitaciones" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Habitaciones"> <i class="label_icon_info fa fa-info-circle"></i></a>
                                     </label>
-                                    
-                                    <input id="gastoTramite" name="gastoTramite" type="text" class="form-control" placeholder="Ingrese gastos por tramites">
+                                    <div class="form_select">
+                                        <select name="tipo-habitaciones[]" class="form-control" title="Habitaciones" data-header="Habitaciones" multiple>
+                                            <option value="1">Grande de 1 a 5</option>
+                                            <option value="2">Mediana de 1 a 5</option>
+                                            <option value="3">Individualde 1 a 5</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>-->
-
+                            </div>                                    -->
+                            
+                            
+                            
 <!--                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Gastos por servicios
-                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Gastos para ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    <label>Tipo de cama
+                                        <a href="#" title="Cama" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Cama"> <i class="label_icon_info fa fa-info-circle"></i></a>
                                     </label>
-                                    <input id="gastoServicio" name="gastoServicio" type="text" class="form-control" placeholder="Ingrese gastos por servicios">
+                                    <div class="form_select">
+                                        <select name="tipo-camas[]" class="form-control" title="Cama" data-header="Cama" multiple>
+                                            <option value="1">Grande de 1 a 5</option>
+                                            <option value="2">Individual de 1 a 5</option>
+                                            <option value="3">Sofa cama de 1 a 5</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>-->
+                            </div>                                    -->
+                            
 
-<!--                            <div class="col-md-6">
+                           
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Otros gastos
-                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Otros gastos ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    <label>Aseo y baños
+                                        <a href="#" title="Aseo" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Aseo"> <i class="label_icon_info fa fa-info-circle"></i></a>
                                     </label>
-                                    <input id="otroGastos" name="otroGastos" type="text" class="form-control" placeholder="Ingrese otros gastos">
+                                    <div class="form_select">
+                                        <select name="tipo-aseos[]" class="form-control" title="Aseo" data-header="Aseo" multiple>
+                                            <option value="1">Baño privado</option>
+                                            <option value="2">Baño compartido</option>
+                                            <option value="3">Aseo</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>-->
-
-<!--                            <div class="col-md-6">
+                            </div>                                    
+                            
+                            
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Cargo adicional
-                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Cargo adicional ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    <label>Otros ambientes
+                                        <a href="#" title="Ambientes" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Ambientes"> <i class="label_icon_info fa fa-info-circle"></i></a>
                                     </label>
-                                    <input id="cargoAdicional" name="cargoAdicional" type="text" class="form-control" placeholder="Ingrese el cargo adicional">
+                                    <div class="form_select">
+                                        <select name="otros-ambientes[]" class="form-control" title="Ambientes" data-header="Ambientes" multiple>
+                                            <option value="1">Balcón</option>
+                                            <option value="2">Terraza</option>
+                                            <option value="3">Zonas comunes</option>    
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>-->
-
-<!--                            <div class="col-md-6">
+                            </div>                                    
+                            
+                             
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Fianza
-                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Fianza ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    <label>Ocio y confort
+                                        <a href="#" title="Ocio y confort" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Ocio y confort"> <i class="label_icon_info fa fa-info-circle"></i></a>
                                     </label>
-                                    <input id="fianza" name="fianza" type="text" class="form-control" placeholder="Ingrese la fianza">
+                                    <div class="form_select">
+                                        <select name="tipo-ocios[]" class="form-control" title="Ocio y confort" data-header="Ocio y confort" multiple>
+                                            <option value="1">TV pantalla plana</option>
+                                            <option value="2">Aire acondicionado </option>
+                                            <option value="3">Calefacción</option>
+                                            <option value="4">WIFI</option>
+                                            <option value="5">Salón compartido</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>                        -->
+                            </div>
 
-<!--                            <div class="clearfix"></div>-->
-                                    
-                                    
+                           
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Servicios de cocina
+                                        <a href="#" title="Servicios de cocina" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Servicios de cocina"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="servicios-cocina[]" class="form-control" title="Servicios de cocina" data-header="Servicios de cocina" multiple>
+                                            <option value="1">Cocina compartida</option>
+                                            <option value="2">Cocina privada</option>
+                                            <option value="3">Sin servicio de cocina</option>
+                                            <option value="4">Mascota</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Electrodomésticos
+                                        <a href="#" title="Electrodomésticos" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Electrodomésticos"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="tipo-electrodomesticos[]" class="form-control" title="Electrodomésticos" data-header="Electrodomésticos" multiple>
+                                            <option value="1">Lavadora</option>
+                                            <option value="2">Frigorífico</option>
+                                            <option value="3">Encimera</option>
+                                            <option value="4">Horno</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                                    
+
+							
+                            <!-- END Working -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Condiciones de uso del alojamiento </label>
+                                    <textarea id="condiciones-uso" class="form-control" name="condiciones-uso" placeholder="Ingrese las condiciones de uso ..."></textarea>
+                                </div>
+                            </div>                            
+                            
+                             
                             <div class="col-md-12">
                                 <button type="button" class="button btn_blue pull-right" onclick="saveAd();"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> CONTINUAR </button>
                             </div>
                         </form>
-
                     </div>
-                            
-
-                            
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="special_offers">
-                            <div class="main_title a_left upper">
-                                <h2>Special Offers</h2>
-                            </div>
-                            <article class="room mb40">
-                                <figure>
-                                    <a href="room.html" class="hover_effect h_blue h_link">
-                                        <img src="images/rooms/special1.jpg" class="img-responsive" alt="Image">
-                                    </a>
-                                    <figcaption>
-                                        <h4><a href="room.html">Single Room</a></h4>
-                                        <div class="price">â‚¬ 89<span> / night</span></div>
-                                    </figcaption>
-                                </figure>
-                            </article>
-                            <article class="room mb40">
-                                <figure>
-                                    <a href="room.html" class="hover_effect h_blue h_link">
-                                        <img src="images/rooms/special2.jpg" class="img-responsive" alt="Image">
-                                    </a>
-                                    <figcaption>
-                                        <h4><a href="room.html">Double Room</a></h4>
-                                        <div class="price">â‚¬ 129<span> / night</span></div>
-                                    </figcaption>
-                                </figure>
-                            </article>
-                            <article class="room mb40">
-                                <figure>
-                                    <a href="room.html" class="hover_effect h_blue h_link">
-                                        <img src="images/rooms/special3.jpg" class="img-responsive" alt="Image">
-                                    </a>
-                                    <figcaption>
-                                        <h4><a href="room.html">Delux Room</a></h4>
-                                        <div class="price">â‚¬ 189<span> / night</span></div>
-                                    </figcaption>
-                                </figure>
-                            </article>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </main>
+
+            <div class="col-md-4">
+                <div class="special_offers">
+                    <div class="main_title a_left upper">
+                        <h2>Special Offers</h2>
+                    </div>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special1.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Single Room</a></h4>
+                                <div class="price">â‚¬ 89<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special2.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Double Room</a></h4>
+                                <div class="price">â‚¬ 129<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                    <article class="room mb40">
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link">
+                                <img src="images/rooms/special3.jpg" class="img-responsive" alt="Image">
+                            </a>
+                            <figcaption>
+                                <h4><a href="room.html">Delux Room</a></h4>
+                                <div class="price">â‚¬ 189<span> / night</span></div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</main>
    

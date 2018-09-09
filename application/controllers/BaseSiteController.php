@@ -38,7 +38,6 @@ class BaseSiteController extends Zend_Controller_Action
     public function securityCheck ()
     {
 
-        
         $this->_controller = $this->getRequest()->getControllerName();
         $this->view->currentController = $this->_controller;
 
@@ -63,7 +62,8 @@ class BaseSiteController extends Zend_Controller_Action
             if ( ($this->_controller != 'index') &&
                  ($this->_controller != 'error') &&
                  ($this->_controller != 'login') &&
-                 ($this->_controller != 'habitacion')        
+                 ($this->_controller != 'habitacion') &&
+                 ($this->_controller != 'blog')        
                          
                )
                    { 

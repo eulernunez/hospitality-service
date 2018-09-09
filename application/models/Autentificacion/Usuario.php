@@ -10,8 +10,6 @@ class Application_Model_Autentificacion_Usuario
 
     public function __construct($userData) 
     {
-       
-        
         $this->id = $userData['id'];
         $this->name = $userData['name'];
         $this->email = $userData['email'];

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50539
 File Encoding         : 65001
 
-Date: 2018-03-16 20:12:04
+Date: 2018-09-09 07:49:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,47 +23,97 @@ CREATE TABLE `anuncios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner_id` int(11) DEFAULT NULL,
   `room_type_id` tinyint(4) DEFAULT NULL,
+  `alojamiento_id` tinyint(4) DEFAULT NULL,
   `title_ad` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
   `comments_ad` text,
   `address_ad` text,
+  `comments_slider` text,
   `zip` varchar(10) DEFAULT NULL,
   `city` varchar(120) DEFAULT NULL,
+  `provincia` varchar(120) DEFAULT NULL,
   `country` int(8) DEFAULT NULL,
   `price_ad` float(10,4) DEFAULT NULL,
-  `bed_type_id` tinyint(4) DEFAULT NULL,
   `surface_type_id` tinyint(4) DEFAULT NULL,
   `persons_number_id` tinyint(4) DEFAULT NULL,
-  `free_service_internet` tinyint(4) DEFAULT NULL,
-  `free_service_wifi` tinyint(4) DEFAULT NULL,
-  `free_service_newspaper` tinyint(4) DEFAULT NULL,
-  `free_service_breakfast_include` tinyint(4) DEFAULT NULL,
-  `other_service_full_ac` tinyint(4) DEFAULT NULL,
-  `other_service_private_balcony` tinyint(4) DEFAULT NULL,
-  `other_service_flat_screen_tv` tinyint(4) DEFAULT NULL,
-  `other_service_room_service` tinyint(4) DEFAULT NULL,
-  `other_service_beach_view` tinyint(4) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `childrens-number-id` tinyint(4) DEFAULT NULL,
+  `condiciones_uso` text,
+  `big_room_id` tinyint(4) DEFAULT NULL,
+  `middle_room_id` tinyint(4) DEFAULT NULL,
+  `individually_room_id` tinyint(4) DEFAULT NULL,
+  `big_bed_id` tinyint(4) DEFAULT NULL,
+  `middle_bed_id` tinyint(4) DEFAULT NULL,
+  `sofabed_id` tinyint(4) DEFAULT NULL,
+  `tipo_aseo_bano_privado` tinyint(4) DEFAULT NULL,
+  `tipo_aseo_bano_compartido` tinyint(4) DEFAULT NULL,
+  `tipo_aseo_aseo` tinyint(4) DEFAULT NULL,
+  `otro_ambiente_balcon` tinyint(4) DEFAULT NULL,
+  `otro_ambiente_terraza` tinyint(4) DEFAULT NULL,
+  `otro_ambiente_zonas_comunes` tinyint(4) DEFAULT NULL,
+  `tipo_ocio_confort_tv_pantalla_plana` tinyint(4) DEFAULT NULL,
+  `tipo_ocio_confort_aire_acondicionado` tinyint(4) DEFAULT NULL,
+  `tipo_ocio_confort_calefaccion` tinyint(4) DEFAULT NULL,
+  `tipo_ocio_confort_wifi` tinyint(4) DEFAULT NULL,
+  `tipo_ocio_confort_salon_compartido` tinyint(4) DEFAULT NULL,
+  `servicios_cocina_compartida` tinyint(4) DEFAULT NULL,
+  `servicios_cocina_privada` tinyint(4) DEFAULT NULL,
+  `servicios_cocina_sin_servicio` tinyint(4) DEFAULT NULL,
+  `servicios_cocina_mascota` tinyint(4) DEFAULT NULL,
+  `tipo_electrodomestico_lavadora` tinyint(4) DEFAULT NULL,
+  `tipo_electrodomestico_frigorifico` tinyint(4) DEFAULT NULL,
+  `tipo_electrodomestico_encimera` tinyint(4) DEFAULT NULL,
+  `tipo_electrodomestico_horno` tinyint(4) DEFAULT NULL,
   `gasto_tramite` float(10,4) DEFAULT NULL,
   `fianza` float(10,4) DEFAULT NULL,
+  `limpieza` float(10,4) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
   `active` tinyint(4) DEFAULT '1',
+  `file_home` varchar(255) DEFAULT NULL,
+  `titulo_enlace` varchar(255) DEFAULT NULL,
+  `titulo_imagen` varchar(255) DEFAULT NULL,
+  `titulo_alt` varchar(255) DEFAULT NULL,
+  `file_gallery1` varchar(255) DEFAULT NULL,
+  `titulo_enlace1` varchar(255) DEFAULT NULL,
+  `titulo_imagen1` varchar(255) DEFAULT NULL,
+  `titulo_alt1` varchar(255) DEFAULT NULL,
+  `file_gallery2` varchar(255) DEFAULT NULL,
+  `file_gallery3` varchar(255) DEFAULT NULL,
+  `file_gallery4` varchar(255) DEFAULT NULL,
+  `file_gallery5` varchar(255) DEFAULT NULL,
+  `file_gallery6` varchar(255) DEFAULT NULL,
+  `file_gallery7` varchar(255) DEFAULT NULL,
+  `file_gallery8` varchar(255) DEFAULT NULL,
+  `titulo_enlace2` varchar(255) DEFAULT NULL,
+  `titulo_enlace3` varchar(255) DEFAULT NULL,
+  `titulo_enlace4` varchar(255) DEFAULT NULL,
+  `titulo_enlace5` varchar(255) DEFAULT NULL,
+  `titulo_enlace6` varchar(255) DEFAULT NULL,
+  `titulo_enlace7` varchar(255) DEFAULT NULL,
+  `titulo_enlace8` varchar(255) DEFAULT NULL,
+  `titulo_imagen2` varchar(255) DEFAULT NULL,
+  `titulo_imagen3` varchar(255) DEFAULT NULL,
+  `titulo_imagen4` varchar(255) DEFAULT NULL,
+  `titulo_imagen5` varchar(255) DEFAULT NULL,
+  `titulo_imagen6` varchar(255) DEFAULT NULL,
+  `titulo_imagen7` varchar(255) DEFAULT NULL,
+  `titulo_imagen8` varchar(255) DEFAULT NULL,
+  `titulo_alt2` varchar(255) DEFAULT NULL,
+  `titulo_alt3` varchar(255) DEFAULT NULL,
+  `titulo_alt4` varchar(255) DEFAULT NULL,
+  `titulo_alt5` varchar(255) DEFAULT NULL,
+  `titulo_alt6` varchar(255) DEFAULT NULL,
+  `titulo_alt7` varchar(255) DEFAULT NULL,
+  `titulo_alt8` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of anuncios
 -- ----------------------------
-INSERT INTO `anuncios` VALUES ('3', '1', '3', 'Habitación grande y luminosa', 'Alquilo está habitación que estará disponible a partir del 01 de diciembre de 2017. El piso es sólo para chicos extranjeros que estudien o trabajen (CHICAS NO) de 21 a 27 años. El ambiente es tranquilo y ordenado. Hay 1 baño grande para 4 roomates. Cocina equipada, lavadora, aspiradora, plancha y calefacción (aunque la casa no es fría). Lo mejor de todo es que tiene una excelente ubicación, a una calle de la estación de autobuses nord, línea de metro L1 Arco fe triunfo', 'Av. Gran Via 500', '08013', 'Barcelona', '206', '900.0000', '2', '5', '7', '1', null, '1', null, '1', '1', null, null, null, '2017-11-04 23:05:26', '10.0000', '300.0000', '1');
-INSERT INTO `anuncios` VALUES ('8', '1', '3', 'Alquiler de piso en calle de Craywinckel', 'Precioso piso de 100m2 con 3 habitaciones en Sant Gervasi! Está recién REFORMADO, completamente AMUEBLADO y listo para entrar a vivir. Tiene 2 habitaciones dobles y 1 individual. El salón comedor es amplio, muy luminoso e incluye la cocina americana totalmente equipada (horno, vitrocerámica, nevera, microondas, lavavajillas, cafetera, tostadora…) Además hay una moderna galería exterior con lavadora y tendedero. El piso tiene 2 baños completos con ducha. Dispone de suelos de parquet, CALEFACCIÓN y AIRE ACONDICIONADO. Es un 2º piso en finca regia con ascensor y servicio de portería de mañana y tarde. Está ubicado en la zona del Putxet, en una calle muy comercial y muy bien comunicado por metro, ferrocarriles y autobuses. El contrato mínimo de alquiler es de 1 año y se pide una fianza de 4 meses.', 'calle de Craywinckel, El Putxet i el Farró, Barcelona', '08013', 'Barcelona', '206', '1200.0000', '1', '3', '4', '1', '1', null, null, '1', '1', '1', null, null, '2017-11-09 00:33:08', '10.0000', '450.0000', '1');
-INSERT INTO `anuncios` VALUES ('9', '1', '3', 'Alquiler de habitación en calle de Marià Cubí', 'Alquilo habitación con cama doble y armario de 2m de ancho x 2,10m de alto. La habitación se compone de 2 estancias. Habitación con balcón + un vestidor con armario. \r\n\r\nEl piso dispone de 3 habitaciones. 1 para cada persona y la 3a usada como estudio vestidor para compartir entre los 2.\r\n\r\nEl piso tiene salón comedor con balcón, cocina y un baño.\r\nTodas las estancias menos 3a hab son exteriores.\r\n\r\nAire acondicionado/bomba de calor en las 2hab y el salón.\r\n\r\nEl precio incluye la habitación + medio vestidor(3a hab compartida) y asistenta una vez por semana(zonas comunes)\r\nGastos de agua, gas, electricidad e internet a parte. Calculo que 50€/mes', 'calle de Marià Cubí, 196, Sant Gervasi - Galvany, Barcelona', '08013', 'Barcelona', '206', '500.0000', '1', '3', '3', '1', '1', null, null, '1', '1', '1', null, null, '2017-11-09 00:33:08', '10.0000', '500.0000', '1');
-INSERT INTO `anuncios` VALUES ('12', '5', '1', 'Test con propietario', 'descripcion de la muestra', 'dirección de la muestra', '08013', 'Barcelona', '206', '456.0000', '2', '2', '2', '1', '1', '1', '1', null, null, null, null, null, '2017-12-14 22:13:27', '11.0000', '600.0000', '0');
-INSERT INTO `anuncios` VALUES ('13', '6', '2', 'Anuncio de prueba', 'Anunicio de prueba Anunicio de prueba Anunicio de prueba Anunicio de prueba', 'Anunicio de prueba Anunicio de prueba Anunicio de prueba Anunicio de prueba', '08013', 'Barcelona', '206', '900.0000', '1', '3', '3', null, '1', '1', null, null, null, '1', '1', '1', '2017-12-15 00:03:52', '10.0000', '250.0000', '1');
-INSERT INTO `anuncios` VALUES ('14', '4', '2', 'prueba adicional', 'prueba adicional prueba adicional prueba adicional', 'prueba adicional', '08013', 'Barcelona', '206', '800.0000', '2', '5', '4', null, '1', '1', null, '1', '1', null, '1', null, '2017-12-20 01:10:32', '10.0000', '1200.0000', '1');
-INSERT INTO `anuncios` VALUES ('20', '3', '1', 'Habitación de Prueba', 'Texto de prueba de un anuncio', 'Texto de prueba de un anuncio', '08013', 'Barcelona', '206', '800.0000', '1', '4', '4', '1', '1', null, null, null, null, '1', '1', null, '2018-01-12 22:24:17', null, null, '0');
-INSERT INTO `anuncios` VALUES ('21', '4', '1', 'Habitación de Euler', 'Habitación de Euler en Nagua Habitación de Euler en Nagua Habitación de Euler en Nagua Habitación de Euler en Nagua Habitación de Euler en Nagua Habitación de Euler en Nagua Habitación de Euler en Nagua.', 'Dirección de Nagua Dirección de Nagua Dirección de Nagua Dirección de Nagua Dirección de Nagua Dirección de Nagua Dirección de Nagua Dirección de Nagua Dirección de Nagua ', '08013', 'Barcelona', '206', '950.0000', '2', '5', '3', '1', '1', null, null, null, null, '1', '1', '1', '2018-01-12 23:16:46', null, null, '0');
-INSERT INTO `anuncios` VALUES ('22', '4', '3', 'Habitación de Luxe de Euler', 'Descripción de la habitación de Euler Descripción de la habitación de Euler', 'Descripción de la habitación de EulerDescripción de la habitación de EulerDescripción de la habitación de Euler', '08013', 'Barcelona', '206', '750.0000', '2', '5', '5', '1', '1', null, null, null, null, '1', '1', '1', '2018-01-12 23:23:28', null, null, '0');
-INSERT INTO `anuncios` VALUES ('23', '11', '1', 'Apartamento lujoso', 'Apartamento lujosoApartamento lujoso Apartamento lujoso Apartamento lujoso Apartamento lujoso Apartamento lujoso Apartamento lujoso Apartamento lujoso Apartamento lujosoApartamento lujoso.', 'c/ Auisias March, 121 ENT 1', '08013', 'Barcelona', '206', '850.0000', '2', '6', '5', '1', '1', null, null, '1', '1', null, null, null, '2018-01-21 23:30:06', '10.0000', '850.0000', '1');
-INSERT INTO `anuncios` VALUES ('25', '12', '1', 'apartamento en alquiler temporal', 'se alquila apartamento de tres habitaciones para el mes de junio, julio y agosto. estancia mínima 6 dias', 'concilio de trento 77 1° 4°', '08018', 'barcelona', '206', '250.0000', '2', '3', '6', '1', '1', null, '1', null, null, null, null, null, '2018-01-29 02:33:12', null, null, '0');
-INSERT INTO `anuncios` VALUES ('26', '6', '1', 'Alquiler de Habitación en Av. Diagonal', 'Comparto piso solo para estancias breves de una semana o dos. No hay estancia mínima. Es un piso muy grande y cómodo. Solo tiene un baño. Está a 5 minutos andando de la metro amarilla Verdaguer (cerca también de las lineas azul y lila). En 15-20 minutos andando desde el centro.', 'Avenida Diagonal, 305\r\nBarrio La Dreta de l\'Eixample\r\nDistrito Eixample\r\n', '08020', 'Barcelona', '206', '500.0000', '1', '3', '1', '1', '1', null, null, '1', '1', '1', null, null, '2018-03-03 21:51:31', '10.0000', '500.0000', '1');
+INSERT INTO `anuncios` VALUES ('42', '1', '4', '1', 'Apartamento en alquiler en valencia', 'apartamento-en-alquiler-en-valencia', 'El apartamento dispone de dos habitaciones para ser ocupado por tres personas, esta situado en el centro de la ciudad de Valencia cerca del puerto deportivo, en la zona histórica de la ciudad\r\n\r\nValencia es la tercera ciudad mas grande de España, con una extraordinaria gastronomía que hacen la delicia de los visitantes.  El Palacio del Marques de Dos Aguas es un edificio de extraordinaria belleza que no se puede dejar de ver, así como la milla de oro de Valencia,  en la calle La Paz, no esta de mas que se visite para ver todo su esplendor ', 'Calle Lope de Vega 168 séptimo piso 2 puerta', 'El apartamento dispone de dos habitaciones para ser ocupado por tres personas, esta situado en el centro de la ciudad de Valencia cerca del puerto deportivo, en la zona histórica de la ciudad\r\n', '06014', 'Valencia', 'Valencia', '206', '250.0000', '3', '3', '0', '', '1', '1', '0', '1', '1', '0', '1', null, null, '0', '0', '0', '1', '1', null, '1', '1', null, '1', null, null, null, '1', '1', '1', '10.0000', '200.0000', '100.0000', '2018-07-05 10:16:34', '1', 'apartamento-con-office-en-valencia-barato.jpg', 'apartamento alojamiento barato en Valencia hotel turismo', 'apartamento economico barato en Valencia hotel turismo', 'barato economico hotel barcelona valencia sevilla', '1-apartamento-con-office-en-valencia-centro.jpg', '', '', '', '2-campanario-de-la-ciudad-de-valencia.jpg', '3-piscina-en-apartamento-rural-poblacion-alicante .jpg', '4-castillo-de-guadalete-provincia-de-valencia.jpg', '5-ciudad-de-sagunto-provincia-de-valencia.jpg', '6-parque-natural-de-la-albufera-valencia.jpg', '7-playa-de-terranova-valencia .jpg', '8-vista-panoramica-de-la-ciudad-de-valencia.jpg', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `anuncios` VALUES ('43', '2', '4', '1', 'Apartamento en alquiler en Alicante centro', 'apartamento-en-alquiler-en-alicante-centro', 'El apartamento dispone de tres habitaciones para ser ocupado por cinco personas, esta situado en el centro de la ciudad de Alicante cerca del castillo de Santa Bárbara en la zona histórica de la ciudad\r\n\r\nEl castillo de Santa Bárbara es uno de los lugares mas visitados de Alicante, es una fortaleza construida por los árabes para la defensa de la ciudad, en el año de 1248 el infante Alfonso de Castilla tomo la fortaleza a los árabes. Desde este lugar se pueden ver las mejores vistas del puerto marítimo y los mejores lugares de la ciudad de Alicante ', 'Calle de Colon, 168. 8° piso 1° puerta', 'El castillo de Santa Bárbara es uno de los lugares mas visitados de Alicante, es una fortaleza construida por los árabes para la defensa de la ciudad, en el año de 1248 el infante Alfonso de Castilla tomo la fortaleza a los árabes', '03006', 'Alicante', 'Alicante', '206', '190.0000', '3', '5', '0', 'sin condiciones de uso', '1', '1', '1', '1', '2', '0', '1', null, null, '0', '0', '0', '1', '1', null, '1', null, null, '1', null, null, null, '1', '1', '1', '10.0000', '250.0000', '100.0000', '2018-07-05 10:39:19', '1', '9-apartamento-con-office-en-Alicante.jpg', 'Apartamento-barato-en-Alicante”', 'Apartamento-con-alojamiento-barato-en-Alicante', 'Apartamento-alicante', '1-campanario-catedral-de-valencia.jpg', 'Apartamento-con-alojamiento-cerca-catedral-de-Valencia', 'Apartamento-en-alojamiento-centro-de-Valencia”', 'Apartamento-en-Alicante-centro”', '2-campanario-catedral-de-alicante.jpg', '3-piscina-en-apartamento-de-alicante.jpg', '4-castillo-de-guadalete-alicante.jpg', '5-poblacion-de-sagunto-valencia.jpg', '6-parque-de-la-albufera.jpg', '7-apartamento-en-terranova-valencia.jpg', '8-vista-panoramica-de-valencia.jpg', 'Apartamento-con-alojamiento-cerca-catedral-de-Alicante”', 'Apartamento-en-alojamiento-de-Alicante”', 'Apartamento-en-alojamiento-Guadalete”', 'Apartamento-barato-en-Sagunto-Valencia”', 'Apartamento-en-parque-natural-de-la-albufera”', 'Apartamento-barato-en-terranova-Valencia”', 'Apartamento-barato-en-Valencia”', 'Apartamento-en-alojamiento-barato-centro-de-Alicante”', 'Apartamento-en-alojamiento-centro-de-Alicante”', 'Apartamento-barato-en-el-centro-de-Guadalete”', 'Apartamento-barato-en-Sagunto-Valencia”', 'Apartamento-barato-en-la-albufera-Valencia”', 'Apartamento-barato-y-lujoso-en-terranova-Valencia”', 'Apartamento-barato-y-lujoso-en-valencia-centro-Valencia”', 'Apartamento-en-Alicante”', 'apartamento-con-piscina-en-Alicante”', 'Apartamento-con-piscina-en-Guadalete”', 'Apartamento-en-Sagunto”', 'Apartamento-en-la-albufera”', 'Apartamento-en-Terranova”', 'Apartamento-en-valencia');
+INSERT INTO `anuncios` VALUES ('44', '3', '4', '1', 'Apartamento en alquiler en Torremolinos', 'apartamento-en-alquiler-en-torremolinos', 'El apartamento dispone de tres habitaciones para ser ocupado por cinco personas, esta situado en el centro de la ciudad de Torremolinos cerca del centro cultual de la ciudad\r\nTorremolinos esta situado en la Costa del Sol en la provincia de Málaga\r\nes la principal ciudad de la costa de Andalucía, con la mayor densidad de alojamiento turístico de sol y playa, Torremolinos dispone de una población propia de mas de sesenta mil habitantes que en pleno verano puede alcanzar una población de mas de cien mil habitantes, la ciudad se  caracteriza por la gran afluencia de turistas en busca de sol y playa con gran variedad de hoteles, de un gran numero de locales nocturnos y de una extraordinaria gastronomía de fama mundial\r\n', 'Calle del Castro n° 78 4° piso 1° puerta', 'El apartamento dispone de tres habitaciones para ser ocupado por cinco personas, esta situado en el centro de la ciudad de Torremolinos cerca del centro cultual de la ciudad\r\nTorremolinos esta situado en la Costa del Sol en la provincia de Málaga', '03024', 'Torremolinos', 'Malaga', '206', '250.0000', '4', '5', '0', 'no se permiten mascotas', '1', '0', '0', '0', '2', '0', '1', null, null, '0', '0', '0', '1', '1', null, '1', null, null, '1', null, null, null, '1', '1', '1', '10.0000', '250.0000', '100.0000', '2018-07-05 10:59:29', '1', '9-espigon-de-la-playa-de-torremolinos-malaga.jpg', 'testing', '', '', '1-paella-de-marisco-su-origen-es-de-los-marineros-que-salian-a-pescar.jpg', '', '', '', '2-calle-del-pueblo-de-nerja-en-malaga.jpg', '5-espada-de-sardinas-asadas-con-omega-3-plato-tipico-marinero.jpg', '6-ensalada-de-verano-plato-tipico-de-la-costa-mediterranea.jpg', '7-jamon-de-bellota-pata-negra-tiene-un-sabor-exquisito-al-paladar.jpg', '8-espigon-en-la-playa-de-torremolinos-malaga.jpg', '3-camino-de-ronda-por-la-montana-malaga.jpg', '4-puente-de-ronda-entre-montanas-malaga.jpg', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `anuncios` VALUES ('45', '2', '4', '1', 'Prueba de la url muy amigable', 'prueba-de-la-url-muy-amigable', 'Málaga es una ciudad moderna y tranquila y al mismo tiempo que un lugar eminentemente turístico , dispone de una gran variedad de alojamiento vacacional y con una gran actividad gastronómica y de ocio Málaga es una ciudad situada al sur del mar Mediterráneo, con una gran actividad económica debido a su excelente gastronomía basada en platos genuinamente andaluces', 'c/ Ausias March, 124 ENT 1\r\n', '', '08013', 'Barcelona', 'Barcelona', '206', '800.0000', '4', '3', '0', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.', '2', '2', '2', '2', '2', '2', '1', '1', null, '0', '0', '0', '1', '1', '1', null, null, '1', '1', '1', null, '1', '1', null, '1', '10.0000', '0.0000', '0.0000', '2018-08-25 21:54:03', '1', '', '', '', '', 'galeria1.jpg', '', '', '', 'galeria2.jpg', 'galeria3.jpg', 'galeria4.jpg', 'galeria5.jpg', 'galeria6.jpg', 'galeria7.jpg', 'galeria8.jpg', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `beds`
@@ -78,6 +128,96 @@ CREATE TABLE `beds` (
 -- ----------------------------
 -- Records of beds
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `billing`
+-- ----------------------------
+DROP TABLE IF EXISTS `billing`;
+CREATE TABLE `billing` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `billing_name` varchar(200) DEFAULT NULL,
+  `billing_document` varchar(20) DEFAULT NULL,
+  `billing_phone` varchar(20) DEFAULT NULL,
+  `billing_address` varchar(255) DEFAULT NULL,
+  `billing_zip` varchar(10) DEFAULT NULL,
+  `billing_city` varchar(100) DEFAULT NULL,
+  `billing_provincia` varchar(120) DEFAULT NULL,
+  `billing_country` int(11) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `active` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of billing
+-- ----------------------------
+INSERT INTO `billing` VALUES ('1', 'Pluton SA', '123456K', '123456789', '', '', '', '', '0', '2018-05-01 00:21:44', '1');
+INSERT INTO `billing` VALUES ('2', 'Pluton SA', '123456K', '123456789', '', '', '', '', '0', '2018-05-01 00:24:03', '1');
+INSERT INTO `billing` VALUES ('3', 'Pluton SAC', 'P123456789', '987456321', 'c/ Mar, 89', '00001', 'Barcelona', 'Barcelona', '2', '2018-05-01 01:12:17', '1');
+INSERT INTO `billing` VALUES ('4', 'ramon', '37561249h', '685172932', 'con cilio 77 1°4°', '08018', 'barcelona', 'barcelona', '0', '2018-05-03 02:38:54', '1');
+INSERT INTO `billing` VALUES ('5', 'Pluton SA', 'I123456789', '963258741', 'c/ mar 768', '08013', 'barcelona', 'barcelona', '206', '2018-05-04 23:47:00', '1');
+INSERT INTO `billing` VALUES ('6', 'Pluton SA', 'I123456789', '963258741', 'c/ mar 768', '08013', 'barcelona', 'barcelona', '206', '2018-05-04 23:56:04', '1');
+INSERT INTO `billing` VALUES ('7', 'Pluton SA', 'I123456789', '963258741', 'c/ mar 768', '08013', 'barcelona', 'barcelona', '206', '2018-05-04 23:56:26', '1');
+INSERT INTO `billing` VALUES ('8', 'Pluton SA', 'I123456789', '963258741', 'c/ mar 768', '08013', 'barcelona', 'barcelona', '206', '2018-05-05 00:09:49', '1');
+INSERT INTO `billing` VALUES ('9', 'Pluton SA', 'I123456789', '963258741', 'c/ mar 768', '08013', 'barcelona', 'barcelona', '206', '2018-05-05 00:11:13', '1');
+INSERT INTO `billing` VALUES ('10', 'Pluton SA', 'I123456789', '963258741', 'c/ mar 768', '08013', 'barcelona', 'barcelona', '206', '2018-05-05 00:13:02', '1');
+INSERT INTO `billing` VALUES ('11', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:39:06', '1');
+INSERT INTO `billing` VALUES ('12', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:41:39', '1');
+INSERT INTO `billing` VALUES ('13', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:46:42', '1');
+INSERT INTO `billing` VALUES ('14', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:47:14', '1');
+INSERT INTO `billing` VALUES ('15', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:48:11', '1');
+INSERT INTO `billing` VALUES ('16', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:49:27', '1');
+INSERT INTO `billing` VALUES ('17', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:50:18', '1');
+INSERT INTO `billing` VALUES ('18', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:55:46', '1');
+INSERT INTO `billing` VALUES ('19', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 00:56:48', '1');
+INSERT INTO `billing` VALUES ('20', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 01:00:33', '1');
+INSERT INTO `billing` VALUES ('21', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 01:03:45', '1');
+INSERT INTO `billing` VALUES ('22', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 01:21:34', '1');
+INSERT INTO `billing` VALUES ('23', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 01:28:46', '1');
+INSERT INTO `billing` VALUES ('24', 'ramon torres', '37561249h', '685172932', 'ale de Concilio de Trento 44 1° 4 puerta', '08018', 'barcelona', 'Barcelona', '206', '2018-05-05 07:03:06', '1');
+INSERT INTO `billing` VALUES ('25', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'Barcelona', 'Barcelona', '206', '2018-05-05 22:55:04', '1');
+INSERT INTO `billing` VALUES ('26', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08045', 'Barcelona', 'Barcelona', '206', '2018-05-05 23:37:11', '1');
+INSERT INTO `billing` VALUES ('27', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'Barcelona', 'Barcelona', '206', '2018-05-05 23:42:13', '1');
+INSERT INTO `billing` VALUES ('28', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'Barcelona', 'Barcelona', '206', '2018-05-05 23:52:54', '1');
+INSERT INTO `billing` VALUES ('29', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'Barcelona', 'Barcelona', '206', '2018-05-06 00:13:32', '1');
+INSERT INTO `billing` VALUES ('30', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'barcelona', 'barcelona', '206', '2018-05-06 00:30:59', '1');
+INSERT INTO `billing` VALUES ('31', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'barcelona', 'barcelona', '206', '2018-05-06 00:57:14', '1');
+INSERT INTO `billing` VALUES ('32', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'barcelona', 'barcelona', '206', '2018-05-06 01:09:06', '1');
+INSERT INTO `billing` VALUES ('33', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'barcelona', 'barcelona', '206', '2018-05-06 02:05:46', '1');
+INSERT INTO `billing` VALUES ('34', 'Master Diez SL', '123456P', '123456789', 'c/ Consejo de Ciento 121', '08015', 'Barcelona', 'Barcelona', '206', '2018-05-06 02:15:16', '1');
+INSERT INTO `billing` VALUES ('35', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'barcelona', 'barcelona', '206', '2018-05-07 01:22:15', '1');
+INSERT INTO `billing` VALUES ('36', 'Ramon', '123456K', '123456789', 'c/ Condejo de ciento', '08018', 'barcelona', 'barcelona', '206', '2018-05-07 01:39:51', '1');
+INSERT INTO `billing` VALUES ('37', 'Ramon Cendon', '37561249H', '685172932', 'Conclio de Trento 77 1°4°', '08018', 'Barcelona', 'arcelona', '206', '2018-05-08 03:39:08', '1');
+INSERT INTO `billing` VALUES ('38', 'ramon torradeflot', '37561249H', '685172932', 'CONCILIO DE TRENTO 77 1° 4°', '08018', 'bARCELONA', 'Barcelona', '206', '2018-05-09 01:23:17', '1');
+INSERT INTO `billing` VALUES ('39', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'barcelona', 'barcelona', '206', '2018-05-12 22:45:03', '1');
+INSERT INTO `billing` VALUES ('40', 'Ramon Cendon', '37561249H', '685172932', 'Conclio de Trento 77 1°4°', '08018', 'barcelona', 'barcelona', '206', '2018-05-12 23:40:13', '1');
+INSERT INTO `billing` VALUES ('41', null, null, null, null, null, null, null, null, '2018-05-13 00:12:03', '1');
+INSERT INTO `billing` VALUES ('42', null, null, null, null, null, null, null, null, '2018-05-13 00:14:55', '1');
+INSERT INTO `billing` VALUES ('43', null, null, null, null, null, null, null, null, '2018-05-13 00:17:09', '1');
+INSERT INTO `billing` VALUES ('44', null, null, null, null, null, null, null, null, '2018-05-13 00:17:24', '1');
+INSERT INTO `billing` VALUES ('45', null, null, null, null, null, null, null, null, '2018-05-13 00:19:43', '1');
+INSERT INTO `billing` VALUES ('46', null, null, null, null, null, null, null, null, '2018-05-13 00:21:31', '1');
+INSERT INTO `billing` VALUES ('47', null, null, null, null, null, null, null, null, '2018-05-13 00:22:01', '1');
+INSERT INTO `billing` VALUES ('48', null, null, null, null, null, null, null, null, '2018-05-13 00:22:57', '1');
+INSERT INTO `billing` VALUES ('49', null, null, null, null, null, null, null, null, '2018-05-13 00:25:57', '1');
+INSERT INTO `billing` VALUES ('50', null, null, null, null, null, null, null, null, '2018-05-13 00:27:33', '1');
+INSERT INTO `billing` VALUES ('51', null, null, null, null, null, null, null, null, '2018-05-13 00:27:58', '1');
+INSERT INTO `billing` VALUES ('52', null, null, null, null, null, null, null, null, '2018-05-13 00:32:26', '1');
+INSERT INTO `billing` VALUES ('53', null, null, null, null, null, null, null, null, '2018-05-13 00:36:38', '1');
+INSERT INTO `billing` VALUES ('54', null, null, null, null, null, null, null, null, '2018-05-13 00:37:48', '1');
+INSERT INTO `billing` VALUES ('55', null, null, null, null, null, null, null, null, '2018-05-13 00:41:03', '1');
+INSERT INTO `billing` VALUES ('56', null, null, null, null, null, null, null, null, '2018-05-13 00:44:05', '1');
+INSERT INTO `billing` VALUES ('57', null, null, null, null, null, null, null, null, '2018-05-13 00:50:07', '1');
+INSERT INTO `billing` VALUES ('58', null, null, null, null, null, null, null, null, '2018-05-13 00:52:28', '1');
+INSERT INTO `billing` VALUES ('59', 'Pluton SA', '123456K', '123456789', '123456789', '08018', 'barcelona', 'barcelona', '206', '2018-05-13 01:04:55', '1');
+INSERT INTO `billing` VALUES ('60', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'barcelona', 'barcelona', '206', '2018-05-13 22:40:30', '1');
+INSERT INTO `billing` VALUES ('61', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'barcelona', 'barcelona', '206', '2018-05-14 00:13:09', '1');
+INSERT INTO `billing` VALUES ('62', 'Diputacion Barcelona', 'P0800008B', '936852741', 'C/ Harmonia 7', '08018', 'Barcelona', 'Barcelona', '206', '2018-05-21 22:41:24', '1');
+INSERT INTO `billing` VALUES ('63', null, null, null, null, null, null, null, null, '2018-05-22 19:28:14', '1');
+INSERT INTO `billing` VALUES ('64', 'Juan', 'y0204715y', '123456', 'c/ gran via 8', '08013', 'bcn', 'bcn', '206', '2018-07-28 00:16:30', '1');
+INSERT INTO `billing` VALUES ('65', 'Pepe', '963258741L', '963258741', 'Gran Via 526', '08013', 'BCN', 'BCN', '206', '2018-07-28 00:31:08', '1');
+INSERT INTO `billing` VALUES ('66', 'Ramon Torres', '998888P', '123456789', 'Av. Gran Via 48', '08016', 'BCN', 'BCN', '206', '2018-07-28 00:41:15', '1');
+INSERT INTO `billing` VALUES ('67', 'Sociedad Scrum SA', '27424565D', '123456789', '123456789', '08013', 'Barcelona', 'Barcelona', '206', '2018-08-17 23:43:35', '1');
 
 -- ----------------------------
 -- Table structure for `booking`
@@ -100,7 +240,7 @@ CREATE TABLE `booking` (
   `created_date` datetime DEFAULT NULL,
   `anuncio_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=382 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of booking
@@ -121,6 +261,147 @@ INSERT INTO `booking` VALUES ('277', 'ramon', '37561249H', 'rtorres18@ono.com', 
 INSERT INTO `booking` VALUES ('278', 'ramon', '37561249h', 'rtorres18@ono.com', '933080443', '0', '2018-03-04 00:00:00', '2018-03-10 00:00:00', '2', '0', '0', '', '1', '2018-03-04 02:14:31', '26');
 INSERT INTO `booking` VALUES ('279', 'Ramon Torres', '37561249H', 'rtorres18@ono.com', '685172932', '0', '2018-03-06 00:00:00', '2018-03-11 00:00:00', '2', '0', '0', '', '1', '2018-03-05 09:47:44', '26');
 INSERT INTO `booking` VALUES ('280', 'Euler Núñez', '26262626', 'eulernunez@hotmail.com', '7878787', '206', '2018-03-19 00:00:00', '2018-03-21 00:00:00', '1', '1', '0', 'mis necesidades son ... ', '1', '2018-03-10 22:28:03', '26');
+INSERT INTO `booking` VALUES ('281', 'Euler Nuñez', 'Y0204715Y', 'EULER@MSN.COM', '678974291', '0', '2018-04-09 00:00:00', '2018-04-20 00:00:00', '1', '0', '0', '', '1', '2018-04-06 23:26:22', '28');
+INSERT INTO `booking` VALUES ('282', 'PPP', '1221212', 'MKLM@MSN.COM', '123132', '0', '2018-04-10 00:00:00', '2018-04-12 00:00:00', '1', '0', '0', '', '1', '2018-04-06 23:28:26', '27');
+INSERT INTO `booking` VALUES ('283', 'Ramon Torres', '37561249H', 'rtorres18@ono.com', '933080443', '0', '2018-04-09 00:00:00', '2018-04-13 00:00:00', '1', '0', '0', '', '1', '2018-04-06 23:30:59', '27');
+INSERT INTO `booking` VALUES ('284', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-07 01:03:52', null);
+INSERT INTO `booking` VALUES ('285', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-07 01:04:04', null);
+INSERT INTO `booking` VALUES ('286', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-07 02:20:09', null);
+INSERT INTO `booking` VALUES ('287', 'Eureka', 'Y0204715Y', 'euler@msn.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-19 00:00:00', '2', '0', '0', '', '1', '2018-04-07 23:29:51', '27');
+INSERT INTO `booking` VALUES ('288', 'Euler', 'Y0204715Y', 'euler@msn.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-17 00:00:00', '1', '0', '0', '', '1', '2018-04-07 23:38:34', '27');
+INSERT INTO `booking` VALUES ('289', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-07 23:48:35', null);
+INSERT INTO `booking` VALUES ('290', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-07 23:58:49', null);
+INSERT INTO `booking` VALUES ('291', 'Eureka', 'Y0204715Y', 'euler@msn.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-17 00:00:00', '2', '1', '0', '', '1', '2018-04-08 00:12:29', '27');
+INSERT INTO `booking` VALUES ('292', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-08 00:13:03', null);
+INSERT INTO `booking` VALUES ('293', 'Euler', 'Y0204715Y', 'euler@msn.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-13 00:00:00', '1', '0', '0', '', '1', '2018-04-08 00:15:12', '27');
+INSERT INTO `booking` VALUES ('294', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-08 00:25:01', null);
+INSERT INTO `booking` VALUES ('295', 'Euler', 'Y0204715Y', 'euler@msn.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-08 00:33:25', '27');
+INSERT INTO `booking` VALUES ('296', 'Euler', 'Y0204715Y', 'euler@msn.com', '678974291', '0', '2018-04-17 00:00:00', '2018-04-26 00:00:00', '1', '0', '0', '', '1', '2018-04-08 00:41:11', '27');
+INSERT INTO `booking` VALUES ('297', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-18 00:00:00', '1', '0', '0', '', '1', '2018-04-08 01:00:32', '28');
+INSERT INTO `booking` VALUES ('298', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-08 01:06:57', '27');
+INSERT INTO `booking` VALUES ('299', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-16 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-08 02:44:14', '27');
+INSERT INTO `booking` VALUES ('300', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-18 00:00:00', '1', '0', '0', '', '1', '2018-04-08 22:56:58', '27');
+INSERT INTO `booking` VALUES ('301', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-11 00:00:00', '1', '0', '0', '', '1', '2018-04-08 23:09:59', '27');
+INSERT INTO `booking` VALUES ('302', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-11 00:00:00', '2018-04-17 00:00:00', '1', '0', '0', '', '1', '2018-04-08 23:41:18', '27');
+INSERT INTO `booking` VALUES ('303', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-17 00:00:00', '2018-04-26 00:00:00', '1', '0', '0', '', '1', '2018-04-09 00:35:39', '27');
+INSERT INTO `booking` VALUES ('304', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-16 00:00:00', '2018-04-27 00:00:00', '1', '0', '0', '', '1', '2018-04-09 00:55:41', '28');
+INSERT INTO `booking` VALUES ('305', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-18 00:00:00', '1', '0', '0', '', '1', '2018-04-09 00:59:09', '28');
+INSERT INTO `booking` VALUES ('306', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-09 00:00:00', '2018-04-17 00:00:00', '1', '0', '0', '', '1', '2018-04-09 01:20:27', '28');
+INSERT INTO `booking` VALUES ('307', 'Euler', 'y0204715y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-09 01:23:36', '28');
+INSERT INTO `booking` VALUES ('308', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-09 01:29:29', '28');
+INSERT INTO `booking` VALUES ('309', 'Euler Nunez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-09 01:38:36', '28');
+INSERT INTO `booking` VALUES ('310', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-09 02:01:53', '28');
+INSERT INTO `booking` VALUES ('311', 'Ramon Torres', '78787878', 'rtorres18@ono.com', '7879798798', '0', '2018-04-10 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-09 02:04:46', '28');
+INSERT INTO `booking` VALUES ('312', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-19 00:00:00', '1', '0', '0', '', '1', '2018-04-09 02:14:26', '28');
+INSERT INTO `booking` VALUES ('313', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-18 00:00:00', '1', '0', '0', '', '1', '2018-04-09 02:23:11', '28');
+INSERT INTO `booking` VALUES ('314', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-18 00:00:00', '1', '0', '0', '', '1', '2018-04-09 02:27:36', '28');
+INSERT INTO `booking` VALUES ('315', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-18 00:00:00', '1', '0', '0', '', '1', '2018-04-09 02:31:45', '28');
+INSERT INTO `booking` VALUES ('316', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-10 00:00:00', '2018-04-18 00:00:00', '1', '0', '0', '', '1', '2018-04-09 02:35:58', '28');
+INSERT INTO `booking` VALUES ('317', 'Ramon Cendon', '37561266', 'tutorcen18@ono.com', '933080443', '0', '2018-04-11 00:00:00', '2018-04-15 00:00:00', '2', '0', '0', '', '1', '2018-04-09 08:31:21', '28');
+INSERT INTO `booking` VALUES ('318', 'Euler Nuñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-16 00:00:00', '2018-04-20 00:00:00', '1', '0', '0', '', '1', '2018-04-13 23:00:05', '27');
+INSERT INTO `booking` VALUES ('319', 'Eureka', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-23 00:00:00', '2018-04-28 00:00:00', '1', '0', '0', '', '1', '2018-04-14 00:46:36', '28');
+INSERT INTO `booking` VALUES ('320', 'Eureka', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-23 00:00:00', '2018-04-27 00:00:00', '1', '0', '0', '', '1', '2018-04-14 00:58:29', '26');
+INSERT INTO `booking` VALUES ('321', 'Euler Núñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-17 00:00:00', '2018-04-24 00:00:00', '1', '0', '0', '', '1', '2018-04-14 21:56:35', '26');
+INSERT INTO `booking` VALUES ('322', 'Euler Núñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-17 00:00:00', '2018-04-27 00:00:00', '1', '0', '0', '', '1', '2018-04-14 22:36:33', '28');
+INSERT INTO `booking` VALUES ('323', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-18 00:00:00', '2018-04-20 00:00:00', '1', '0', '0', '', '1', '2018-04-14 23:04:55', '27');
+INSERT INTO `booking` VALUES ('325', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.COM', '678974291', '0', '2018-04-18 00:00:00', '2018-04-20 00:00:00', '1', '0', '0', '', '1', '2018-04-14 23:46:17', '27');
+INSERT INTO `booking` VALUES ('326', 'Euler Nuñez', 'Y0204715Y', 'eulernunez@hotmail.COM', '678974291', '0', '2018-04-16 00:00:00', '2018-04-20 00:00:00', '1', '0', '0', '', '1', '2018-04-15 00:37:57', '27');
+INSERT INTO `booking` VALUES ('327', 'Eureka', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-24 00:00:00', '2018-04-26 00:00:00', '1', '0', '0', '', '1', '2018-04-15 00:51:24', '27');
+INSERT INTO `booking` VALUES ('328', 'Jesus Ramon', '37561246', 'tutorcen18@ono.com', '685172932', '0', '2018-04-16 00:00:00', '2018-04-22 00:00:00', '2', '0', '0', '', '1', '2018-04-15 20:12:09', '28');
+INSERT INTO `booking` VALUES ('332', 'RAMON', '37561247', 'RTORRES18@ONO.COM', '685172932', '190', '2018-04-16 00:00:00', '2018-04-22 00:00:00', '2', '1', '0', 'sin requerimientos', '1', '2018-04-15 20:28:53', '9');
+INSERT INTO `booking` VALUES ('333', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-16 00:00:00', '2018-04-26 00:00:00', '1', '0', '0', '', '1', '2018-04-16 01:16:03', '27');
+INSERT INTO `booking` VALUES ('334', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-17 00:00:00', '2018-04-27 00:00:00', '1', '0', '0', '', '1', '2018-04-16 01:26:29', '26');
+INSERT INTO `booking` VALUES ('335', 'Ramon ', '123456789', 'rtorres18@ono.com', '123456789', '0', '2018-04-17 00:00:00', '2018-04-27 00:00:00', '1', '0', '0', '', '1', '2018-04-16 01:31:13', '27');
+INSERT INTO `booking` VALUES ('336', 'Euler', 'y0204715y', 'eulernunez@hotmail.COM', '678974291', '0', '2018-04-23 00:00:00', '2018-04-30 00:00:00', '1', '0', '0', '', '1', '2018-04-20 23:40:25', '27');
+INSERT INTO `booking` VALUES ('337', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-04-23 00:00:00', '2018-04-29 00:00:00', '1', '0', '0', '', '1', '2018-04-21 00:08:16', '28');
+INSERT INTO `booking` VALUES ('338', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-21 10:21:56', null);
+INSERT INTO `booking` VALUES ('339', 'Euler', 'Y02011122U', 'eulernunez@hotmail.coM', '4444444', '0', '2018-04-23 00:00:00', '2018-04-27 00:00:00', '1', '0', '0', '', '1', '2018-04-22 23:06:07', '28');
+INSERT INTO `booking` VALUES ('340', 'Ramon Torres', 'X0123456Y', 'rtorres18@ono.com', '123456789', '0', '2018-04-23 00:00:00', '2018-04-28 00:00:00', '1', '0', '0', '', '1', '2018-04-23 02:20:26', '28');
+INSERT INTO `booking` VALUES ('341', 'Euler Nuñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-01 00:00:00', '2018-05-05 00:00:00', '2', '0', '0', '', '1', '2018-04-28 22:53:18', '28');
+INSERT INTO `booking` VALUES ('342', 'Euler Núñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-01 00:00:00', '2018-05-05 00:00:00', '1', '0', '0', '', '1', '2018-04-29 00:05:26', '28');
+INSERT INTO `booking` VALUES ('343', 'Euler', 'Y0204715I', 'eulernunez@hotmail.com', '67892654', '0', '2018-05-01 00:00:00', '2018-05-05 00:00:00', '1', '0', '0', '', '1', '2018-04-29 02:00:14', '28');
+INSERT INTO `booking` VALUES ('344', 'Euler Nunez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-01 00:00:00', '2018-05-05 00:00:00', '1', '1', '0', '', '1', '2018-04-29 02:04:06', '28');
+INSERT INTO `booking` VALUES ('345', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-04-29 10:28:50', null);
+INSERT INTO `booking` VALUES ('346', 'Reyna Cid', 'I0204715K', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-07 00:00:00', '2018-05-13 00:00:00', '1', '1', '0', '', '1', '2018-04-30 23:47:34', '28');
+INSERT INTO `booking` VALUES ('347', null, null, null, null, '0', null, null, null, null, '0', '', '1', '2018-05-01 00:20:37', null);
+INSERT INTO `booking` VALUES ('348', 'Reyna Rodriguez', 'y0204715y', 'eulernunez@hotmail.com', '369852147', '0', '2018-05-02 00:00:00', '2018-05-04 00:00:00', '1', '1', '0', '', '1', '2018-05-01 01:10:01', '28');
+INSERT INTO `booking` VALUES ('349', 'ramon', '37561249', 'rtorres18@ono.com', '685172932', '0', '2018-05-06 00:00:00', '2018-05-11 00:00:00', '2', '0', '0', '', '1', '2018-05-03 02:36:31', '28');
+INSERT INTO `booking` VALUES ('350', 'ramon', '37561249', 'rtorres18@ono.com', '685172932', '0', '2018-05-05 00:00:00', '2018-05-10 00:00:00', '3', '0', '0', '', '1', '2018-05-03 02:44:44', '28');
+INSERT INTO `booking` VALUES ('352', 'Euler', 'y0204715y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-07 00:00:00', '2018-05-10 00:00:00', '1', '0', '0', '', '1', '2018-05-04 23:42:39', '28');
+INSERT INTO `booking` VALUES ('353', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-14 00:00:00', '2018-05-17 00:00:00', '1', '0', '0', '', '1', '2018-05-05 00:37:03', '28');
+INSERT INTO `booking` VALUES ('354', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-28 00:00:00', '2018-05-31 00:00:00', '1', '0', '0', '', '1', '2018-05-05 01:20:06', '28');
+INSERT INTO `booking` VALUES ('355', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-14 00:00:00', '2018-05-18 00:00:00', '1', '0', '0', '', '1', '2018-05-05 01:26:55', '28');
+INSERT INTO `booking` VALUES ('356', 'ramon', '37561249', 'rtorres18@ono.com', '685172932', '0', '2018-05-06 00:00:00', '2018-05-06 00:00:00', '2', '0', '0', '', '1', '2018-05-05 06:59:17', '28');
+INSERT INTO `booking` VALUES ('357', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974294', '0', '2018-05-14 00:00:00', '2018-05-20 00:00:00', '1', '1', '0', '', '1', '2018-05-05 22:52:35', '28');
+INSERT INTO `booking` VALUES ('358', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-14 00:00:00', '2018-05-19 00:00:00', '1', '0', '0', '', '1', '2018-05-05 23:35:26', '28');
+INSERT INTO `booking` VALUES ('359', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-14 00:00:00', '2018-05-20 00:00:00', '1', '0', '0', '', '1', '2018-05-05 23:40:54', '28');
+INSERT INTO `booking` VALUES ('360', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-22 00:00:00', '2018-05-25 00:00:00', '1', '0', '0', '', '1', '2018-05-05 23:50:55', '28');
+INSERT INTO `booking` VALUES ('361', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-14 00:00:00', '2018-05-24 00:00:00', '1', '0', '0', '', '1', '2018-05-06 00:12:11', '28');
+INSERT INTO `booking` VALUES ('362', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-21 00:00:00', '2018-05-26 00:00:00', '1', '1', '0', '', '1', '2018-05-06 00:29:26', '28');
+INSERT INTO `booking` VALUES ('363', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-21 00:00:00', '2018-05-27 00:00:00', '1', '1', '0', '', '1', '2018-05-06 00:56:14', '28');
+INSERT INTO `booking` VALUES ('364', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-22 00:00:00', '2018-05-31 00:00:00', '1', '0', '0', '', '1', '2018-05-06 01:07:53', '28');
+INSERT INTO `booking` VALUES ('365', 'Euler', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-21 00:00:00', '2018-05-30 00:00:00', '1', '0', '0', '', '1', '2018-05-06 02:04:46', '27');
+INSERT INTO `booking` VALUES ('366', 'Ramon Torres', 'I123456', 'rtorres18@ono.com', '123456789', '0', '2018-05-07 00:00:00', '2018-05-11 00:00:00', '1', '0', '0', '', '1', '2018-05-06 02:09:44', '26');
+INSERT INTO `booking` VALUES ('367', 'Euler Nuñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-08 00:00:00', '2018-05-12 00:00:00', '1', '0', '0', '', '1', '2018-05-07 01:21:00', '28');
+INSERT INTO `booking` VALUES ('368', 'Ramon Torres', '123456P', 'rtorres18@ono.com', '123456789', '0', '2018-05-07 00:00:00', '2018-05-15 00:00:00', '1', '1', '0', '', '1', '2018-05-07 01:38:13', '28');
+INSERT INTO `booking` VALUES ('369', 'Ramon Torres', 'Y0204715Y', 'MKLM@MSN.COM', '685172932', '5', '2018-05-09 00:00:00', '2018-05-13 00:00:00', '2', '1', '0', 'sin rquerimientos', '1', '2018-05-08 03:24:24', '0');
+INSERT INTO `booking` VALUES ('370', 'Ramon Cendon', '37561249', 'rtorres18@ono.com', '685172932', '0', '2018-05-09 00:00:00', '2018-05-13 00:00:00', '2', '0', '0', '', '1', '2018-05-08 03:36:02', '26');
+INSERT INTO `booking` VALUES ('371', 'ramon torres', '37561249', 'rtorres18@ono.com', '685172932', '0', '2018-05-10 00:00:00', '2018-05-13 00:00:00', '2', '0', '0', '', '1', '2018-05-09 01:19:46', '27');
+INSERT INTO `booking` VALUES ('372', 'Euler Núñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-21 00:00:00', '2018-05-29 00:00:00', '1', '0', '0', '', '1', '2018-05-12 22:43:22', '28');
+INSERT INTO `booking` VALUES ('373', 'Ramon', '123456M', 'rtorres18@ono.com', '123456789', '0', '2018-05-21 00:00:00', '2018-05-29 00:00:00', '1', '0', '0', '', '1', '2018-05-12 23:38:31', '27');
+INSERT INTO `booking` VALUES ('374', 'Ramon Torres', '123456P', 'rtorres18@ono.com', '123456789', '0', '2018-05-15 00:00:00', '2018-05-24 00:00:00', '1', '0', '0', '', '1', '2018-05-13 01:04:19', '27');
+INSERT INTO `booking` VALUES ('375', 'Euler', 'y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-21 00:00:00', '2018-05-24 00:00:00', '1', '0', '0', '', '1', '2018-05-13 22:39:01', '28');
+INSERT INTO `booking` VALUES ('376', 'Euler', '123456I', 'eulernunez@hotmail.com', '123456', '0', '2018-05-15 00:00:00', '2018-05-22 00:00:00', '1', '1', '0', '', '1', '2018-05-14 00:11:36', '27');
+INSERT INTO `booking` VALUES ('377', 'Euler Nuñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-05-28 00:00:00', '2018-05-31 00:00:00', '1', '0', '0', '', '1', '2018-05-21 22:38:52', '27');
+INSERT INTO `booking` VALUES ('378', 'Euler Núñez', 'Y0204715Y', 'eulernunez@hotmail.com', '678974291', '0', '2018-08-01 00:00:00', '2018-08-05 00:00:00', '2', '0', '0', '', '1', '2018-07-28 00:15:17', '27');
+INSERT INTO `booking` VALUES ('379', 'Euler NúñeZ', '123456789P', 'eulernunez@hotmail.com', '12345678(', '0', '2018-08-01 00:00:00', '2018-08-05 00:00:00', '1', '0', '0', '', '1', '2018-07-28 00:29:58', '44');
+INSERT INTO `booking` VALUES ('380', 'Ramon Torres', '98888P', 'rtorres18@ono.com', '123456789', '0', '2018-08-02 00:00:00', '2018-08-05 00:00:00', '1', '0', '0', '', '1', '2018-07-28 00:39:46', '42');
+INSERT INTO `booking` VALUES ('381', 'Euler Nuñez', '', 'eulernunez@hotmail.com', '123456789', '0', '2018-09-04 00:00:00', '2018-09-07 00:00:00', '2', '0', '0', '', '1', '2018-08-17 23:33:17', '44');
+
+-- ----------------------------
+-- Table structure for `comentarios`
+-- ----------------------------
+DROP TABLE IF EXISTS `comentarios`;
+CREATE TABLE `comentarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_turismo` int(11) DEFAULT NULL,
+  `puntaje` tinyint(4) DEFAULT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
+  `anuncio_id` int(11) DEFAULT NULL,
+  `comentario` varchar(300) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `activo` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of comentarios
+-- ----------------------------
+INSERT INTO `comentarios` VALUES ('1', '3', '5', '283', '42', 'La villa es coqueta, acogedora y cuenta con pequeños detalles que te hacen la estancia confortable, casi como en tu propia casa. Es tranquila e independiente. En su terraza con barbacoa y cenador puedes disfrutar de veladas muy agradables disfrutar de vel detalles que te hacen la estancia confortabl', '2018-08-31 23:21:18', '1');
+INSERT INTO `comentarios` VALUES ('2', '3', '4', '268', '42', 'Casa muy acogedora, con todo tipo de detalles, con barbacoa en el jardín. Una ubicación muy buena, cercana a playas. El dueño pendiente que todo estuviera perfecto. Un alojamiento muy recomendable.', '2018-08-31 23:31:18', '1');
+INSERT INTO `comentarios` VALUES ('3', '1', '5', '328', '43', 'Una casa de dos plantas, perfecta para cuatro personas. La vivienda cuenta con todo lo necesario y se nota que los propietarios han cuidado hasta el último detalle para que los que la visiten se encuentren como en casa. Muy recomendable.', '2018-08-31 23:36:19', '1');
+INSERT INTO `comentarios` VALUES ('4', '1', '5', '283', '43', 'Fue una experiencia inolvidable Hermosa experiencia Linda experiencia en el alojamiento Linda experiencia en el alojamiento Linda experiencia en el alojamiento Linda experiencia en el alojamiento Linda experiencia en el alojamiento', '2018-08-31 23:37:49', '1');
+INSERT INTO `comentarios` VALUES ('7', '2', '5', '328', '43', 'Fue una experiencia muy placentera Hermosa experiencia Linda experiencia en el alojamiento Linda experiencia en el alojamiento Linda experiencia en el alojamiento Linda experiencia en el alojamiento Linda experiencia en el alojamiento', '2018-08-31 23:42:13', '1');
+INSERT INTO `comentarios` VALUES ('8', '2', '0', '346', '42', 'Village paradise is a lovely apartment near to the Faro Park area of Lanzarote. It\'s short walk to the sea.', '2018-09-01 01:30:18', '1');
+INSERT INTO `comentarios` VALUES ('9', '2', '5', '283', '42', 'The villa was tastefully decorated modern and very clean with everything you could need(except a toaster). Comfortable beds and new The villa was tastefully decorated modern and very clean with everything you could need(except a toaster). Comfortable beds', '2018-09-01 02:29:52', '0');
+INSERT INTO `comentarios` VALUES ('10', '2', '3', '283', '42', 'Qué fantástica villa. Perfectamente situado para tiendas y restaurantes locales. Transporte público y recogida y regreso para taxis. Puede ser un poco concurrido en la carretera cuando autobuses te dejan recogida desde el hotel local pero nada muy notorio', '2018-09-01 02:33:58', '0');
+
+-- ----------------------------
+-- Table structure for `comerciales`
+-- ----------------------------
+DROP TABLE IF EXISTS `comerciales`;
+CREATE TABLE `comerciales` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(250) DEFAULT NULL,
+  `apellidos` varchar(250) DEFAULT NULL,
+  `active` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of comerciales
+-- ----------------------------
+INSERT INTO `comerciales` VALUES ('1', 'MARIO', 'TORRES', '1');
 
 -- ----------------------------
 -- Table structure for `contacts`
@@ -136,7 +417,7 @@ CREATE TABLE `contacts` (
   `created` datetime DEFAULT NULL,
   `state` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of contacts
@@ -147,6 +428,21 @@ INSERT INTO `contacts` VALUES ('13', 'Pablo Casado', 'NA', 'pcasado@pp.com', 'NA
 INSERT INTO `contacts` VALUES ('14', 'ramon', 'NA', 'rtorres18@ono.com', 'NA', 'quisiera mas informacion sobre.....', '2018-03-11 02:33:19', '1');
 INSERT INTO `contacts` VALUES ('15', 'ramon', '933080443', 'rtorres18@ono.com', 'informacion', 'mas informacion', '2018-03-11 02:51:24', '1');
 INSERT INTO `contacts` VALUES ('16', 'ramon', '933080443', 'rtorres18@ono.com', 'informacion', 'mas informacion', '2018-03-11 02:53:40', '1');
+INSERT INTO `contacts` VALUES ('17', 'Euler', '678974291', 'eulernunez@hotmail.com', 'Informacion', 'Informacion Informacion Informacion Informacion', '2018-04-08 01:11:25', '1');
+INSERT INTO `contacts` VALUES ('18', 'RAMON', '685172932', 'rtorres18@ono.com', 'APARTAMENTO', 'SI TENGO UN APARTAMENTO PARA ALQUILAR', '2018-05-21 09:22:35', '1');
+INSERT INTO `contacts` VALUES ('19', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Informacion', 'Existe alojamientos para Paraguay', '2018-05-21 22:04:31', '1');
+INSERT INTO `contacts` VALUES ('20', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Informacion', 'Quiero un piso en ', '2018-05-21 22:16:29', '1');
+INSERT INTO `contacts` VALUES ('21', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', '', '', '2018-05-21 22:31:52', '1');
+INSERT INTO `contacts` VALUES ('22', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Informacion 2', 'Consulta de pisos ... ', '2018-05-21 22:33:23', '1');
+INSERT INTO `contacts` VALUES ('23', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Informacion 2', 'Consulta de pisos ... ', '2018-05-21 22:34:54', '1');
+INSERT INTO `contacts` VALUES ('24', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Informacion 2', 'Consulta de pisos ... ', '2018-05-21 22:35:07', '1');
+INSERT INTO `contacts` VALUES ('25', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Informacion 2', 'Consulta de pisos ... ', '2018-05-21 22:36:37', '1');
+INSERT INTO `contacts` VALUES ('26', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Información', 'Existen alojamientos especiales ..', '2018-05-21 22:46:57', '1');
+INSERT INTO `contacts` VALUES ('27', 'Euler Núñez', '678974291', 'eulernunez@hotmail.com', 'Información', 'Requiero la necesidad de poder obtener información sobre ... ', '2018-05-21 22:54:18', '1');
+INSERT INTO `contacts` VALUES ('28', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Información', 'sE NECESITA SABER', '2018-05-21 23:02:20', '1');
+INSERT INTO `contacts` VALUES ('29', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Informacion 08/JUL', 'Probando ...', '2018-07-08 23:48:04', '1');
+INSERT INTO `contacts` VALUES ('30', 'Euler Nuñez', '678974291', 'eulernunez@hotmail.com', 'Informe W', 'Testing W', '2018-07-08 16:50:50', '1');
+INSERT INTO `contacts` VALUES ('32', 'Eureka Nuny3z', '678974291', 'eulernunez@hotmail.com', 'Testing', 'Probando el contacto', '2018-08-31 22:56:27', '1');
 
 -- ----------------------------
 -- Table structure for `ibis`
@@ -159,28 +455,23 @@ CREATE TABLE `ibis` (
   `ad_id` int(11) DEFAULT NULL,
   `state` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ibis
 -- ----------------------------
-INSERT INTO `ibis` VALUES ('2', 'ficha-curso-html-y-css.pdf', 'pdf', '22', '1');
-INSERT INTO `ibis` VALUES ('3', 'ficha-curso-html-y-css.pdf', 'pdf', '3', '1');
-INSERT INTO `ibis` VALUES ('4', 'ficha-curso-html-y-css.pdf', 'pdf', '7', '1');
-INSERT INTO `ibis` VALUES ('5', 'ficha-curso-html-y-css.pdf', 'pdf', '8', '1');
-INSERT INTO `ibis` VALUES ('6', 'ficha-curso-html-y-css.pdf', 'pdf', '9', '1');
-INSERT INTO `ibis` VALUES ('7', 'ficha-curso-html-y-css.pdf', 'pdf', '12', '1');
-INSERT INTO `ibis` VALUES ('8', 'ficha-curso-html-y-css.pdf', 'pdf', '13', '1');
-INSERT INTO `ibis` VALUES ('9', 'ficha-curso-html-y-css.pdf', 'pdf', '14', '1');
-INSERT INTO `ibis` VALUES ('10', 'ficha-curso-html-y-css.pdf', 'pdf', '15', '1');
-INSERT INTO `ibis` VALUES ('11', 'ficha-curso-html-y-css.pdf', 'pdf', '16', '1');
-INSERT INTO `ibis` VALUES ('12', 'ficha-curso-html-y-css.pdf', 'pdf', '17', '1');
-INSERT INTO `ibis` VALUES ('13', 'ficha-curso-html-y-css.pdf', 'pdf', '18', '1');
-INSERT INTO `ibis` VALUES ('14', 'ficha-curso-html-y-css.pdf', 'pdf', '19', '1');
-INSERT INTO `ibis` VALUES ('15', 'ficha-curso-html-y-css.pdf', 'pdf', '20', '1');
-INSERT INTO `ibis` VALUES ('16', 'ficha-curso-html-y-css.pdf', 'pdf', '21', '1');
-INSERT INTO `ibis` VALUES ('17', 'solicitud_cambio.pdf', 'pdf', '23', '1');
 INSERT INTO `ibis` VALUES ('18', 'solicitud_cambio.pdf', 'pdf', '26', '1');
+INSERT INTO `ibis` VALUES ('19', 'solicitud_cambio.pdf', 'pdf', '27', '1');
+INSERT INTO `ibis` VALUES ('20', 'solicitud_cambio.pdf', 'pdf', '28', '1');
+INSERT INTO `ibis` VALUES ('26', 'solicitud_cambio.pdf', 'pdf', '29', '1');
+INSERT INTO `ibis` VALUES ('27', 'solicitud_cambio.pdf', 'pdf', '30', '1');
+INSERT INTO `ibis` VALUES ('28', 'solicitud_cambio.pdf', 'pdf', '31', '1');
+INSERT INTO `ibis` VALUES ('29', 'solicitud_cambio.pdf', 'pdf', '38', '1');
+INSERT INTO `ibis` VALUES ('30', 'solicitud_cambio.pdf', 'pdf', '39', '1');
+INSERT INTO `ibis` VALUES ('31', 'DS-160_Example.pdf', 'pdf', '42', '1');
+INSERT INTO `ibis` VALUES ('32', 'DS-160_Example.pdf', 'pdf', '43', '1');
+INSERT INTO `ibis` VALUES ('33', 'DS-160_Example.pdf', 'pdf', '44', '1');
+INSERT INTO `ibis` VALUES ('34', 'solicitud_cambio.pdf', 'pdf', '45', '1');
 
 -- ----------------------------
 -- Table structure for `owners`
@@ -200,22 +491,14 @@ CREATE TABLE `owners` (
   `active` tinyint(4) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of owners
 -- ----------------------------
 INSERT INTO `owners` VALUES ('1', 'Luis Merino', '37562472J', '689357412', null, 'luismerino@msn.com', 'Ingresando a la medida de los cambios territoriales', null, null, null, '1', '2017-12-11 23:03:25');
-INSERT INTO `owners` VALUES ('2', 'Carlos Torres', '37562472J', '69325154', null, 'carlos@google.com', 'hvjvj bhb bhb hbjh bhb bjbhj bjhb bhjbh hb', null, null, null, '1', '2017-12-12 00:21:55');
-INSERT INTO `owners` VALUES ('3', 'Pedro Sanchez', '37562472J', '222222222', null, 'pedro@msn.com', 'mkmkkm', null, null, null, '1', '2017-12-12 00:28:06');
-INSERT INTO `owners` VALUES ('4', 'Euler Núñez', null, '3333334555', null, 'euler@msn.com', 'cuarto ingreso', null, null, null, '1', '2017-12-12 00:29:52');
-INSERT INTO `owners` VALUES ('5', 'Test', null, '111111111', null, 'test@msn.com', 'nueve', null, null, null, '1', '2017-12-14 21:56:39');
-INSERT INTO `owners` VALUES ('6', 'Victor Urbano', null, '789456123', null, 'victorurbano@msn.com', 'diecccion ', null, null, null, '1', '2017-12-15 00:02:11');
-INSERT INTO `owners` VALUES ('7', 'Felix Guerrero', 'DNI: Y0204715Y', '678974291', '936852147', 'eulernunez@hotmail.com', 'c/ Ausias March, 121 ENT 1\r\n08013\r\nBarcelona\r\nEspaña', null, null, null, '1', '2018-01-21 00:12:15');
-INSERT INTO `owners` VALUES ('8', 'Felix Guerrero', 'DNI: Y0204715Y', '678974291', '936582147', 'eulernunez@hotmail.com', 'c/ Ausias March, 121 ENT 1\r\n08013\r\nBarcelona\r\nEspaña\r\n', null, null, null, '1', '2018-01-21 00:15:08');
-INSERT INTO `owners` VALUES ('10', 'Luis Torres', 'Y0204715Y', '678974291', '936852147', 'fincasrmeza@gmail.com', 'c/ Ausias Marc 211\r\n08013', null, null, null, '1', '2018-01-21 01:02:30');
-INSERT INTO `owners` VALUES ('11', 'Euler Núñez Neuer', 'Y0204715Y', '936582471', '678974291', 'eulernunez@hotmail.com', 'c/ Ausias March, 121', '08013', 'Barcelona', '206', '1', '2018-01-21 22:20:32');
-INSERT INTO `owners` VALUES ('12', 'ramon', '37562472J', '933080443', '685172932', 'rtorres18@ono.com', 'concilio de trento 77 1°4°', '08018', 'barcelona ', '206', '1', '2018-01-29 02:24:49');
+INSERT INTO `owners` VALUES ('2', 'Carlos Torres', '37562472J', '69325154', null, 'carlos@google.com', 'Ingresando a la medida de los cambios territoriales', null, null, null, '1', '2017-12-12 00:21:55');
+INSERT INTO `owners` VALUES ('3', 'Pedro Sanchez', '37562472J', '222222222', null, 'pedro@msn.com', 'Ingresando a la medida de los cambios territoriales', null, null, null, '1', '2017-12-12 00:28:06');
 
 -- ----------------------------
 -- Table structure for `persons`
@@ -243,146 +526,65 @@ CREATE TABLE `pics` (
   `ad_id` int(11) DEFAULT NULL,
   `state` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=288 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pics
 -- ----------------------------
-INSERT INTO `pics` VALUES ('1', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-canape-barcelona.jpg', 'jpg', '1', '3', '1');
-INSERT INTO `pics` VALUES ('2', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-habitacion-simple-barcelona.jpg', 'jpg', '2', '3', '1');
-INSERT INTO `pics` VALUES ('3', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-piscina-interior-barcelona.jpg', 'jpg', '2', '3', '1');
-INSERT INTO `pics` VALUES ('4', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-comedor-2-barcelona.jpg', 'jpg', '2', '3', '1');
-INSERT INTO `pics` VALUES ('5', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-para-eventos-barcelona.jpg', 'jpg', '2', '3', '1');
-INSERT INTO `pics` VALUES ('6', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-paraiso-barcelona.jpg', 'jpg', '2', '3', '1');
-INSERT INTO `pics` VALUES ('7', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-sanwich-de-esparragos-barcelona.jpg', 'jpg', '2', '3', '1');
-INSERT INTO `pics` VALUES ('8', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-bar-salon-barcelona.jpg', 'jpg', '2', '3', '1');
-INSERT INTO `pics` VALUES ('9', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-canape-barcelona.jpg', 'jpg', '2', '3', '1');
-INSERT INTO `pics` VALUES ('10', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-comedor-eventos-barcelona.jpg', 'jpg', '1', '4', '1');
-INSERT INTO `pics` VALUES ('11', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-pan-crujiente-barcelona.jpg', 'jpg', '2', '4', '1');
-INSERT INTO `pics` VALUES ('12', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-pollo-parrilla-barcelona.jpg', 'jpg', '2', '4', '1');
-INSERT INTO `pics` VALUES ('13', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-room-2-barcelona.jpg', 'jpg', '2', '4', '1');
-INSERT INTO `pics` VALUES ('14', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-salon-eventos-barcelona.jpg', 'jpg', '2', '4', '1');
-INSERT INTO `pics` VALUES ('15', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-suite1-barcelona.jpg', 'jpg', '2', '4', '1');
-INSERT INTO `pics` VALUES ('16', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-suite-ramblas-2-barcelona.jpg', 'jpg', '2', '4', '1');
-INSERT INTO `pics` VALUES ('17', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-suite-ramblas.jpg', 'jpg', '2', '4', '1');
-INSERT INTO `pics` VALUES ('18', 'hotel-barato-barcelona-alojamiento-economico-hotel-españa-4-estrellas-salon-nupcial-barcelones.jpg', 'jpg', '2', '4', '1');
-INSERT INTO `pics` VALUES ('19', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-suite1-barcelona.jpg', 'jpg', '1', '5', '1');
-INSERT INTO `pics` VALUES ('20', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-catering-barcelona.jpg', 'jpg', '2', '5', '1');
-INSERT INTO `pics` VALUES ('21', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-catering-singular-barcelona.jpg', 'jpg', '2', '5', '1');
-INSERT INTO `pics` VALUES ('22', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-comedor-imperial-barcelona.jpg', 'jpg', '2', '5', '1');
-INSERT INTO `pics` VALUES ('23', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-habitacion-simple-barcelona.jpg', 'jpg', '2', '5', '1');
-INSERT INTO `pics` VALUES ('24', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-piscina-interior-barcelona.jpg', 'jpg', '2', '5', '1');
-INSERT INTO `pics` VALUES ('25', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-comedor-2-barcelona.jpg', 'jpg', '2', '5', '1');
-INSERT INTO `pics` VALUES ('26', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-para-eventos-barcelona.jpg', 'jpg', '2', '5', '1');
-INSERT INTO `pics` VALUES ('27', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-paraiso-barcelona.jpg', 'jpg', '2', '5', '1');
-INSERT INTO `pics` VALUES ('28', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-bocaditos-de-almendra-queso-barcelonaza.jpg', 'jpg', '1', '6', '1');
-INSERT INTO `pics` VALUES ('29', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-catering-barcelona.jpg', 'jpg', '2', '6', '1');
-INSERT INTO `pics` VALUES ('30', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-catering-singular-barcelona.jpg', 'jpg', '2', '6', '1');
-INSERT INTO `pics` VALUES ('31', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-comedor-imperial-barcelona.jpg', 'jpg', '2', '6', '1');
-INSERT INTO `pics` VALUES ('32', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-habitacion-simple-barcelona.jpg', 'jpg', '2', '6', '1');
-INSERT INTO `pics` VALUES ('33', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-piscina-interior-barcelona.jpg', 'jpg', '2', '6', '1');
-INSERT INTO `pics` VALUES ('34', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-comedor-2-barcelona.jpg', 'jpg', '2', '6', '1');
-INSERT INTO `pics` VALUES ('35', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-para-eventos-barcelona.jpg', 'jpg', '2', '6', '1');
-INSERT INTO `pics` VALUES ('36', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-paraiso-barcelona.jpg', 'jpg', '2', '6', '1');
-INSERT INTO `pics` VALUES ('37', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-suitte-nupcial-barcelona.jpg', 'jpg', '1', '7', '1');
-INSERT INTO `pics` VALUES ('38', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-cafeteria-barcelona.jpg', 'jpg', '2', '7', '1');
-INSERT INTO `pics` VALUES ('39', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-comedor-barcelona.jpg', 'jpg', '2', '7', '1');
-INSERT INTO `pics` VALUES ('40', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-eventos-barcelona.jpg', 'jpg', '2', '7', '1');
-INSERT INTO `pics` VALUES ('41', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-fachada-hotel-barcelona.jpg', 'jpg', '2', '7', '1');
-INSERT INTO `pics` VALUES ('42', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-1-barcelona.jpg', 'jpg', '2', '7', '1');
-INSERT INTO `pics` VALUES ('43', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-bodal-barcelona.jpg', 'jpg', '2', '7', '1');
-INSERT INTO `pics` VALUES ('44', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-doble-barcelona.jpg', 'jpg', '2', '7', '1');
-INSERT INTO `pics` VALUES ('45', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-feliz-barcelona.jpg', 'jpg', '2', '7', '1');
-INSERT INTO `pics` VALUES ('46', 'hotel-barato-barcelona-hotel-cid-sitges-habitacion-doble.jpg', 'jpg', '1', '8', '1');
-INSERT INTO `pics` VALUES ('47', 'hotel-barato-barcelona-hotel-cid-sitges-1-estrella-aperitivos-buffet.jpg', 'jpg', '2', '8', '1');
-INSERT INTO `pics` VALUES ('48', 'hotel-barato-barcelona-hotel-cid-sitges-1-estrella-entrada-salon-interior.jpg', 'jpg', '2', '8', '1');
-INSERT INTO `pics` VALUES ('49', 'hotel-barato-barcelona-hotel-cid-sitges-1-estrella-habitacion.jpg', 'jpg', '2', '8', '1');
-INSERT INTO `pics` VALUES ('50', 'hotel-barato-barcelona-hotel-cid-sitges-1-estrella-habitacion-condesa.jpg', 'jpg', '2', '8', '1');
-INSERT INTO `pics` VALUES ('51', 'hotel-barato-barcelona-hotel-cid-sitges-1-estrella-habitacion-imperio.jpg', 'jpg', '2', '8', '1');
-INSERT INTO `pics` VALUES ('52', 'hotel-barato-barcelona-hotel-cid-sitges-1-estrella-habitacion-individual.jpg', 'jpg', '2', '8', '1');
-INSERT INTO `pics` VALUES ('53', 'hotel-barato-barcelona-hotel-cid-sitges-1-estrella-habitacion-nupcial.jpg', 'jpg', '2', '8', '1');
-INSERT INTO `pics` VALUES ('54', 'hotel-barato-barcelona-hotel-cid-sitges-1-estrella-habitacion-vista-exterior.jpg', 'jpg', '2', '8', '1');
-INSERT INTO `pics` VALUES ('55', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-terraza-hotel-barcelona.jpg', 'jpg', '1', '9', '1');
-INSERT INTO `pics` VALUES ('56', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-habitacion-anastasia-barcelona.jpg', 'jpg', '2', '9', '1');
-INSERT INTO `pics` VALUES ('57', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-habitacion-doble-barcelona.jpg', 'jpg', '2', '9', '1');
-INSERT INTO `pics` VALUES ('58', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-habitacion-individual-barcelona.jpg', 'jpg', '2', '9', '1');
-INSERT INTO `pics` VALUES ('59', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-habitacion-matrimonio.jpg', 'jpg', '2', '9', '1');
-INSERT INTO `pics` VALUES ('60', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-habitacion-nupcial-barcelona.jpg', 'jpg', '2', '9', '1');
-INSERT INTO `pics` VALUES ('61', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-habitacion-turquesa-barcelona.jpg', 'jpg', '2', '9', '1');
-INSERT INTO `pics` VALUES ('62', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-pasillo-interior-barcelona.jpg', 'jpg', '2', '9', '1');
-INSERT INTO `pics` VALUES ('63', 'hotel-barato-barcelona-alojamiento-economico-hotel-passeig-gracia-recepcion.jpg', 'jpg', '2', '9', '1');
-INSERT INTO `pics` VALUES ('64', 'hotel-barato-barcelona-condal-2-estrellasl-la-boqueria-nueva.jpg', 'jpg', '1', '12', '1');
-INSERT INTO `pics` VALUES ('65', 'hotel-barato-barcelona-condal-macba.jpg', 'jpg', '2', '12', '1');
-INSERT INTO `pics` VALUES ('66', 'hotel-barato-barcelona-condal-outdoor-terrace.jpg', 'jpg', '2', '12', '1');
-INSERT INTO `pics` VALUES ('67', 'hotel-barato-barcelona-condal-plaza-rea2l.jpg', 'jpg', '2', '12', '1');
-INSERT INTO `pics` VALUES ('68', 'hotel-barato-barcelona-condal-plaza-real.jpg', 'jpg', '2', '12', '1');
-INSERT INTO `pics` VALUES ('69', 'hotel-barato-barcelona-condal-reception.jpg', 'jpg', '2', '12', '1');
-INSERT INTO `pics` VALUES ('70', 'hotel-barato-barcelona-condal-room-single.jpg', 'jpg', '2', '12', '1');
-INSERT INTO `pics` VALUES ('71', 'hotel-barato-barcelona-condal-teatro-liceu-nueva2.jpg', 'jpg', '2', '12', '1');
-INSERT INTO `pics` VALUES ('72', 'hotel-barato-barcelona-condal-teatro-liceu-nueva.jpg', 'jpg', '2', '12', '1');
-INSERT INTO `pics` VALUES ('73', 'hotel-barato-barcelona-condal-2-estrellas-teatro-liceu.jpg', 'jpg', '1', '13', '1');
-INSERT INTO `pics` VALUES ('74', 'hotel-barato-barcelona-condal-2-estrellas-fachada.jpg', 'jpg', '2', '13', '1');
-INSERT INTO `pics` VALUES ('75', 'hotel-barato-barcelona-condal-2-estrellasl-la-boqueria-nueva.jpg', 'jpg', '2', '13', '1');
-INSERT INTO `pics` VALUES ('76', 'hotel-barato-barcelona-condal-2-estrellas-outdoor-terrace2.jpg', 'jpg', '2', '13', '1');
-INSERT INTO `pics` VALUES ('77', 'hotel-barato-barcelona-condal-2-estrellas-outdoor-terrace.jpg', 'jpg', '2', '13', '1');
-INSERT INTO `pics` VALUES ('78', 'hotel-barato-barcelona-condal-2-estrellas-outdor-terrace.jpg', 'jpg', '2', '13', '1');
-INSERT INTO `pics` VALUES ('79', 'hotel-barato-barcelona-condal-2-estrellas-ramblas-nueva1.jpg', 'jpg', '2', '13', '1');
-INSERT INTO `pics` VALUES ('80', 'hotel-barato-barcelona-condal-2-estrellas-ramblas-nueva-2.jpg', 'jpg', '2', '13', '1');
-INSERT INTO `pics` VALUES ('81', 'hotel-barato-barcelona-condal-2-estrellas-ramblas-nueva.jpg', 'jpg', '2', '13', '1');
-INSERT INTO `pics` VALUES ('82', 'hotel-barato-barcelona-condal-2-estrellas-ramblas-nueva-2.jpg', 'jpg', '1', '14', '1');
-INSERT INTO `pics` VALUES ('83', 'hotel-barato-barcelona-condal-2-estrellas-room-triple.jpg', 'jpg', '2', '14', '1');
-INSERT INTO `pics` VALUES ('84', 'hotel-barato-barcelona-condal-2-estrellas-room-twin.jpg', 'jpg', '2', '14', '1');
-INSERT INTO `pics` VALUES ('85', 'hotel-barato-barcelona-condal-2-estrellas-teatro-liceu.jpg', 'jpg', '2', '14', '1');
-INSERT INTO `pics` VALUES ('86', 'hotel-barato-barcelona-condal-2-estrellas-teatro-liceu-nuevo.jpg', 'jpg', '2', '14', '1');
-INSERT INTO `pics` VALUES ('87', 'hotel-barato-barcelona-condal- room-double.jpg', 'jpg', '2', '14', '1');
-INSERT INTO `pics` VALUES ('88', 'hotel-barato-barcelona-condal-bcn-las-ramblas.jpg', 'jpg', '2', '14', '1');
-INSERT INTO `pics` VALUES ('89', 'hotel-barato-barcelona-condal-breakfast2.jpg', 'jpg', '2', '14', '1');
-INSERT INTO `pics` VALUES ('90', 'hotel-barato-barcelona-condal-breakfast.jpg', 'jpg', '2', '14', '1');
-INSERT INTO `pics` VALUES ('91', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-nupcial-barcelona.jpg', 'jpg', '1', '20', '1');
-INSERT INTO `pics` VALUES ('92', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-habitacion-doble-barcelona.jpg', 'jpg', '2', '20', '1');
-INSERT INTO `pics` VALUES ('93', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-habitacion-feliz-barcelona.jpg', 'jpg', '2', '20', '1');
-INSERT INTO `pics` VALUES ('94', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-relax-barcelona.jpg', 'jpg', '2', '20', '1');
-INSERT INTO `pics` VALUES ('95', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-restaurant-barcelona.jpg', 'jpg', '2', '20', '1');
-INSERT INTO `pics` VALUES ('96', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-salon-barcelona.jpg', 'jpg', '2', '20', '1');
-INSERT INTO `pics` VALUES ('97', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-suitte-nupcial-barcelona.jpg', 'jpg', '2', '20', '1');
-INSERT INTO `pics` VALUES ('98', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-terraza-2-barcelona.jpg', 'jpg', '2', '20', '1');
-INSERT INTO `pics` VALUES ('99', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-terraza-noche-barcelona.jpg', 'jpg', '2', '20', '1');
-INSERT INTO `pics` VALUES ('100', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-relax-barcelona.jpg', 'jpg', '1', '21', '1');
-INSERT INTO `pics` VALUES ('101', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-habitacion-doble-barcelona.jpg', 'jpg', '2', '21', '1');
-INSERT INTO `pics` VALUES ('102', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-habitacion-feliz-barcelona.jpg', 'jpg', '2', '21', '1');
-INSERT INTO `pics` VALUES ('103', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-relax-barcelona.jpg', 'jpg', '2', '21', '1');
-INSERT INTO `pics` VALUES ('104', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-restaurant-barcelona.jpg', 'jpg', '2', '21', '1');
-INSERT INTO `pics` VALUES ('105', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-salon-barcelona.jpg', 'jpg', '2', '21', '1');
-INSERT INTO `pics` VALUES ('106', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-suitte-nupcial-barcelona.jpg', 'jpg', '2', '21', '1');
-INSERT INTO `pics` VALUES ('107', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-terraza-2-barcelona.jpg', 'jpg', '2', '21', '1');
-INSERT INTO `pics` VALUES ('108', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-terraza-noche-barcelona.jpg', 'jpg', '2', '21', '1');
-INSERT INTO `pics` VALUES ('109', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-relax-barcelona.jpg', 'jpg', '1', '22', '1');
-INSERT INTO `pics` VALUES ('110', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-salon-barcelona.jpg', 'jpg', '2', '22', '1');
-INSERT INTO `pics` VALUES ('111', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-bodal-barcelona.jpg', 'jpg', '2', '22', '1');
-INSERT INTO `pics` VALUES ('112', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-doble-barcelona.jpg', 'jpg', '2', '22', '1');
-INSERT INTO `pics` VALUES ('113', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-feliz-barcelona.jpg', 'jpg', '2', '22', '1');
-INSERT INTO `pics` VALUES ('114', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-habitacion-nupcial-barcelona.jpg', 'jpg', '2', '22', '1');
-INSERT INTO `pics` VALUES ('115', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-relax-barcelona.jpg', 'jpg', '2', '22', '1');
-INSERT INTO `pics` VALUES ('116', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-restaurant-1-barcelona.jpg', 'jpg', '2', '22', '1');
-INSERT INTO `pics` VALUES ('117', 'hotel-barato-barcelona-alojamiento-economico-hotel-condes-barcelona-4-estrellas-restaurant-barcelona.jpg', 'jpg', '2', '22', '1');
-INSERT INTO `pics` VALUES ('118', 'hotel-barato-barcelona-alojamiento economico-hotel-espana-4-estrellas-aperiitivos-variados-barcelona.jpg', 'jpg', '1', '23', '1');
-INSERT INTO `pics` VALUES ('119', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-habitacion-simple-barcelona.jpg', 'jpg', '2', '23', '1');
-INSERT INTO `pics` VALUES ('120', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-piscina-interior-barcelona.jpg', 'jpg', '2', '23', '1');
-INSERT INTO `pics` VALUES ('121', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-comedor-2-barcelona.jpg', 'jpg', '2', '23', '1');
-INSERT INTO `pics` VALUES ('122', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-para-eventos-barcelona.jpg', 'jpg', '2', '23', '1');
-INSERT INTO `pics` VALUES ('123', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-salon-paraiso-barcelona.jpg', 'jpg', '2', '23', '1');
-INSERT INTO `pics` VALUES ('124', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-4-estrellas-sanwich-de-esparragos-barcelona.jpg', 'jpg', '2', '23', '1');
-INSERT INTO `pics` VALUES ('125', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-bar-salon-barcelona.jpg', 'jpg', '2', '23', '1');
-INSERT INTO `pics` VALUES ('126', 'hotel-barato-barcelona-alojamiento-economico-hotel-espana-canape-barcelona.jpg', 'jpg', '2', '23', '1');
-INSERT INTO `pics` VALUES ('127', '9 -715 x450 -249973844_2.jpg', 'jpg', '1', '26', '1');
-INSERT INTO `pics` VALUES ('128', '1 750 X 400--246371532_3.jpg', 'jpg', '2', '26', '1');
-INSERT INTO `pics` VALUES ('129', '2-750 X 400-246371532_7.jpg', 'jpg', '2', '26', '1');
-INSERT INTO `pics` VALUES ('130', '3- 750 X 400-246371532_8.jpg', 'jpg', '2', '26', '1');
-INSERT INTO `pics` VALUES ('131', '4- 750 X 400-246371532_9.jpg', 'jpg', '2', '26', '1');
-INSERT INTO `pics` VALUES ('132', '5- 750 X 400-249973844_2.jpg', 'jpg', '2', '26', '1');
-INSERT INTO `pics` VALUES ('133', '6- 750 X 400-249973844_3.jpg', 'jpg', '2', '26', '1');
-INSERT INTO `pics` VALUES ('134', '7 750 X 400-249973844_8.jpg', 'jpg', '2', '26', '1');
-INSERT INTO `pics` VALUES ('135', '8 750 x 400-- FUENCARRAL - 244228085_6.jpg', 'jpg', '2', '26', '1');
+INSERT INTO `pics` VALUES ('246', '9-apartamento-con-office-en-valencia-centro.jpg', 'jpg', '1', '42', '1');
+INSERT INTO `pics` VALUES ('247', '1-apartamento-con-office-en-valencia-centro.jpg', 'jpg', '2', '42', '1');
+INSERT INTO `pics` VALUES ('248', '2-campanario-de-la-ciudad-de-valencia.jpg', 'jpg', '2', '42', '1');
+INSERT INTO `pics` VALUES ('249', '3-piscina-en-apartamento-rural-poblacion-alicante .jpg', 'jpg', '2', '42', '1');
+INSERT INTO `pics` VALUES ('250', '4-castillo-de-guadalete-provincia-de-valencia.jpg', 'jpg', '2', '42', '1');
+INSERT INTO `pics` VALUES ('251', '5-ciudad-de-sagunto-provincia-de-valencia.jpg', 'jpg', '2', '42', '1');
+INSERT INTO `pics` VALUES ('252', '6-parque-natural-de-la-albufera-valencia.jpg', 'jpg', '2', '42', '1');
+INSERT INTO `pics` VALUES ('253', '7-playa-de-terranova-valencia .jpg', 'jpg', '2', '42', '1');
+INSERT INTO `pics` VALUES ('254', '8-vista-panoramica-de-la-ciudad-de-valencia.jpg', 'jpg', '2', '42', '1');
+INSERT INTO `pics` VALUES ('255', '9-apartamento-con-office-en-valencia-centro.jpg', 'jpg', '1', '43', '1');
+INSERT INTO `pics` VALUES ('256', '1-apartamento-con-office-en-valencia-centro.jpg', 'jpg', '2', '43', '1');
+INSERT INTO `pics` VALUES ('257', '2-campanario-de-la-ciudad-de-valencia.jpg', 'jpg', '2', '43', '1');
+INSERT INTO `pics` VALUES ('258', '3-piscina-en-apartamento-rural-poblacion-alicante .jpg', 'jpg', '2', '43', '1');
+INSERT INTO `pics` VALUES ('259', '4-castillo-de-guadalete-provincia-de-valencia.jpg', 'jpg', '2', '43', '1');
+INSERT INTO `pics` VALUES ('260', '5-ciudad-de-sagunto-provincia-de-valencia.jpg', 'jpg', '2', '43', '1');
+INSERT INTO `pics` VALUES ('261', '6-parque-natural-de-la-albufera-valencia.jpg', 'jpg', '2', '43', '1');
+INSERT INTO `pics` VALUES ('262', '7-playa-de-terranova-valencia .jpg', 'jpg', '2', '43', '1');
+INSERT INTO `pics` VALUES ('263', '8-vista-panoramica-de-la-ciudad-de-valencia.jpg', 'jpg', '2', '43', '1');
+INSERT INTO `pics` VALUES ('264', '9-espigon-de-la-playa-de-torremolinos-malaga.jpg', 'jpg', '1', '44', '1');
+INSERT INTO `pics` VALUES ('265', '1-paella-de-marisco-su-origen-es-de-los-marineros-que-salian-a-pescar.jpg', 'jpg', '2', '44', '1');
+INSERT INTO `pics` VALUES ('266', '2-calle-del-pueblo-de-nerja-en-malaga.jpg', 'jpg', '2', '44', '1');
+INSERT INTO `pics` VALUES ('269', '5-espada-de-sardinas-asadas-con-omega-3-plato-tipico-marinero.jpg', 'jpg', '2', '44', '1');
+INSERT INTO `pics` VALUES ('270', '6-ensalada-de-verano-plato-tipico-de-la-costa-mediterranea.jpg', 'jpg', '2', '44', '1');
+INSERT INTO `pics` VALUES ('271', '7-jamon-de-bellota-pata-negra-tiene-un-sabor-exquisito-al-paladar.jpg', 'jpg', '2', '44', '1');
+INSERT INTO `pics` VALUES ('272', '8-espigon-en-la-playa-de-torremolinos-malaga.jpg', 'jpg', '2', '44', '1');
+INSERT INTO `pics` VALUES ('273', '3-camino-de-ronda-por-la-montana-malaga.jpg', 'jpg', '2', '44', '1');
+INSERT INTO `pics` VALUES ('274', '4-puente-de-ronda-entre-montanas-malaga.jpg', 'jpg', '2', '44', '1');
+INSERT INTO `pics` VALUES ('276', 'galeria1.jpg', 'jpg', '2', '45', '1');
+INSERT INTO `pics` VALUES ('277', 'galeria2.jpg', 'jpg', '2', '45', '1');
+INSERT INTO `pics` VALUES ('278', 'galeria3.jpg', 'jpg', '2', '45', '1');
+INSERT INTO `pics` VALUES ('279', 'galeria4.jpg', 'jpg', '2', '45', '1');
+INSERT INTO `pics` VALUES ('280', 'galeria5.jpg', 'jpg', '2', '45', '1');
+INSERT INTO `pics` VALUES ('281', 'galeria6.jpg', 'jpg', '2', '45', '1');
+INSERT INTO `pics` VALUES ('282', 'galeria7.jpg', 'jpg', '2', '45', '1');
+INSERT INTO `pics` VALUES ('283', 'galeria8.jpg', 'jpg', '2', '45', '1');
+INSERT INTO `pics` VALUES ('287', 'sala-comedor.jpg', 'jpg', '1', '45', '1');
+
+-- ----------------------------
+-- Table structure for `places`
+-- ----------------------------
+DROP TABLE IF EXISTS `places`;
+CREATE TABLE `places` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `place` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of places
+-- ----------------------------
+INSERT INTO `places` VALUES ('1', 'Andalucía');
+INSERT INTO `places` VALUES ('2', 'Málaga');
+INSERT INTO `places` VALUES ('3', 'Sevilla');
+INSERT INTO `places` VALUES ('4', 'Granada');
 
 -- ----------------------------
 -- Table structure for `publications`
@@ -393,6 +595,7 @@ CREATE TABLE `publications` (
   `category_id` int(11) DEFAULT NULL,
   `title_publication` varchar(250) DEFAULT NULL,
   `contenido_publication` text,
+  `blockquote` varchar(250) DEFAULT NULL,
   `contenido_publication_2` text,
   `tag_vacaciones` tinyint(4) DEFAULT NULL,
   `tag_playas` tinyint(4) DEFAULT NULL,
@@ -401,18 +604,100 @@ CREATE TABLE `publications` (
   `created_date` datetime DEFAULT NULL,
   `active` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of publications
 -- ----------------------------
-INSERT INTO `publications` VALUES ('1', '3', 'Alquiler de habitación en calle de Viladomat, 210', 'El piso tiene parquet está totalmente equipado de dos baños, la cocina es muy agradable tiene vitrocerámica, microondas, un gran frigorífico, lavadora etc. Tiene un gran comedor con chimenea, balcón, Wi-fi, teléfono (llamadas nacionales gratis), calefacción, … Piso muy limpio.\r\nsólo una cosa, este es un piso tranquilo, así que buscamos a gente agradable y motivada, que trabaje. si estás interesado/a, mándame un mensaje y acordamos una visita para ver el piso o preguntar cualquier duda.', 'Se alquila para una chica UN STUDIO UNA ZONA PRIVADA con una habitación doble y otra individual con ventanas y SU PROPIO BAÑO con ducha.\r\nDisponible a partir del 1 de abril de 2018.\r\nEs ideal para un trabajador que busque vivir cómodamente en el centro de la ciudad. Esta muy bien comunicado cerca del metro L5 hospital clinic, de la stación Sants y de Francesc Macia', '0', '1', '0', '1', '2018-03-17 00:46:46', '1');
-INSERT INTO `publications` VALUES ('2', '4', 'Alquiler de habitación en calle de Viladomat, 210', 'Se alquila para una chica UN STUDIO UNA ZONA PRIVADA con una habitación doble y otra individual con ventanas y SU PROPIO BAÑO con ducha.\r\nDisponible a partir del 1 de abril de 2018.\r\nEs ideal para un trabajador que busque vivir cómodamente en el centro de la ciudad. Esta muy bien comunicado cerca del metro L5 hospital clinic, de la stación Sants y de Francesc Macia', 'El piso tiene parquet está totalmente equipado de dos baños, la cocina es muy agradable tiene vitrocerámica, microondas, un gran frigorífico, lavadora etc. Tiene un gran comedor con chimenea, balcón, Wi-fi, teléfono (llamadas nacionales gratis), calefacción, … Piso muy limpio.\r\nsólo una cosa, este es un piso tranquilo, así que buscamos a gente agradable y motivada, que trabaje. si estás interesado/a, mándame un mensaje y acordamos una visita para ver el piso o preguntar cualquier duda.', '1', '1', '1', '1', '2018-03-17 00:47:58', '1');
-INSERT INTO `publications` VALUES ('3', '1', 'Alquiler de habitación en calle de Viladomat, 210', 'El piso tiene parquet está totalmente equipado de dos baños, la cocina es muy agradable tiene vitrocerámica, microondas, un gran frigorífico, lavadora etc. Tiene un gran comedor con chimenea, balcón, Wi-fi, teléfono (llamadas nacionales gratis), calefacción, … Piso muy limpio.\r\nsólo una cosa, este es un piso tranquilo, así que buscamos a gente agradable y motivada, que trabaje. si estás interesado/a, mándame un mensaje y acordamos una visita para ver el piso o preguntar cualquier duda.', 'Se alquila para una chica UN STUDIO UNA ZONA PRIVADA con una habitación doble y otra individual con ventanas y SU PROPIO BAÑO con ducha.\r\nDisponible a partir del 1 de abril de 2018.\r\nEs ideal para un trabajador que busque vivir cómodamente en el centro de la ciudad. Esta muy bien comunicado cerca del metro L5 hospital clinic, de la stación Sants y de Francesc Macia', '1', '1', '1', '1', '2018-03-17 00:50:47', '1');
-INSERT INTO `publications` VALUES ('4', '2', 'Alquiler de habitación en calle de Viladomat, 210', 'Se alquila para una chica UN STUDIO UNA ZONA PRIVADA con una habitación doble y otra individual con ventanas y SU PROPIO BAÑO con ducha.\r\nDisponible a partir del 1 de abril de 2018.\r\nEs ideal para un trabajador que busque vivir cómodamente en el centro de la ciudad. Esta muy bien comunicado cerca del metro L5 hospital clinic, de la stación Sants y de Francesc Macia', 'El piso tiene parquet está totalmente equipado de dos baños, la cocina es muy agradable tiene vitrocerámica, microondas, un gran frigorífico, lavadora etc. Tiene un gran comedor con chimenea, balcón, Wi-fi, teléfono (llamadas nacionales gratis), calefacción, … Piso muy limpio.\r\nsólo una cosa, este es un piso tranquilo, así que buscamos a gente agradable y motivada, que trabaje. si estás interesado/a, mándame un mensaje y acordamos una visita para ver el piso o preguntar cualquier duda.', '1', '0', '0', '1', '2018-03-17 00:54:10', '1');
-INSERT INTO `publications` VALUES ('5', '1', 'Alquiler de habitación en calle de Viladomat, 210', 'El piso tiene parquet está totalmente equipado de dos baños, la cocina es muy agradable tiene vitrocerámica, microondas, un gran frigorífico, lavadora etc. Tiene un gran comedor con chimenea, balcón, Wi-fi, teléfono (llamadas nacionales gratis), calefacción, … Piso muy limpio.\r\nsólo una cosa, este es un piso tranquilo, así que buscamos a gente agradable y motivada, que trabaje. si estás interesado/a, mándame un mensaje y acordamos una visita para ver el piso o preguntar cualquier duda.', 'isponible a partir del 1 de abril de 2018.\r\nEs ideal para un trabajador que busque vivir cómodamente en el centro de la ciudad. Esta muy bien comun', '1', '1', '1', '1', '2018-03-17 00:57:00', '1');
-INSERT INTO `publications` VALUES ('6', '1', 'Alquiler de habitación en calle de Viladomat, 210', 'isponible a partir del 1 de abril de 2018.\r\nEs ideal para un trabajador que busque vivir cómodamente en el centro de la ciudad. Esta muy bien comun', 'linic, de la stación Sants y de Francesc Macia.\r\nEl piso tiene parquet está totalmente equipado de dos baños, la cocina es muy agradable tiene vitrocerámica, microondas, un gran frigorífico, lavadora etc. Tiene un gran comedor con chimenea, balcón, Wi-fi, teléfono (llamadas nacionales gratis), calefacción, … Piso muy limpio.\r\nsólo una cosa, este es un piso tranquilo, así que buscamos a gente agradable y motivada, que trabaje. si estás interesado/a, mándame un mensaje y acorda', '1', '0', '0', '1', '2018-03-17 00:58:14', '1');
-INSERT INTO `publications` VALUES ('7', '3', 'Alquiler de habitación en calle de Viladomat, 210', 'linic, de la stación Sants y de Francesc Macia.\r\nEl piso tiene parquet está totalmente equipado de dos baños, la cocina es muy agradable tiene vitrocerámica, microondas, un gran frigorífico, lavadora etc. Tiene un gran comedor con chimenea, balcón, Wi-fi, teléfono (llamadas nacionales gratis), calefacción, … Piso muy limpio.\r\nsólo una cosa, este es un piso tranquilo, así que buscamos a gente agradable y motivada, que trabaje. si estás interesado/a, mándame un mensaje y acorda', 'Se alquila para una chica UN STUDIO UNA ZONA PRIVADA con una habitación doble y otra individual con ventanas y SU PROPIO BAÑO con ducha.\r\nDisponible a partir del 1 de abril de 2018.\r\nEs ideal para un trabajador que busque vivir cómodamente en el centro de la ciudad. Esta muy bien comunicado cerca del metro L5 hospital clinic, de la stación Sants y de Francesc Macia.\r\nEl piso tiene parquet está totalmente equipado de dos baños, la cocina es muy agradable tiene vitrocerámica, microondas, un gran frigorífico, lavadora etc. Tiene un gran comedor con chimenea', '1', '1', '1', '1', '2018-03-17 00:59:54', '1');
+INSERT INTO `publications` VALUES ('11', '4', 'PLAYA BAVARO', 'Esta es sin duda la más conocida playa de Punta Cana, ya que a lo largo de su costa se ubican los principales hoteles todo-incluido como el Barceló, el Vista Sol o el Palace. Su belleza es tan impresionante que fue declarada por la UNESCO como una de las mejores playas del mundo.\r\n\r\nSus arenas blancas y aguas tranquilas y cristalinas convierten a Playa Bávaro en una de las más paradisíacas playas de República Dominicana, por lo que casi siempre está llena de turistas, principalmente de los huéspedes de los hoteles cercanos.\r\n\r\nAl ser una playa tan turística y reconocida, cuenta además con todos los servicios tales como restaurantes, plazas comerciales y tiendas de regalos. Además, entre las múltiples actividades que hacer en Playa Bávaro Punta Cana se pueden realizar numerosas actividades para realizar, como buceo, snorkel, kayak alquiler de motos acuáticas y hasta paseos en catamarán.', 'Al ser una playa tan turística y reconocida, cuenta además con todos los servicios tales como restaurantes, plazas comerciales y tiendas de regalos. ', 'Si nos vamos más hacia el sur, muy cerca del Aeropuerto Internacional de Punta Cana, se encuentra Playa Blanca, una playa de arena blanca y aguas turquesas situada en los comienzos del sector más exclusivo de este destino turístico: Cap Cana. Cuenta con muchas palmeras, sus aguas son muy calmadas y es ideal para la práctica de Kitesurf y Windsurfing. \r\n\r\nPara mí es una playa espectacular si lo que buscas es relax, además de que es considerada una de las mejores playas en Punta Cana para niños por lo tranquilas y bajitas de sus aguas. Además, bastante cerca de la orilla se encuentra un arrecife de coral en el cual se puede realizar snorkel un buen rato.​\r\n\r\nEl único detalle a tener en cuenta es que Playa Blanca es una playa privada, dedicada más que todo a los huéspedes del hotel Punta Cana Resort & Club. Sin embargo, es posible acceder si desde la entrada del lugar se le indica al personal de seguridad que solamente se desea llegar a Playa Blanca y pasar el día allí.', null, '1', '1', null, '2018-03-18 21:45:34', '1');
+INSERT INTO `publications` VALUES ('12', '4', 'Mejores playas de Punta Cana y Bávaro', 'Si estás planificando un viaje a esta zona seguro que te estás preguntando cuáles son las mejores playas de Punta Cana o Bávaro, para visitarlas o simplemente alojarte cerca de ellas.\r\n\r\n\r\nAntes que nada tienes que saber lo siguiente:\r\nLlamamos Punta Cana a toda la región que incluye propiamente Bávaro y Punta Cana\r\nEn realidad, Punta Cana es la zona de costa al sur del aeropuerto internacional de Punta Cana.\r\nBávaro es la zona al norte del aeropuerto\r\n\r\n\r\nTe dejo este dibujo para que te aclares.', ' Al ser una playa tan turística y reconocida, cuenta además con todos los servicios tales como restaurantes, plazas comerciales y tiendas de regalos. ', 'Otra de las cosas que debes saber es que es un lugar en el que las grandes cadenas, resorts y zonas residenciales se han apropiado del 95% (por no decir más) de las playas y costa.\r\n\r\nPara que lo entiendas de otro modo, vas a pasar también el 95% de tu tiempo en la playa (o piscina)  del resort que hayas elegido. Por este motivo te aconsejo que escojas con cuidado tu alojamiento, mires bien las fotos de su playa y piscina, pues es lo que vas a disfrutar la mayoría del tiempo de tus ansiadas vacaciones, tampoco hay mucho que ver en Punta Cana.', '1', '1', '1', null, '2018-03-19 00:57:59', '1');
+INSERT INTO `publications` VALUES ('13', '4', 'Boca Chica es una pequeña ciudad', 'Boca Chica es una pequeña ciudad balnearia en República Dominicana, a 10 minutos en coche del areopuerto de Santo Domingo.\r\nNo es la típica playa de los famosos resorts de el caribe, es una playa con dominicanos, tursitas, chiringos, etc. Para mí fue una de las más bonitas que visité. Tiene aguas cristalinas, calmadas, poco profundas, y arena blanca y fina.', 'Aproximadamente a 400 metros a lo largo, se encuentra un arrecife que sobresale del agua y que tiene la forma de medio circulo gigante', 'Aunque si habían muchos niños con los que estuvimos jugando en el agua un buen rato. Comimos en un chiringo y luego compramos piña a un vendedor ambulante que pasaba con un carrito lleno de fruta, que por supuesto también nos ofreció ron', null, null, '1', '1', '2018-03-20 23:37:51', '1');
+
+-- ----------------------------
+-- Table structure for `publication_pics`
+-- ----------------------------
+DROP TABLE IF EXISTS `publication_pics`;
+CREATE TABLE `publication_pics` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_name` varchar(245) DEFAULT NULL,
+  `file_ext` varchar(5) DEFAULT NULL,
+  `publication_id` int(11) DEFAULT NULL,
+  `state` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of publication_pics
+-- ----------------------------
+INSERT INTO `publication_pics` VALUES ('136', 'blog-post1-panoramico.jpg', 'jpg', '11', '1');
+INSERT INTO `publication_pics` VALUES ('137', 'blog-post1-panoramico.jpg', 'jpg', '12', '1');
+INSERT INTO `publication_pics` VALUES ('138', 'vista-sol.jpg', 'jpg', '13', '1');
+
+-- ----------------------------
+-- Table structure for `sections`
+-- ----------------------------
+DROP TABLE IF EXISTS `sections`;
+CREATE TABLE `sections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `seccion` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sections
+-- ----------------------------
+INSERT INTO `sections` VALUES ('1', 'Alojamiento Hotel');
+INSERT INTO `sections` VALUES ('2', 'Turismo rural');
+INSERT INTO `sections` VALUES ('3', 'Apartamentos');
+INSERT INTO `sections` VALUES ('4', 'Alojamiento privado');
+INSERT INTO `sections` VALUES ('5', 'Alojamiento residencial');
+INSERT INTO `sections` VALUES ('6', 'Cruceros');
+INSERT INTO `sections` VALUES ('7', 'Vuelos');
+INSERT INTO `sections` VALUES ('8', 'Paquetes');
+INSERT INTO `sections` VALUES ('9', 'Playas');
+
+-- ----------------------------
+-- Table structure for `seo`
+-- ----------------------------
+DROP TABLE IF EXISTS `seo`;
+CREATE TABLE `seo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(150) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `keywords` varchar(255) DEFAULT NULL,
+  `author` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of seo
+-- ----------------------------
+INSERT INTO `seo` VALUES ('1', 'Hotel, Apartamento, Alojamiento, Barato, Vacaciones, Turismo, viajacon', 'A partir de 30 € día encuentra los mejores lugares para Vacaciones o turismo, alojamiento barato en, hotel, apartamento, privado, playa, ciudad, rural, viajacon.es', 'viajacon.es. a partir de 30 € día encuentra los mejores lugares para Vacaciones, turismo, alojamiento barato en, hotel, apartamento, playa, ciudad, turismo rural, alojamiento privado, residencial', 'Multiservicio 202 sl');
+
+-- ----------------------------
+-- Table structure for `settings`
+-- ----------------------------
+DROP TABLE IF EXISTS `settings`;
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comercial_id` int(11) DEFAULT NULL,
+  `section_id` int(11) DEFAULT NULL,
+  `place_id` int(11) DEFAULT NULL,
+  `active` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of settings
+-- ----------------------------
+INSERT INTO `settings` VALUES ('1', '1', '3', '0', '1');
+INSERT INTO `settings` VALUES ('2', '1', '7', '0', '0');
+INSERT INTO `settings` VALUES ('3', '1', '9', '0', '0');
+INSERT INTO `settings` VALUES ('4', '1', '4', '0', '0');
+INSERT INTO `settings` VALUES ('5', '1', '0', '1', '1');
+INSERT INTO `settings` VALUES ('6', '1', '0', '2', '1');
+INSERT INTO `settings` VALUES ('7', '1', '0', '3', '1');
+INSERT INTO `settings` VALUES ('8', '1', '0', '4', '1');
 
 -- ----------------------------
 -- Table structure for `usuario`

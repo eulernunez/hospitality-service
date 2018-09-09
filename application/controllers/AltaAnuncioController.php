@@ -111,6 +111,62 @@ class AltaAnuncioController extends BaseSiteController
 
     }
 
+    public function updateUploadPicAction()
+    {
+
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $adId = (int)$this->_getParam('id');
+       
+        
+        /* HARDCORE 57 */
+//      $userId = $this->system->getLoggedInUser()->getId();
+        $userId = 57;
+        $basicPathPic = $this->system->getConfig()->path->pics->anuncios;
+       
+        $this->setFolder($userId, $adId);
+        $targetFolderOriginal = $basicPathPic . '/' . $userId . '/' . $adId . '/home';
+
+        $verifyToken = md5('unique_salt' . $_POST['timestamp']);
+
+        if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
+
+            $tempFile = $_FILES['Filedata']['tmp_name'];
+            $nameArchivo = '/' . $_FILES['Filedata']['name'];
+            
+            $targetFileOriginal = rtrim($targetFolderOriginal,'/') . $nameArchivo;
+            $fileTypes = array('jpg','jpeg','gif','png'); 
+            $fileParts = pathinfo($_FILES['Filedata']['name']);
+            if (in_array(strtolower($fileParts['extension']),$fileTypes)) {
+                move_uploaded_file($tempFile,$targetFileOriginal);
+                
+                $formData['fileName'] = $_FILES['Filedata']['name'];
+                $formData['fileExt'] = $fileParts['extension'];
+                $formData['sectionId'] = '1';
+                $formData['adId'] = $adId;
+                $handler = new Application_Model_Repository_Statement();
+                $handler->delete($adId);
+                $handler->actualizarFileHome($adId);
+                
+                $modelo = new Application_Model_DbTable_Pic();
+                $modelo->agregar($formData);
+                
+                echo '1';
+                
+            } else {
+                echo 'Invalid file type.'; 
+            }
+
+        }
+
+        return true;
+
+    }
+    
+    
+    
+    
     
     public function setFolder($userId, $adId)
     {
@@ -171,11 +227,11 @@ class AltaAnuncioController extends BaseSiteController
 
         $userId = $this->system->getLoggedInUser()->getId();
         $basicPathPic = $this->system->getConfig()->path->pics->anuncios;
-        
+
         $session = new Zend_Session_Namespace('adId');
         $adId = $session->id;
         $this->setFolder($userId, $adId);
-        
+
         $targetFolderGallery = $basicPathPic . '/' . $userId . '/' . $adId . '/gallery';
         $targetFolderThumbnail = $basicPathPic . '/' . $userId . '/' . $adId . '/thumbnail';
         $verifyToken = md5('unique_salt' . $_POST['timestamp']);
@@ -184,7 +240,7 @@ class AltaAnuncioController extends BaseSiteController
 
             $tempFile = $_FILES['Filedata']['tmp_name'];
             $nameArchivo = '/' . $_FILES['Filedata']['name'];
-            
+
             $targetFileGallery = rtrim($targetFolderGallery,'/') . $nameArchivo;
             $fileTypes = array('jpg','jpeg','gif','png'); 
             $fileParts = pathinfo($_FILES['Filedata']['name']);
@@ -218,6 +274,78 @@ class AltaAnuncioController extends BaseSiteController
         
         
     }
+    
+
+    public function updateUploadGalleryPicsAction()
+    {
+
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $basicPathPic = $this->system->getConfig()->path->pics->anuncios;
+
+        $adId = (int)$this->_getParam('id');
+        $pic = (int)$this->_getParam('pic');
+        
+        
+        /* HARDCORE 57 */
+//      $userId = $this->system->getLoggedInUser()->getId();
+        $userId = 57;
+
+        
+        $this->setFolder($userId, $adId);
+
+        $targetFolderGallery = $basicPathPic . '/' . $userId . '/' . $adId . '/gallery';
+        $targetFolderThumbnail = $basicPathPic . '/' . $userId . '/' . $adId . '/thumbnail';
+        $verifyToken = md5('unique_salt' . $_POST['timestamp']);
+
+        if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
+
+            $tempFile = $_FILES['Filedata']['tmp_name'];
+            $nameArchivo = '/' . $_FILES['Filedata']['name'];
+
+            $targetFileGallery = rtrim($targetFolderGallery,'/') . $nameArchivo;
+            $fileTypes = array('jpg','jpeg','gif','png'); 
+            $fileParts = pathinfo($_FILES['Filedata']['name']);
+            if (in_array(strtolower($fileParts['extension']),$fileTypes)) {
+                move_uploaded_file($tempFile,$targetFileGallery);
+
+                $targetFileThumbnail = rtrim($targetFolderThumbnail,'/') . $nameArchivo;
+                $resizeThumbnail = new Application_Model_System_ImagenResize($targetFileGallery);
+                $resizeThumbnail->resizeImage(116, 80, 'crop');
+                $resizeThumbnail->saveImage($targetFileThumbnail, 100);
+
+                $formData['fileName'] = $_FILES['Filedata']['name'];
+                $formData['fileExt'] = $fileParts['extension'];
+                $formData['sectionId'] = '2';
+                $formData['adId'] = $adId;
+                
+                $handler = new Application_Model_Repository_Statement();
+                $handler->deleteGallery($pic);
+                
+                
+                $modelo = new Application_Model_DbTable_Pic();
+                $modelo->agregar($formData);
+
+                echo '1';
+
+            } else {
+
+                echo 'Invalid file type.'; 
+
+            }
+
+        }
+
+        return true;
+        
+        
+    }
+    
+    
+    
+    
 
     public function createOwnersSelect($owners)
     {

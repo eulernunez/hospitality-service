@@ -9,6 +9,7 @@ class Application_Model_DbTable_Publication extends Zend_Db_Table_Abstract
                 'title_publication' => 'title-publication',
                 'contenido_publication' => 'contenido-publication',
                 'contenido_publication_2' => 'contenido-publication-2',
+                'blockquote' => 'blockquote',
                 'created_date' => 'created-date',
                 'active' => 'active'
             );

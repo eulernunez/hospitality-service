@@ -7,10 +7,11 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
 
     <!-- ========== SEO ========== -->
-    <title>Viaja Con</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-    <meta content="" name="author">
+<!--    <title>Hotel, Apartamento, Alojamiento, Barato, Vacaciones, Turismo, viajacon</title>-->
+    <title><?= $this->setTitlePage(); ?></title>
+    <meta content="<?= $this->setDescription(); ?>" name="description"/>
+    <meta content="<?= $this->setKeywords(); ?>" name="keywords"/>
+    <meta content="<?= $this->setAuthor(); ?>" name="author"/>
 
     <!-- ========== FAVICON ========== -->
     <link rel="apple-touch-icon-precomposed" href="images/favicon-apple.png" />
@@ -193,19 +194,23 @@
         <div class="top_menu">
             <div class="container">
                 
-                <div class="welcome_mssg hidden-xs">
+                <div class="welcome_mssg hidden-xs" style="font-size:18px;">
                     Si tienes un alojamiento disponible y lo quieres alquilar&nbsp; 
                 </div>
                 
-                <ul class="top_menu_left">
+                <ul class="top_menu_left" style="list-style:none">
                     
-                    <li class="email hidden-xxs">
-                        
+<!--                    <li class="email hidden-xxs">
                         <a href="<?php echo $this->baseUrl( ) . '/contact-us'; ?>">contáctanos</a>
-                        <i class="fa fa-envelope-o "></i>. 
-                        
-                    </li>
+                        <i class="fa fa-envelope-o"></i>. 
+                    </li>-->
 
+                    <li class="menu_button" style="font-size:18px;">
+                        <a href="<?php echo $this->baseUrl() . '/contact-us'; ?>" class="button  btn_yellow" style="padding: 0px; color: black; padding-left: 8px; padding-right: 8px;" >
+                           contáctanos
+                        </a>
+                    </li>
+                    
                 </ul>   
                 
                 <ul class="top_menu_right">
@@ -252,6 +257,16 @@
                     <ul class="nav navbar-nav">
                         <li class="mobile_menu_title" style="display:none;">MENU</li>
                         <li class="dropdown simple_menu">
+                            <a href="<?php echo $this->baseUrl( ) . '/'; ?>"> HOME </a>
+                            
+                        </li>
+                        
+                        
+                        <li class="dropdown simple_menu">
+                            
+                           
+                            
+                            
                         <?php if($this->logIn && !$this->isAdministrador) : ?>
 <!--                            <a href="<?php echo $this->baseUrl( ) . '/'; ?>"> ALTA</a>-->
                             <a href="<?php echo $this->baseUrl( ) . '/'; ?>" class="dropdown-toggle" data-toggle="dropdown">ALTA <b class="caret"></b></a>
@@ -259,14 +274,18 @@
                                 <li><a href="<?php echo $this->baseUrl( ) . '/alta-propietario'; ?>">Alta de propietarios</a></li>
                                 <li><a href="<?php echo $this->baseUrl( ) . '/alta-anuncio'; ?>">Alta de anuncios</a></li>
                             </ul>
-                            
                         <?php elseif($this->logIn && $this->isAdministrador) : ?>    
-                            
-                            
-                        <?php else : ?>    
-                            <a href="<?php echo $this->baseUrl( ) . '/'; ?>"> HOME</a>
+                            <a href="<?php echo $this->baseUrl( ) . '/'; ?>" class="dropdown-toggle" data-toggle="dropdown">CONFIGURACIÓN <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo $this->baseUrl( ) . '/gallery'; ?>">Galleria de imágenes</a></li>
+                                <li><a href="<?php echo $this->baseUrl( ) . '/seo'; ?>">SEO - Home</a></li>
+                                <li><a href="<?php echo $this->baseUrl( ) . '/menssage'; ?>">Mensajes</a></li>
+                                <li><a href="<?php echo $this->baseUrl( ) . '/slider'; ?>">Imágenes slider principal</a></li>
+                            </ul>
+                        <?php else : ?>    
+                            <a href="<?php echo $this->baseUrl( ) . '/'; ?>" class="dropdown-toggle" data-toggle="dropdown"> GALERIA <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?php echo $this->baseUrl( ) . '/gallery'; ?>">Galleria de imágenes</a></li>
 <!--                            <li><a href="index2.html">Home Version 2</a></li>
                                 <li><a href="index3.html">Home Version 3</a></li>
                                 <li><a href="index4.html">Home Version 4</a></li>
@@ -281,7 +300,16 @@
                                 <li><a href="<?php echo $this->baseUrl( ) . '/alta-publicacion'; ?>">Publicar noticia</a></li>
                             </ul>
                         </li>
-
+                        <?php elseif($this->logIn && $this->isAdministrador) : ?>    
+                            
+                            
+                        <?php else : ?>   
+                        <li class="dropdown simple_menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">BLOG <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php echo $this->baseUrl( ) . '/blog/list'; ?>">Noticias</a></li>
+                            </ul>
+                        </li>
                         
                         
                         
@@ -372,7 +400,6 @@
         <!-- ========== ABOUT & ROOMS ========== -->
                 
         
-        
             <?php echo $this->layout()->content; ?>
             
         <!-- ========== FEATURES ========== -->
@@ -425,12 +452,12 @@
             <div class="subfooter">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-8 col-sm-8">
                             <div class="copyrights">
-                                 Copyright 2018 <a href="index.html">Viajacon.com</a> All Rights Reserved.
+                                Copyright 2018 <a href="index.html">Viajacon.com</a> All Rights Reserved. <span style="color:#272727; font-size:10px;"> By Euler Núñez eulernunez@gmail.com </span>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-4 col-sm-4">
                             <div class="social_media">
                                 <a class="facebook" data-original-title="Facebook" data-toggle="tooltip" href="#"><i class="fa fa-facebook"></i></a>
                                 <a class="twitter" data-original-title="Twitter" data-toggle="tooltip" href="#"><i class="fa fa-twitter"></i></a>

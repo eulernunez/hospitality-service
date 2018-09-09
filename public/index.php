@@ -9,8 +9,16 @@ defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 // Ensure library/ is on include_path
+// C:\xampp\htdocs\eskeleton\library  Supuestamente aqui debe estar la Library
+//set_include_path(implode(PATH_SEPARATOR, array(
+//    realpath(APPLICATION_PATH . '/../library'),
+//    get_include_path(),
+//)));
+
+// Set library
+// C:\xampp\library
 set_include_path(implode(PATH_SEPARATOR, array(
-    realpath(APPLICATION_PATH . '/../library'),
+    realpath(APPLICATION_PATH . '../../../../library'),
     get_include_path(),
 )));
 

@@ -1,5 +1,4 @@
 <?php
-
 class ListadosController extends Zend_Controller_Action
 {
 
@@ -10,6 +9,7 @@ class ListadosController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
         // action body
         $ads = array();
 
@@ -17,10 +17,10 @@ class ListadosController extends Zend_Controller_Action
         $ads = $repository->fetchAllAds('1');
 
         //die('ADS: <pre>' . print_r($ads, true) . '</pre>');
-        
-        $this->view->ads = $ads;        
-    }
 
+        $this->view->ads = $ads;
+
+    }
 
 }
 

@@ -1,3 +1,11 @@
+<style>
+    .form-control .btn-select, .form-control .btn-select:hover, .form-control .btn-select:focus {
+        font-size: 0.85em;
+        
+    }    
+</style>
+
+
 <script type="text/javascript">
    
 $(document).ready(function() { 
@@ -53,10 +61,10 @@ function validationAd() {
 <div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
     <div class="container">
         <div class="inner">
-            <h1>Validación</h1>
+            <h1><?= ($this->flag)?'Edición':'Validación'; ?></h1>
             <ol class="breadcrumb">
                 <li><a href="<?= $this->baseUrl() . '/'; ?>">Home</a></li>
-                <li>Validación de anuncios</li>
+                <li><?= ($this->flag)?'Edición':'Validación'; ?> de anuncios</li>
             </ol>
         </div>
     </div>
@@ -72,7 +80,7 @@ function validationAd() {
                         <div id="booking_advanced">
 
                             <div class="main_title a_left upper">
-                                <h2>Validación</h2>
+                                <h2><?= ($this->flag)?'Edición':'Validación'; ?></h2>
                             </div>
                             <!-- ========== ANUNCIO FORM ========== -->
                             <div id="ajax-box" class="row">
@@ -118,7 +126,7 @@ function validationAd() {
                                                 <select id="room-type-id" name="room-type-id" class="form-control" title="Seleccionar tipo de alojamiento" data-header="Tipo de alojamiento">
                                                     <option value="1" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='1')?'selected':'' ?>>Alojamiento en hotel</option>
                                                     <option value="2" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='2')?'selected':'' ?>>Alojamiento privado</option>
-                                                    <option value="3" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='3')?'selected':'' ?>>Alojamiento vacacional</option>
+                                                    <option value="3" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='3')?'selected':'' ?>>Alojamiento residencial</option>
                                                     <option value="4" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='4')?'selected':'' ?>>Apartamentos</option>
                                                     <option value="5" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["room_type_id"]=='5')?'selected':'' ?>>Turismo rural</option>
                                                 </select>
@@ -137,6 +145,13 @@ function validationAd() {
                                         <div class="form-group">
                                             <label>Descripción del anuncio</label>
                                             <textarea id="comments-ad" class="form-control" name="comments-ad"><?= $this->dataForm["comments_ad"]; ?></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Descripción slider</label>
+                                            <textarea id="comments-slider" class="form-control" name="comments-slider"><?= $this->dataForm["comments_slider"]; ?></textarea>
                                         </div>
                                     </div>
                                     
@@ -160,7 +175,15 @@ function validationAd() {
                                             <input id="city" name="city" type="text" class="form-control" value="<?= $this->dataForm["city"]; ?>"/>
                                         </div>
                                     </div>
-                                    
+
+                            <div class="clearfix"></div>        
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Provincia</label>
+                                    <input id="provincia" name="provincia" type="text" class="form-control" value="<?= $this->dataForm["provincia"]; ?>"/>
+                                </div>
+                            </div>
                                     
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -429,26 +452,14 @@ function validationAd() {
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Precio</label>
+                                            <label> Precio del alojamiento día/noche </label>
                                             <input id="price-ad" name="price-ad" type="text" class="form-control" value="<?= number_format($this->dataForm['price_ad'],0); ?>">
                                         </div>
                                     </div>
                                     
                                     <div class="clearfix"></div>
                                     
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Tipo de cama
-                                                <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Cama"> <i class="label_icon_info fa fa-info-circle"></i></a>
-                                            </label>
-                                            <div class="form_select">
-                                                <select id="bed-type-id" name="bed-type-id" class="form-control" title="Cama" data-header="Cama">
-                                                    <option value="1" <?= ($this->dataForm["bed_type_id"]=='1')?'selected':'' ?>>Simple</option>
-                                                    <option value="2" <?= ($this->dataForm["bed_type_id"]=='2')?'selected':'' ?>>Doble</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                 
                                    
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -457,13 +468,13 @@ function validationAd() {
                                             </label>
                                             <div class="form_select">
                                                 <select id="surface-type-id" name="surface-type-id" class="form-control" title="Superficie" data-header="Superficie">
-                                                    <option value="1" <?= ($this->dataForm["surface_type_id"]=='1')?'selected':'' ?>>40 m2</option>
-                                                    <option value="2" <?= ($this->dataForm["surface_type_id"]=='2')?'selected':'' ?>>60 m2</option>
-                                                    <option value="3" <?= ($this->dataForm["surface_type_id"]=='3')?'selected':'' ?>>80 m2</option>
-                                                    <option value="4" <?= ($this->dataForm["surface_type_id"]=='4')?'selected':'' ?>>100 m2</option>
-                                                    <option value="5" <?= ($this->dataForm["surface_type_id"]=='5')?'selected':'' ?>>120 m2</option>
-                                                    <option value="6" <?= ($this->dataForm["surface_type_id"]=='6')?'selected':'' ?>>160 m2</option>
-                                                    <option value="7" <?= ($this->dataForm["surface_type_id"]=='7')?'selected':'' ?>>200 m2</option>
+                                                    <option value="1" <?= ($this->dataForm["surface_type_id"]=='1')?'selected':'' ?>>Hasta 15 m2</option>
+                                                    <option value="2" <?= ($this->dataForm["surface_type_id"]=='2')?'selected':'' ?>>Hasta 30 m2</option>
+                                                    <option value="3" <?= ($this->dataForm["surface_type_id"]=='3')?'selected':'' ?>>Hasta 50 m2</option>
+                                                    <option value="4" <?= ($this->dataForm["surface_type_id"]=='4')?'selected':'' ?>>Hasta 100 m2</option>
+                                                    <option value="5" <?= ($this->dataForm["surface_type_id"]=='5')?'selected':'' ?>>Hasta 120 m2</option>
+                                                    <option value="6" <?= ($this->dataForm["surface_type_id"]=='6')?'selected':'' ?>>Hasta 160 m2</option>
+                                                    <option value="7" <?= ($this->dataForm["surface_type_id"]=='7')?'selected':'' ?>>Hasta 200 m2</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -488,62 +499,374 @@ function validationAd() {
                                         </div>
                                     </div>
 
-                                    
-                                    <div class="clearfix"></div>
-                                    
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Servicios free
-                                                <a href="#" title="Servicios" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Free"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                            <label>Niños
+                                                <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Niños"><i class="label_icon_info fa fa-info-circle"></i></a>
                                             </label>
                                             <div class="form_select">
-                                                <select name="free-ads[]" class="form-control" title="Free" data-header="Free" multiple>
-                                                    <option value="1" <?= ($this->dataForm["free_service_internet"]=='1')?'selected':'' ?>>Internet</option>
-                                                    <option value="2" <?= ($this->dataForm["free_service_wifi"]=='1')?'selected':'' ?>>WI-FI</option>
-                                                    <option value="3" <?= ($this->dataForm["free_service_newspaper"]=='1')?'selected':'' ?>>Periódicos</option>
-                                                    <option value="4" <?= ($this->dataForm["free_service_breakfast_include"]=='1')?'selected':'' ?>>Desayuno incluido</option>
+                                                <select id="childrens-number-id" name="childrens-number-id" class="form-control" title="Niños" data-header="Niños">
+                                                    <option value="0" <?= ($this->dataForm["childrens-number-id"]=='0')?'selected':'' ?>>0</option>
+                                                    <option value="1" <?= ($this->dataForm["childrens-number-id"]=='1')?'selected':'' ?>>1</option>
+                                                    <option value="2" <?= ($this->dataForm["childrens-number-id"]=='2')?'selected':'' ?>>2</option>
+                                                    <option value="3" <?= ($this->dataForm["childrens-number-id"]=='3')?'selected':'' ?>>3</option>
+                                                    <option value="4" <?= ($this->dataForm["childrens-number-id"]=='4')?'selected':'' ?>>4</option>
+                                                    <option value="5" <?= ($this->dataForm["childrens-number-id"]=='5')?'selected':'' ?>>5</option>
+                                                    <option value="6" <?= ($this->dataForm["childrens-number-id"]=='6')?'selected':'' ?>>6</option>
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>                                    
+                                    </div>
+
                                     
-                                    <div class="clearfix"></div>
-                                    
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label>Otros servicios
-                                        <a href="#" title="Otros servicios" data-toggle="popover" data-placement="top" data-trigger="hover" data-content=""> <i class="label_icon_info fa fa-info-circle"></i></a>
-                                    </label>
+                            
+                            <!-- Working -->        
+                            <div class="col-md-6">
+                                
+                                 <div class="form-group">
+                                    <label>Tipo de alojamiento</label>
                                     <div class="form_select">
-                                        <select name="other-services-ads[]" class="form-control" title="Otros servicios" data-header="Otros servicios" multiple>
-                                            <option value="1" <?= ($this->dataForm["other_service_full_ac"]=='1')?'selected':'' ?>>Aire acondicionado</option>
-                                            <option value="2" <?= ($this->dataForm["other_service_private_balcony"]=='1')?'selected':'' ?>>Balcón privado</option>
-                                            <option value="3" <?= ($this->dataForm["other_service_flat_screen_tv"]=='1')?'selected':'' ?>>Flat Screen Tv</option>
-                                            <option value="4" <?= ($this->dataForm["other_service_room_service"]=='1')?'selected':'' ?>>Servicios de habitación</option>
-                                            <option value="5" <?= ($this->dataForm["other_service_beach_view"]=='1')?'selected':'' ?>>Vista a la playa</option>
+                                        <select id="alojamiento-id" name="alojamiento-id" class="form-control" title="Tipo de alojamiento" data-header="Tipo de alojamiento">
+                                            <option value="1" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["alojamiento_id"]=='1')?'selected':'' ?>>Privado</option>
+                                            <option value="2" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["alojamiento_id"]=='2')?'selected':'' ?>>Familiar</option>
+                                            <option value="3" data-subtext="<span class='label label-info'></span>" <?= ($this->dataForm["alojamiento_id"]=='3')?'selected':'' ?>>Hotel</option>
                                         </select>
                                     </div>
                                 </div>
-                            </div>                                             
-                                    
+                                
+                            </div>                                
+                            
                             <div class="clearfix"></div>
+                            
+                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de habitaciones de doble/matrimoniales
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Habitaciones dobles"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="big-room-id" name="big-room-id" class="form-control" title="Habitaciones dobles" data-header="Habitaciones dobles">
+                                            <option value="1" <?= ($this->dataForm["big_room_id"]=='1')?'selected':'' ?>>1</option>
+                                            <option value="2" <?= ($this->dataForm["big_room_id"]=='2')?'selected':'' ?>>2</option>
+                                            <option value="3" <?= ($this->dataForm["big_room_id"]=='3')?'selected':'' ?>>3</option>
+                                            <option value="4" <?= ($this->dataForm["big_room_id"]=='4')?'selected':'' ?>>4</option>
+                                            <option value="5" <?= ($this->dataForm["big_room_id"]=='5')?'selected':'' ?>>5</option>
+                                            <option value="6" <?= ($this->dataForm["big_room_id"]=='6')?'selected':'' ?>>6</option>
+                                            <option value="7" <?= ($this->dataForm["big_room_id"]=='7')?'selected':'' ?>>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de Habitaciones medianas
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Habitaciones medianas"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="middle-room-id" name="middle-room-id" class="form-control" title="Habitaciones medianas" data-header="Habitaciones medianas">
+                                            <option value="1" <?= ($this->dataForm["middle_room_id"]=='1')?'selected':'' ?>>1</option>
+                                            <option value="2" <?= ($this->dataForm["middle_room_id"]=='2')?'selected':'' ?>>2</option>
+                                            <option value="3" <?= ($this->dataForm["middle_room_id"]=='3')?'selected':'' ?>>3</option>
+                                            <option value="4" <?= ($this->dataForm["middle_room_id"]=='4')?'selected':'' ?>>4</option>
+                                            <option value="5" <?= ($this->dataForm["middle_room_id"]=='5')?'selected':'' ?>>5</option>
+                                            <option value="6" <?= ($this->dataForm["middle_room_id"]=='6')?'selected':'' ?>>6</option>
+                                            <option value="7" <?= ($this->dataForm["middle_room_id"]=='7')?'selected':'' ?>>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de Habitaciones individuales
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Habitaciones individuales"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="individually-room-id" name="individually-room-id" class="form-control" title="Habitaciones individuales" data-header="Habitaciones individuales">
+                                            <option value="1" <?= ($this->dataForm["individually_room_id"]=='1')?'selected':'' ?>>1</option>
+                                            <option value="2" <?= ($this->dataForm["individually_room_id"]=='2')?'selected':'' ?>>2</option>
+                                            <option value="3" <?= ($this->dataForm["individually_room_id"]=='3')?'selected':'' ?>>3</option>
+                                            <option value="4" <?= ($this->dataForm["individually_room_id"]=='4')?'selected':'' ?>>4</option>
+                                            <option value="5" <?= ($this->dataForm["individually_room_id"]=='5')?'selected':'' ?>>5</option>
+                                            <option value="6" <?= ($this->dataForm["individually_room_id"]=='6')?'selected':'' ?>>6</option>
+                                            <option value="7" <?= ($this->dataForm["individually_room_id"]=='7')?'selected':'' ?>>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de camas dobles
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Camas dobles"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="big-bed-id" name="big-bed-id" class="form-control" title="Camas dobles" data-header="Camas dobles">
+                                            <option value="1" <?= ($this->dataForm["big_bed_id"]=='1')?'selected':'' ?>>1</option>
+                                            <option value="2" <?= ($this->dataForm["big_bed_id"]=='2')?'selected':'' ?>>2</option>
+                                            <option value="3" <?= ($this->dataForm["big_bed_id"]=='3')?'selected':'' ?>>3</option>
+                                            <option value="4" <?= ($this->dataForm["big_bed_id"]=='4')?'selected':'' ?>>4</option>
+                                            <option value="5" <?= ($this->dataForm["big_bed_id"]=='5')?'selected':'' ?>>5</option>
+                                            <option value="6" <?= ($this->dataForm["big_bed_id"]=='6')?'selected':'' ?>>6</option>
+                                            <option value="7" <?= ($this->dataForm["big_bed_id"]=='7')?'selected':'' ?>>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de camas medianas
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Camas medianas"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="middle-bed-id" name="middle-bed-id" class="form-control" title="Camas medianas" data-header="Camas medianas">
+                                            <option value="1" <?= ($this->dataForm["middle_bed_id"]=='1')?'selected':'' ?>>1</option>
+                                            <option value="2" <?= ($this->dataForm["middle_bed_id"]=='2')?'selected':'' ?>>2</option>
+                                            <option value="3" <?= ($this->dataForm["middle_bed_id"]=='3')?'selected':'' ?>>3</option>
+                                            <option value="4" <?= ($this->dataForm["middle_bed_id"]=='4')?'selected':'' ?>>4</option>
+                                            <option value="5" <?= ($this->dataForm["middle_bed_id"]=='5')?'selected':'' ?>>5</option>
+                                            <option value="6" <?= ($this->dataForm["middle_bed_id"]=='6')?'selected':'' ?>>6</option>
+                                            <option value="7" <?= ($this->dataForm["middle_bed_id"]=='7')?'selected':'' ?>>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>N° de sofá camas
+                                        <a href="#" title="Seleccione" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Sofá camas"></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select id="sofabed-id" name="sofabed-id" class="form-control" title="Sofá camas" data-header="Sofá camas">
+                                            <option value="1" <?= ($this->dataForm["sofabed_id"]=='1')?'selected':'' ?>>1</option>
+                                            <option value="2" <?= ($this->dataForm["sofabed_id"]=='2')?'selected':'' ?>>2</option>
+                                            <option value="3" <?= ($this->dataForm["sofabed_id"]=='3')?'selected':'' ?>>3</option>
+                                            <option value="4" <?= ($this->dataForm["sofabed_id"]=='4')?'selected':'' ?>>4</option>
+                                            <option value="5" <?= ($this->dataForm["sofabed_id"]=='5')?'selected':'' ?>>5</option>
+                                            <option value="6" <?= ($this->dataForm["sofabed_id"]=='6')?'selected':'' ?>>6</option>
+                                            <option value="7" <?= ($this->dataForm["sofabed_id"]=='7')?'selected':'' ?>>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+<!--                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tipo de habitaciones
+                                        <a href="#" title="Habitaciones" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Habitaciones"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="tipo-habitaciones[]" class="form-control" title="Habitaciones" data-header="Habitaciones" multiple>
+                                            <option value="1" <?= ($this->dataForm["tipo_habitacion_grande"]=='1')?'selected':'' ?>>Grande de 1 a 5</option>
+                                            <option value="2" <?= ($this->dataForm["tipo_habitacion_mediana"]=='1')?'selected':'' ?>>Mediana de 1 a 5</option>
+                                            <option value="3" <?= ($this->dataForm["tipo_habitacion_individual"]=='1')?'selected':'' ?>>Individualde 1 a 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                                    -->
+                                                        
+<!--                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tipo de cama
+                                        <a href="#" title="Cama" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Cama"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="tipo-camas[]" class="form-control" title="Cama" data-header="Cama" multiple>
+                                            <option value="1" <?= ($this->dataForm["tipo_cama_grande"]=='1')?'selected':'' ?>>Grande de 1 a 5</option>
+                                            <option value="2" <?= ($this->dataForm["tipo_cama_individual"]=='1')?'selected':'' ?>>Individual de 1 a 5</option>
+                                            <option value="3" <?= ($this->dataForm["tipo_cama_sofa_cama"]=='1')?'selected':'' ?>>Sofa cama de 1 a 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>-->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Aseo y baños
+                                        <a href="#" title="Aseo" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Aseo"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="tipo-aseos[]" class="form-control" title="Aseo" data-header="Aseo" multiple>
+                                            <option value="1" <?= ($this->dataForm["tipo_aseo_bano_privado"]=='1')?'selected':'' ?>>Baño privado</option>
+                                            <option value="2" <?= ($this->dataForm["tipo_aseo_bano_compartido"]=='1')?'selected':'' ?>>Baño compartido</option>
+                                            <option value="3" <?= ($this->dataForm["tipo_aseo_aseo"]=='1')?'selected':'' ?>>Aseo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                            
+
+                            <!-- OJO Pendiente -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Otros ambientes
+                                        <a href="#" title="Ambientes" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Ambientes"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="otros-ambientes[]" class="form-control" title="Ambientes" data-header="Ambientes" multiple>
+                                            <option value="1" <?= ($this->dataForm["otro_ambiente_balcon"]=='1')?'selected':'' ?>>Balcón</option>
+                                            <option value="2" <?= ($this->dataForm["otro_ambiente_terraza"]=='1')?'selected':'' ?>>Terraza</option>
+                                            <option value="3" <?= ($this->dataForm["otro_ambiente_zonas_comunes"]=='1')?'selected':'' ?>>Zonas comunes</option>    
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                                    
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ocio y confort
+                                        <a href="#" title="Ocio y confort" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Ocio y confort"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="tipo-ocios[]" class="form-control" title="Ocio y confort" data-header="Ocio y confort" multiple>
+                                            <option value="1" <?= ($this->dataForm["tipo_ocio_confort_tv_pantalla_plana"]=='1')?'selected':'' ?>>TV pantalla plana</option>
+                                            <option value="2" <?= ($this->dataForm["tipo_ocio_confort_aire_acondicionado"]=='1')?'selected':'' ?>>Aire acondicionado</option>
+                                            <option value="3" <?= ($this->dataForm["tipo_ocio_confort_calefaccion"]=='1')?'selected':'' ?>>Calefacción</option>
+                                            <option value="4" <?= ($this->dataForm["tipo_ocio_confort_wifi"]=='1')?'selected':'' ?>>WIFI</option>
+                                            <option value="5" <?= ($this->dataForm["tipo_ocio_confort_salon_compartido"]=='1')?'selected':'' ?>>Salón compartido</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Servicios de cocina
+                                        <a href="#" title="Servicios de cocina" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Servicios de cocina"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="servicios-cocina[]" class="form-control" title="Servicios de cocina" data-header="Servicios de cocina" multiple>
+                                            <option value="1" <?= ($this->dataForm["servicios_cocina_compartida"]=='1')?'selected':'' ?>>Cocina compartida</option>
+                                            <option value="2" <?= ($this->dataForm["servicios_cocina_privada"]=='1')?'selected':'' ?>>Cocina privada</option>
+                                            <option value="3" <?= ($this->dataForm["servicios_cocina_sin_servicio"]=='1')?'selected':'' ?>>Sin servicio de cocina</option>
+                                            <option value="4" <?= ($this->dataForm["servicios_cocina_mascota"]=='1')?'selected':'' ?>>Mascota</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Electrodomésticos
+                                        <a href="#" title="Electrodomésticos" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Electrodomésticos"> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <div class="form_select">
+                                        <select name="tipo-electrodomesticos[]" class="form-control" title="Electrodomésticos" data-header="Electrodomésticos" multiple>
+                                            <option value="1" <?= ($this->dataForm["tipo_electrodomestico_lavadora"]=='1')?'selected':'' ?>>Lavadora</option>
+                                            <option value="2" <?= ($this->dataForm["tipo_electrodomestico_frigorifico"]=='1')?'selected':'' ?>>Frigorífico</option>
+                                            <option value="3" <?= ($this->dataForm["tipo_electrodomestico_encimera"]=='1')?'selected':'' ?>>Encimera</option>
+                                            <option value="4" <?= ($this->dataForm["tipo_electrodomestico_horno"]=='1')?'selected':'' ?>>Horno</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Condiciones de uso del alojamiento </label>
+                                    <textarea id="condiciones-uso" class="form-control" name="condiciones-uso"><?= $this->dataForm["condiciones_uso"]; ?></textarea>
+                                </div>
+                            </div>
 
                             <div class="col-md-8">
                                 <?php foreach($this->dataForm["pics"] as $pic) : ?>
-                                <div style="padding: 4px;">
-                                    <?php if('1'==$pic["section_id"]) : ?>
-                                    <img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->dataForm["id"] . '/home/' . $pic["file_name"] ;?>" alt="Image">
-                                    <?php endif; ?>
-                                </div>
+                                    <div style="padding: 4px;">
+                                        <?php if('1'==$pic["section_id"]) : ?>
+                                        <span style="font-weight: bold;"><?= $pic["file_name"];?></span>
+                                        <?php $file = (empty($this->dataForm["file_home"]))?$pic["file_name"]:$this->dataForm["file_home"]; ?>
+                                        <img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->dataForm["id"] . '/home/' . $file; ?>" alt="Image">
+
+                                        <div class="form-group">
+                                            <label> Nombre del archivo </label>
+                                            <input id="file-home-hidden" name="file-home-hidden" type="hidden" value="<?= (empty($this->dataForm["file_home"]))?$pic["file_name"]:$this->dataForm["file_home"]; ?>">
+                                            <input id="file-home" name="file-home" type="text" class="form-control" value="<?= (empty($this->dataForm["file_home"]))?$pic["file_name"]:$this->dataForm["file_home"]; ?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label> Título enlace </label>
+                                            <?php if(empty($this->dataForm["titulo_enlace"])) : ?>
+                                            <input id="titulo-enlace" name="titulo-enlace" type="text" class="form-control" placeholder="Ingrese el título del enlace">
+                                            <?php else : ?>
+                                            <input id="titulo-enlace" name="titulo-enlace" type="text" class="form-control" value="<?= $this->dataForm["titulo_enlace"]; ?>">
+                                            <?php endif ?>
+                                            
+                                            
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label> Título imagen </label>
+                                            <?php if(empty($this->dataForm["titulo_imagen"])) : ?>
+                                            <input id="titulo-imagen" name="titulo-imagen" type="text" class="form-control" placeholder="Ingrese el título de la imagen">
+                                            <?php else : ?>
+                                            <input id="titulo-imagen" name="titulo-imagen" type="text" class="form-control" value="<?= $this->dataForm["titulo_imagen"]; ?>">
+                                            <?php endif ?>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label> Título ALT </label>
+                                            <?php if(empty($this->dataForm["titulo_alt"])) : ?>
+                                            <input id="titulo-alt" name="titulo-alt" type="text" class="form-control" placeholder="Ingrese el título del ALT">
+                                            <?php else : ?>
+                                            <input id="titulo-alt" name="titulo-alt" type="text" class="form-control" value="<?= $this->dataForm["titulo_alt"]; ?>">
+                                            <?php endif ?>
+                                        </div>
+
+                                        <?php endif; ?>
+                                    </div>
                                 <?php endforeach; ?>
                             </div>                            
                             
                             <div class="col-md-12">
+                                <?php $contador = 1; ?>
                                 <?php foreach($this->dataForm["pics"] as $pic) : ?>
                                 <div style="padding: 4px;">
                                     <?php if('2'==$pic["section_id"]) : ?>
-                                    <img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->dataForm["id"] . '/gallery/' . $pic["file_name"] ;?>" alt="Image">
-                                    <?php endif; ?>
+                                    <span style="font-weight: bold;"><?= $pic["file_name"];?></span>
+                                    <?php $file = (empty($this->dataForm["file_gallery" . $contador]))?$pic["file_name"]:$this->dataForm["file_gallery" . $contador] ;?>
+                                    <img class="img-responsive" src="<?php echo $this->baseUrl( ) . '/ads/images/57/' . $this->dataForm["id"] . '/gallery/' . $file; ?>" alt="Image">
+                                    <div class="form-group">
+                                        <label> Nombre del archivo </label>
+                                        <input id="file-gallery-hidden<?= $contador; ?>" name="file-gallery-hidden<?= $contador; ?>" type="hidden" value="<?= (empty($this->dataForm["file_gallery" . $contador]))?$pic["file_name"]:$this->dataForm["file_gallery" . $contador]; ?>">
+                                        <input id="file-gallery<?= $contador; ?>" name="file-gallery<?= $contador; ?>" type="text" class="form-control" value="<?= (empty($this->dataForm["file_gallery" . $contador]))?$pic["file_name"]:$this->dataForm["file_gallery" . $contador]; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Título enlace </label>
+                                        <?php if(empty($this->dataForm["titulo_enlace".$contador])) : ?>
+                                        <input id="titulo-enlace<?= $contador; ?>" name="titulo-enlace<?= $contador; ?>" type="text" class="form-control" placeholder="Ingrese el título del enlace <?= $contador; ?>">
+                                        <?php else : ?>
+                                        <input id="titulo-enlace<?= $contador; ?>" name="titulo-enlace<?= $contador; ?>" type="text" class="form-control" value="<?= $this->dataForm["titulo_enlace".$contador]; ?>">
+                                        <?php endif ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Título imagen </label>
+                                        <?php if(empty($this->dataForm["titulo_imagen" . $contador])) : ?>
+                                        <input id="titulo-imagen<?= $contador; ?>" name="titulo-imagen<?= $contador; ?>" type="text" class="form-control" placeholder="Ingrese el título de la imagen <?= $contador; ?>">
+                                        <?php else : ?>
+                                        <input id="titulo-imagen<?= $contador; ?>" name="titulo-imagen<?= $contador; ?>" type="text" class="form-control" value="<?= $this->dataForm["titulo_imagen" . $contador]; ?>">
+                                        <?php endif ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Título ALT </label>
+                                        <?php if(empty($this->dataForm["titulo_alt" . $contador])) : ?>
+                                        <input id="titulo-alt<?= $contador; ?>" name="titulo-alt<?= $contador; ?>" type="text" class="form-control" placeholder="Ingrese el título del ALT <?= $contador; ?>">
+                                        <?php else : ?>
+                                        <input id="titulo-alt<?= $contador; ?>" name="titulo-alt<?= $contador; ?>" type="text" class="form-control" value="<?= $this->dataForm["titulo_alt" . $contador]; ?>">
+                                        <?php endif ?>
+                                    </div>
+                                    <?php $contador++; endif; ?>
                                 </div>
                                 <?php endforeach; ?>
                             </div>                            
@@ -608,16 +931,26 @@ function validationAd() {
                                     <label>Fianza
                                         <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Fianza ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
                                     </label>
-                                    <input id="fianza" name="fianza" type="text" class="form-control" placeholder="Ingrese la fianza">
+                                    <input id="fianza" name="fianza" type="text" class="form-control" placeholder="Ingrese la fianza" value="<?= number_format($this->dataForm['fianza'],0); ?>">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Limpieza
+                                        <a href="#" title="" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Limpieza ..."> <i class="label_icon_info fa fa-info-circle"></i></a>
+                                    </label>
+                                    <input id="limpieza" name="limpieza" type="text" class="form-control" placeholder="Ingrese la limpieza" value="<?= number_format($this->dataForm['limpieza'],0); ?>">
                                 </div>
                             </div>                        
-                                                                                                    
-                            <div class="col-md-12">                                                   
+
+                            <div class="clearfix"></div>
+                            <div class="col-md-6">                                                   
                                 <a type="button" target="_blank" class="button btn_yellow pull-left" href="<?= $this->baseUrl() . '/ads/images/57/' . $this->dataForm["id"] . '/ibi/' . $this->dataForm["ibi"]["file_name"]; ?>"> <i class="fa fa-id-card-o" aria-hidden="true"></i> DESCARGAR IBI </a>
                             </div>
 
-                            <div class="col-md-12">
-                                <button type="button" class="button btn_blue pull-right" onclick="validationAd();"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> VALIDAR </button>
+                            <div class="col-md-6">
+                                <button type="button" class="button btn_blue pull-right" onclick="validationAd();"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> <?= ($this->flag)?'EDITAR':'VALIDAR'; ?> </button>
                             </div>
 
                         </form>

@@ -7,7 +7,6 @@ class Application_Model_System_System
     public $view;
     public $body;
     
-    
     public static function getInstance($class_name = 'Application_Model_System_System') 
     {
 
@@ -68,37 +67,54 @@ class Application_Model_System_System
     public function sendEmail( $params )
     {
 
+//        EMAIL BY DEFAULT 
         $smtp = "smtp.1and1.es";
-        $usuario = "administrador@viajacon.es";
-        $clave = "72880072Rtc$";  
-        $de = "administrador@viajacon.es";
+        $usuario = "admin@viajacon.es";
+        $clave = "&?72880072Rtc$";  
+        $de = "admin@viajacon.es";
 
         
+// https://myaccount.google.com/security        
+// https://myaccount.google.com/lesssecureapps?pli=1        
+// Algunos dispositivos y aplicaciones utilizan una tecnología de inicio
+// de sesión menos segura, lo cual hace que tu cuenta sea más vulnerable,
+// por lo que te recomendamos que desactives el acceso de estas aplicaciones.
+// Si, a pesar del riesgo que ello supone, quieres utilizarlas,
+// puedes activar el acceso
+// Permitir el acceso de aplicaciones menos seguras: SÍ
+
+        //ALTERNATIVE
+//        $smtp = "smtp.googlemail.com";
+//        $usuario = "turistday@gmail.com";
+//        $clave = "72880072";  
+//        $de = "administrador@viajacon.es";
+
         try {
 
             $config = array (
-                        'auth' => 'login',
-                        'username' => $usuario,
-                        'password' => $clave,
-                        'ssl' => 'ssl',
-                        'port' => '465'  // check 587
-                );
-            
+                'auth' => 'login',
+                'username' => $usuario,
+                'password' => $clave,
+                'ssl' => 'ssl',
+                'port' => '465'  // check 587 Connection time out // 995 Connection refused   // 465 Connection time out KO BUT local OK
+            );
+
             $mailTransport = new Zend_Mail_Transport_Smtp($smtp, $config);
             $mail = new Zend_Mail();
             $mail->setFrom($de);
-            
+
             $mail->addTo($params['para']);
             //$mail->addTo($de);
             $mail->setBodyHtml($params['mensaje']);
             $mail->setSubject($params['asunto']);
             $mail->send($mailTransport);
             
-            } catch (Exception $e){
-                
-                        echo $e->getMessage();
+        } catch (Exception $e){
+
+            echo ('ERROR:<pre>'. print_r($e->getMessage(), true) . '</pre>');
+            
                         
-            }
+        }
 
    }
     
@@ -157,6 +173,11 @@ class Application_Model_System_System
             Zend_Auth::getInstance()->clearIdentity();
     }    
     
+    /*
+     * Try this code
+     * 
+     * 
+     */
 
     public function getLoggedInUser() 
     {
